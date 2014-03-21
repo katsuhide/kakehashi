@@ -2,6 +2,8 @@
 
 body{
 	background-color: $_base-bg-color;
+	// font-family: 'Josefin Sans';
+	font-family: 'Raleway';
 	li {
 		color: $_base-text-color;
 	}
@@ -10,11 +12,28 @@ body{
 #service-name {
 	text-align: center;
 	font-size: 2rem;
-	font-weight: normal;
+	// font-weight: normal;
+	font-family: 'Codystar';
 }
 
 #datasource-logo {
 	color: $_base-text-color;
+}
+
+#main-contents {
+	margin: $_tabbar-height auto 0 auto;
+}
+
+#trend {
+	margin: auto auto auto auto;
+	text-align: left;
+	img {
+		width: 150px;
+		height: 150px;
+		border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+	}
 }
 
 .off-canvas-wrap {

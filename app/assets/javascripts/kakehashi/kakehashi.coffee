@@ -6,7 +6,7 @@ App = window.App = new Backbone.Marionette.Application()
 
 App.addRegions
 	header: '#header'
-	main: '#main'
+	main: '#main-contents'
 	footer: '#footer'
 
 App.on 'initialize:after', ->
