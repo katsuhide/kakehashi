@@ -1,0 +1,35 @@
+// config
+$_tabbar-height: 60px;
+$_datasource-area-height: 54px;
+
+// page color setting
+$_pattern: 0;
+
+// default pattern (1)
+$_base-bg-color: #1F1F1F;
+$_base-text-color: #FFFFFF;
+$_top-bg-color: #DA6272;
+$_top-text-color: #FFFFFF;
+$_side-bg-color: #FFFFFF;
+$_side-text-color: #000000;
+
+@if $_pattern==1 {
+	// pattern 1 : light blue
+	$_base-bg-color: #CBE8F6;
+	$_base-text-color: #000000;
+	$_top-bg-color: #0b579b;
+	$_top-text-color: #FFFFFF;
+	$_side-bg-color: #FFFFFF;
+	$_side-text-color: #000000;
+
+} @else if $_pattern == 2 {
+	// pattern 2 : dark blue
+	$_base-bg-color: #CBE8F6;
+	$_base-text-color: #000000;
+	$_top-bg-color: #02243a;
+	$_top-text-color: #FFFFFF;
+	$_side-bg-color: #FFFFFF;
+	$_side-text-color: #000000;
+
+}
+

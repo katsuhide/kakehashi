@@ -57,5 +57,8 @@ group :assets do
 	gem 'eco'
 end
 
-# Add foundation
+# foundation
 gem 'foundation-rails'
+
+# spring
+gem "spring", group: :development

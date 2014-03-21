@@ -12,6 +12,9 @@
 // Allows the use of rem-calc() or lower-bound() in your settings
 @import "foundation/functions";
 
+// import original css config
+@import "set";
+
 // $experimental: true;
 
 // The default font-size is set to 100% of the browser style sheet (usually 16px)
@@ -636,8 +639,8 @@
 
 // Off-canvas
 
-// $tabbar-bg: #333;
-// $tabbar-height: rem-calc(45);
+$tabbar-bg: $_top-bg-color;
+$tabbar-height: rem-calc($_tabbar-height);
 // $tabbar-line-height: $tabbar-height;
 // $tabbar-color: #FFF;
 // $tabbar-middle-padding: 0 rem-calc(10);
@@ -647,31 +650,35 @@
 // $tabbar-left-section-border: solid 1px scale-color($tabbar-bg, $lightness: -50%);
 
 // Off Canvas Tab Bar Headers
-// $tabbar-header-color: #FFF;
+$tabbar-header-color: $_top-text-color;
 // $tabbar-header-weight: bold;
 // $tabbar-header-line-height: $tabbar-height;
 // $tabbar-header-margin: 0;
 
 // Off Canvas Menu Variables
 // $off-canvas-width: 250px;
-// $off-canvas-bg: #333;
+$off-canvas-bg: $_side-bg-color;
 
 // Off Canvas Menu List Variables
 // $off-canvas-label-padding: 0.3rem rem-calc(15);
+$off-canvas-label-padding: 0.8rem rem-calc(15);
 // $off-canvas-label-color: #999;
 // $off-canvas-label-text-transform: uppercase;
 // $off-canvas-label-font-weight: bold;
-// $off-canvas-label-bg: #444;
+$off-canvas-label-bg: scale-color($_side-bg-color, $lightness: -20%);
 // $off-canvas-label-border-top: 1px solid scale-color(#444, $lightness: 14%);
 // $off-canvas-label-border-bottom: none;
 // $off-canvas-label-margin:0;
 // $off-canvas-link-padding: rem-calc(10, 15);
+$off-canvas-link-padding: rem-calc(5, 0);
 // $off-canvas-link-color: rgba(#FFF, 0.7);
+$off-canvas-link-color: rgba($_side-text-color, 0.7);
 // $off-canvas-link-border-bottom: 1px solid scale-color($off-canvas-bg, $lightness: -25%);
 
 // Off Canvas Menu Icon Variables
-// $tabbar-menu-icon-color: #FFF;
+$tabbar-menu-icon-color: $_top-text-color;
 // $tabbar-menu-icon-hover: scale-color($tabbar-menu-icon-color, $lightness: -30%);
+$tabbar-menu-icon-hover: scale-color($tabbar-menu-icon-color, $lightness: -50%);
 
 // $tabbar-menu-icon-text-indent: rem-calc(35);
 // $tabbar-menu-icon-width: $tabbar-height;

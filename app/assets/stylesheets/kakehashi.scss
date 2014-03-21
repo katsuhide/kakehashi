@@ -1,0 +1,33 @@
+@import "set";
+
+body{
+	background-color: $_base-bg-color;
+	li {
+		color: $_base-text-color;
+	}
+}
+
+#service-name {
+	text-align: center;
+	font-size: 2rem;
+	font-weight: normal;
+}
+
+#datasource-logo {
+	color: $_base-text-color;
+}
+
+.off-canvas-wrap {
+	.main-section {
+		text-align: center;
+	}
+
+	.tab-bar {
+		text-align: center;
+		a {
+			color: $_base-text-color;
+		}
+	}
+}
+
+

@@ -7,13 +7,12 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 	# Controller
 	KAKEHASHI.Controller = ->
-		@trendList = "trendList"
+		@trendList = "Trend List"
 		@
 
 	# extend Controller
 	_.extend KAKEHASHI.Controller.prototype,
 		start: ->
-			console.log "start"
 			@showHeader @trendList
 			@showFooter @trendList
 			@showMain @trendList
@@ -33,11 +32,13 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 		showMain: (trendList) ->
 			# App.main.show new KAKEHASHI.Views.ListView
-			# 	collection: todoList
+			main = new App.Layout.Main
+			collection: trendList
+			App.main.show main
 
 		showTarget: (target) ->
-			console.log "ここで対処のアイテムを絞り込む？"
 			console.log target
+
 
 	# Initialize
 	KAKEHASHI.addInitializer ->
