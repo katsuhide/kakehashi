@@ -17,6 +17,7 @@
 //= require marionette
 //= require foundation
 //= require turbolinks
+//= require kakehashi/kakehashi.js
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

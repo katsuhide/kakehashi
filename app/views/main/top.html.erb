@@ -1,2 +1,11 @@
-<h1>Main#top</h1>
-<p>Find me in app/views/main/top.html.erb</p>
+<section id="kakehashiapp">
+	<header id="header"></header>
+	<section id="main"></section>
+	<footer id="footer"></footer>
+</section>
+
+<%= javascript_tag do %>
+$(function() {
+	App.start();
+});
+<% end %>

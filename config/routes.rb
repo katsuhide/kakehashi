@@ -1,5 +1,6 @@
 Kakehashi::Application.routes.draw do
   get "main/top"
+  root "main#top"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
