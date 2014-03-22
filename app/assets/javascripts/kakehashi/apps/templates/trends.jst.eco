@@ -1,5 +1,17 @@
+<table id="trend">
+  <thead>
+    <tr>
+      <th>2Rank.</th>
+      <th>2Image</th>
+      <th>2Name</th>
+      <th>2Count</th>
+    </tr>
+  </thead>
+  <tbody id="trend-list">
+    <!-- <tr id="trend-list" data-tooltip class="has-tip" title="This sake's rank is XXX !"></tr> -->
+  </tbody>
+</table>
 <div id="datasource-logo"><i class="fa fa-twitter fa-3x"></i></div>
-<% console.log "main.jst.eco" + @ %>
 <table id="trend">
   <thead>
     <tr>
