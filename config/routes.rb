@@ -1,6 +1,11 @@
 Kakehashi::Application.routes.draw do
   get "main/kakehashi"
   root "main#kakehashi"
+
+  scope 'api' do
+    get 'days'  => 'day#list'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

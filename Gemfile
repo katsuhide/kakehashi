@@ -62,3 +62,7 @@ gem 'foundation-rails'
 
 # spring
 gem "spring", group: :development
+
+# pry
+gem 'pry'
+gem 'pry-rails'
