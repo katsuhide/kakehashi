@@ -7,9 +7,9 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		modelEvents:
 			'change': 'render'
 
-		# onRender: ->
-		# 	console.log "Item View Render"
-
+		templateHelpers:
+			getRank: ->
+				console.log "todo ここからリストなんて取得できない？"
 
 	# Item List View
 	class Views.ListView extends Backbone.Marionette.CompositeView
@@ -24,3 +24,4 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 				@update
 
 			update: ->
+

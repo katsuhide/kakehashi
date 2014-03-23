@@ -1,4 +1,4 @@
-<td><%= @['id'] %></td>
+<td><%= @getRank() %></td>
 <td><img src="assets/sake/<%=@['tag'] %>.jpg"></td>
 <td><%= @['name'] %></td>
 <td><%= @['count'] %></td>

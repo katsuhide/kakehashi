@@ -7,7 +7,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 	# Controller
 	KAKEHASHI.Controller = ->
-		@trendList = "Trend List"
+		@trendList = new App.Trends.TrendList()
 		@
 
 	# extend Controller
@@ -20,24 +20,22 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 		showHeader: (trendList) ->
 			header = new App.Layout.Header
-			collection: trendList
+				collection: trendList
 
 			App.header.show header
 
 		showFooter: (trendList) ->
 			footer = new App.Layout.Footer
-			collection: trendList
+				collection: trendList
 
 			App.footer.show footer
 
 		showMain: (trendList) ->
-			# App.main.show new KAKEHASHI.Views.ListView
-			main = new App.Layout.Main
-			collection: trendList
-			App.main.show main
+			App.main.show new KAKEHASHI.Views.ListView
+				collection: trendList
 
 		showTarget: (target) ->
-			console.log target
+			console.log "target parametter:" + target
 
 
 	# Initialize

@@ -1,5 +1,4 @@
 <div id="datasource-logo"><i class="fa fa-twitter fa-3x"></i></div>
-<% console.log "main.jst.eco" + @ %>
 <table id="trend">
   <thead>
     <tr>
