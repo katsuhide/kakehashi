@@ -5,7 +5,7 @@
 
 ### Definition
 column | comment
-- | -
+--- | ---
 tag_type | キーワードのカテゴリー
 tag | キーワードとして保存される情報
 keyword | 実際に検索されるキーワード
@@ -18,7 +18,7 @@ land_of_origin | 原産地（酒限定のため、このへんは後で再定義
 
 ### Definition
 column | comment
-- | -
+--- | ---
 keyword_id | 外部キー
 count | 検索結果の量
 search_datetime | 検索された時間
@@ -29,7 +29,7 @@ search_datetime | 検索された時間
 
 ### Definition
 column | comment
-- | -
+--- | ---
 tag_type | キーワードのカテゴリー
 tag | キーワードとして保存される情報
 name | 名称
