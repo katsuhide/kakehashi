@@ -15,3 +15,25 @@ App.module 'Layout', (Layout, App, Backbone) ->
 
 		template: 'kakehashi/apps/templates/footer'
 
+		collectionEvents:
+			'all': 'render'
+
+		initialize: ->
+			# console.log "footer initialize"
+
+		serializeData: ->
+			# console.log "footer serializeData"
+			total = @collection.length
+			@completedCount(total)
+
+		completedCount: (total)->
+			totalCount: total
+
+		getTotalCount: ->
+			@collection.length
+
+		templateHelpers:
+			countList: ->
+				console.log "footer:" + @getTotalCount
+
+

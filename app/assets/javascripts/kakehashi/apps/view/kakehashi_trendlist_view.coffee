@@ -7,21 +7,21 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		modelEvents:
 			'change': 'render'
 
-		templateHelpers:
-			getRank: ->
-				console.log "todo ここからリストなんて取得できない？"
-
 	# Item List View
 	class Views.ListView extends Backbone.Marionette.CompositeView
-			template: 'kakehashi/apps/templates/trends'
-			itemView: Views.ItemView
-			itemViewContainer: '#trend-list'
+		template: 'kakehashi/apps/templates/trends'
+		itemView: Views.ItemView
+		itemViewContainer: '#trend-list'
 
-			collectionEvents:
-				'all': 'update'
+		collectionEvents:
+			'all': 'update'
 
-			onRender: ->
-				@update
+		onRender: ->
+			@update
 
-			update: ->
+		update: ->
 
+		templateHelpers:
+			getRank2: ->
+				console.log "getRank2"
+				1 + 20

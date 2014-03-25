@@ -13,10 +13,15 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 	# extend Controller
 	_.extend KAKEHASHI.Controller.prototype,
 		start: ->
+			# console.log "show header"
 			@showHeader @trendList
+			# console.log "show footer"
 			@showFooter @trendList
+			# console.log "show list"
 			@showMain @trendList
+			# console.log "show fetch"
 			@trendList.fetch()
+			# console.log "done"
 
 		showHeader: (trendList) ->
 			header = new App.Layout.Header
@@ -35,7 +40,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 				collection: trendList
 
 		showTarget: (target) ->
-			console.log "target parametter:" + target
+			# console.log "target parametter:" + target
 
 
 	# Initialize
