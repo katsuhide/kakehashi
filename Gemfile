@@ -66,3 +66,6 @@ gem "spring", group: :development
 # pry
 gem 'pry'
 gem 'pry-rails'
+
+# twitter
+gem 'twitter'

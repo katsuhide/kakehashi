@@ -1,6 +1,10 @@
 require 'twitter'
 require 'yaml'	# TODO:configの用意
-require './twitter_api_util.rb'	# TODO:パスを決める
+require '../assets/twitter/twitter_api_util.rb'
+
+def read_configuration
+	return YAML.load_file("../assets/twitter/twitter_config.yml")
+end
 
 def initialize_of_count_tweets
 	@logger = Logger.new(STDOUT)
