@@ -47,7 +47,14 @@ end
 # gem 'debugger', group: [:development, :test]
 
 # debugger
-group :development do
+group :test, :development do
+	gem "pry-rails"
+	gem "pry-doc"
+	gem "pry-stack_explorer"
+	gem "pry-byebug"
+	gem "hirb"
+	gem "hirb-unicode"
+	gem "awesome_print"
 	gem 'better_errors'
 	gem 'binding_of_caller'
 end
@@ -62,10 +69,6 @@ gem 'foundation-rails'
 
 # spring
 gem "spring", group: :development
-
-# pry
-gem 'pry'
-gem 'pry-rails'
 
 # twitter
 gem 'twitter'
