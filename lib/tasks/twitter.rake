@@ -1,6 +1,6 @@
 require 'twitter'
-require 'yaml'	# TODO:configの用意
-require '../assets/twitter/twitter_api_util.rb'
+require 'yaml'
+require_relative '../assets/twitter/twitter_api_util'
 
 def read_configuration
 	return YAML.load_file("../assets/twitter/twitter_config.yml")

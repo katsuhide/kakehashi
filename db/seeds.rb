@@ -6,6 +6,18 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Day.create(tag_type: 'sake', tag: 'dassai', name: '獺祭', count: 1234567, base_date: '2014/03/22')
-Day.create(tag_type: 'sake', tag: 'koshinokanbai', name: '越乃寒梅', count: 12345, base_date: '2014/03/22')
-Day.create(tag_type: 'sake', tag: 'goninnmusume', name: '五人娘', count: 9835, base_date: '2014/03/22')
+Keyword.first_or_create([
+	{ tag_type: 'sake', tag: 'dassai', name: '獺祭', land_of_origin: '山口' },
+	{ tag_type: 'sake', tag: 'koshinokanbai', name: '越乃寒梅', land_of_origin: '新潟' },
+	{ tag_type: 'sake', tag: 'goninnmusume', name: '五人娘', land_of_origin: '千葉' },
+])
+
+Day.first_or_create([
+	{ tag_type: 'sake', tag: 'dassai', name: '獺祭', count: 1234567, base_date: '2014/03/22' },
+	{ tag_type: 'sake', tag: 'koshinokanbai', name: '越乃寒梅', count: 12345, base_date: '2014/03/22' },
+	{ tag_type: 'sake', tag: 'goninnmusume', name: '五人娘', count: 9835, base_date: '2014/03/22' },
+])
+
+# Day.create(tag_type: 'sake', tag: 'dassai', name: '獺祭', count: 1234567, base_date: '2014/03/22')
+# Day.create(tag_type: 'sake', tag: 'koshinokanbai', name: '越乃寒梅', count: 12345, base_date: '2014/03/22')
+# Day.create(tag_type: 'sake', tag: 'goninnmusume', name: '五人娘', count: 9835, base_date: '2014/03/22')

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  keyword_id: 
+  count: 1
+  search_datetime: 2014-03-27 02:44:00
+
+two:
+  keyword_id: 
+  count: 1
+  search_datetime: 2014-03-27 02:44:00
