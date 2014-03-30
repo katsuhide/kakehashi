@@ -5,6 +5,7 @@
       <th>Rank.</th>
       <th>Image</th>
       <th>Name</th>
+      <th>Land of Origin</th>
       <th>Count</th>
     </tr>
   </thead>
