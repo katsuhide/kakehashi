@@ -29,8 +29,9 @@ def create_trend_result(keyword, tweets)
 end
 
 def update_keyword(keyword, tweets)
-	if !tweets.nil? then
-		keyword['since_id'] = tweets[tweets.size - 1]['id']
+	latest_tweet = tweets[tweets.size - 1]
+	if !tweets.nil? && !latest_tweet.nil? then
+		keyword['since_id'] = latest_tweet['id']
 		keyword.save
 	end
 end
@@ -132,7 +133,33 @@ end
 
 # update the trendlist of day
 def update_trendlist
-	puts "TODO"
+	# keywordと結合して、tweetの件数を取得する
+	trends = Trend.joins(:keyword).group(:keyword_id).sum(:count)
+
+	# Update Day Trend
+	trends.each do |trend|
+		# 集計結果
+		keyword_id = trend[0]
+		count = trend[1]
+
+		# keyword info
+		keyword = Keyword.find_by(id:keyword_id)
+
+		# trend info
+		tag = keyword['tag']
+		day_trend = Day.find_by(tag:tag)
+		if day_trend.nil? then
+			day_trend = Day.new()
+			day_trend['tag_type'] = keyword['tag_type']
+			day_trend['tag'] = keyword['tag']
+			day_trend['name'] = keyword['name']
+			day_trend['count'] = count
+			day_trend.save
+		else
+			day_trend['count'] = count
+			day_trend.save
+		end
+	end
 end
 
 # update keyword by latest since_id
@@ -162,6 +189,12 @@ namespace :twitter do
 		tweets.each do |tweet|
 			pp tweet['id']
 		end
+	end
+
+	desc 'count tweets and udpate the trendlist'
+	task :all => :environment do
+		count_tweets
+		update_trendlist
 	end
 
 	desc 'count tweets per hour'
