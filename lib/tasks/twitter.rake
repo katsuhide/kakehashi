@@ -3,14 +3,14 @@ require 'yaml'
 require_relative '../assets/twitter/twitter_api_util'
 
 def read_configuration
-	return YAML.load_file("../assets/twitter/twitter_config.yml")
+	return YAML.load_file("lib/assets/twitter/twitter_config.yml")
 end
 
-def initialize_of_count_tweets
-	@logger = Logger.new(STDOUT)
-	@logger.level = Logger::INFO
-	@tw = TwitterUtil.new(@logger)
+def initalize_twitter
 	@config = read_configuration
+	@logger = Logger.new('log/twitter.log')
+	@logger.level = Logger::INFO
+	@tw = TwitterUtil.new(@logger, @config)
 	@fetch_size = @config["fetch_size"]
 	@execute_datetime = Time.now()
 end
@@ -22,11 +22,10 @@ end
 
 def create_trend_result(keyword, tweets)
 	trend = Trend.new()
-	trend['category'] = "sake"
 	trend['keyword_id'] = keyword['id']
 	trend['count'] = tweets.size
 	trend['search_datetime'] = @execute_datetime
-	return trend
+	trend.save
 end
 
 def update_keyword(keyword, tweets)
@@ -36,37 +35,92 @@ def update_keyword(keyword, tweets)
 	end
 end
 
+## 	construct result
+def contruct_result(tweets)
+	result = []
+	tweets.each{|tweet|
+		h = Hash::new
+		h.store("id", tweet.id)
+		h.store("time", tweet.created_at)
+		result.push(h)
+	}
+	return result
+end
+
+## 	search tweets method
+def search_tweets(keyword, since_id)
+	tweets = @tw.search_tweets(@fetch_size, keyword, since_id)
+	return contruct_result(tweets)
+end
+
+## 	再帰検索
+def repeat_back_search(keyword, since_id, min_id, base_tweets)
+	tweets = search_tweets_by_both(keyword, since_id, min_id-1)
+	min_id = @tw.get_min_id(tweets)
+	base_tweets += tweets
+	if tweets.count != 0 then
+		@logger.info("Count:" + tweets.size.to_s + ", Min_id: " + min_id.to_s + ", Max_id: " + @tw.get_max_id(tweets).to_s)
+		base_tweets = repeat_back_search(keyword, since_id, min_id, base_tweets)
+	end
+	return base_tweets
+end
+
+## 	search tweets method by since_id and max_id
+def search_tweets_by_both(keyword, since_id, max_id)
+	tweets  = @tw.search_tweets_by_both(@fetch_size, keyword, since_id, max_id)
+	return contruct_result(tweets)
+end
+
+## 	since_id以降のTweetを全件取得する
+def search_all_tweets(keyword, since_id)
+	## 直近のTweetを取得
+	@logger.info("Start getting the latest tweets.")
+	tweets = search_tweets(keyword, since_id)
+	@logger.info("Count:" + tweets.size.to_s + ", Min_id: " + @tw.get_min_id(tweets).to_s + ", Max_id: " + @tw.get_max_id(tweets).to_s)
+
+	## そこから前回取得結果まで遡る
+	@logger.info("Start getting the other tweets")
+	if tweets.count != 0 then
+		min_id = @tw.get_min_id(tweets)
+		tweets = repeat_back_search(keyword, since_id, min_id, tweets)
+	end
+	return tweets
+end
+
+
 def execute_search_tweet(keywords)
 	keywords.each{|keyword|
-		keyword = keyword['keyword']
-		since_id = keyword['since_id']
+		search_word = keyword['search_word']
+		since_id = keyword['since_id'].nil? ? 0 : keyword['since_id']
 		tweets = nil
 
 		begin
 			# search all tweets
-			@logger.info("START!!!" + "keyword: " + keyword + ", since_id: " + since_id.to_s)
-			tweets = search_all_tweets(keyword, since_id).sort_by{|tweet| tweet['id']}
+			@logger.info("START!!!" + "keyword: " + search_word + ", since_id: " + since_id.to_s)
+			tweets = search_all_tweets(search_word, since_id).sort_by{|tweet| tweet['id']}
 
 			# create the trend result
 			create_trend_result(keyword, tweets)
 
-			# update keyword data
-			update_keyword(keyword, tweets)
+			# update since_id
+			since_id = tweets[tweets.size - 1]['id']
 		rescue Twitter::Error::TooManyRequests => tw_error
-			@logger.error(tw_error.to_s + " during searching " + keyword)
+			@logger.error(tw_error.to_s + " during searching " + search_word)
 			swith_twitter_account()
 		rescue => ex
 			@logger.error(ex)
 		ensure
-			@logger.info("END!!!" + "keyword: " + keyword + ", since_id: " + since_id.to_s)
+			@logger.info("END!!!" + "keyword: " + search_word + ", since_id: " + since_id.to_s)
+			# update keyword data
+			update_keyword(keyword, tweets)
 		end
 	}
 end
 
 # count tweets per hour
 def count_tweets
-	# initialize
-	initialize_of_count_tweets
+	# initalize_twitter
+	initalize_twitter
 
 	# get the keyword list
 	keywords = get_keywords
@@ -81,8 +135,35 @@ def update_trendlist
 	puts "TODO"
 end
 
+# update keyword by latest since_id
+def update_keyword_to_latest
+	# initalize_twitter
+	initalize_twitter
+
+	# get the keyword list
+	keywords = get_keywords
+
+	keywords.each do |keyword|
+		tweet = @tw.search_tweet(keyword['search_word'])
+		new_since_id = tweet.nil? ? since_id : tweet['id']
+		keyword['since_id'] = new_since_id
+		keyword.save
+	end
+
+end
 
 namespace :twitter do
+	desc 'test'
+	task :test => :environment do
+		initalize_twitter
+		@client = @tw.get_client
+		keyword = "獺祭"
+		tweets = @client.search(keyword, :count => 2, :result_type => "recent", :since_id => 0).take(1)
+		tweets.each do |tweet|
+			pp tweet['id']
+		end
+	end
+
 	desc 'count tweets per hour'
 	task :count_tweets => :environment do
 		count_tweets
@@ -91,6 +172,11 @@ namespace :twitter do
 	desc 'update the trendlist of day'
 	task :update_trendlist => :environment do
 		update_trendlist
+	end
+
+	desc 'update keyword by latest since_id'
+	task :update_keyword => :environment do
+		update_keyword_to_latest
 	end
 
 end

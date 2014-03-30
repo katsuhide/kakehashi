@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326174400) do
+ActiveRecord::Schema.define(version: 20140330022531) do
 
   create_table "days", force: true do |t|
     t.string   "tag_type"
@@ -26,11 +26,12 @@ ActiveRecord::Schema.define(version: 20140326174400) do
   create_table "keywords", force: true do |t|
     t.string   "tag_type"
     t.string   "tag"
-    t.string   "keyword"
+    t.string   "search_word"
     t.string   "name"
     t.string   "land_of_origin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "since_id"
   end
 
   create_table "trends", force: true do |t|

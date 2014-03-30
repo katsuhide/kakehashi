@@ -5,8 +5,8 @@ require 'logger'
 
 class TwitterUtil
 	## 	initialize
-	def initialize(log = nil)
-		read_configuration
+	def initialize(log = nil, config)
+		@config = config
 		create_client(get_available_client())
 		@logger = log
 		if @logger.nil? then
@@ -14,12 +14,6 @@ class TwitterUtil
 			@logger.level = Logger::INFO
 		end
 		@logger.debug("Twitter Util initialize")
-	end
-
-	## 	read the configuration method
-	def read_configuration
-		@config = YAML.load_file("config.yml")
-		return @config
 	end
 
 	## 	get next index of twitter client
@@ -38,11 +32,11 @@ class TwitterUtil
 
 	## 	create the twitter client
 	def create_client(oauth)
-		@client = Twitter::Client.new(
+		@client = Twitter::REST::Client.new(
 			 consumer_key: oauth["consumer_key"],
 			 consumer_secret: oauth["consumer_secret"],
-			 oauth_token: oauth["oauth_token"],
-			 oauth_token_secret: oauth["oauth_token_secret"]
+			 access_token: oauth["access_token"],
+			 access_token_secret: oauth["access_token_secret"]
 		)
 	end
 
@@ -57,7 +51,6 @@ class TwitterUtil
 			h = Hash::new
 			h.store("id", tweet.id)
 			h.store("time", tweet.created_at)
-			h.store("user", "@" + tweet.from_user)
 			h.store("text", tweet.text)
 			@logger.debug(p h)
 		end
@@ -77,8 +70,7 @@ class TwitterUtil
 
 	##  	search latest tweet
 	def search_tweet(keyword)
-		tweet =  @client.search(keyword, :count => 1, :result_type => "recent").results.reverse.map.first
-		print_tweet(tweet)
+		tweet =  @client.search(keyword, :count => 1, :result_type => "recent").take(1)[0]
 		return tweet
 	end
 
@@ -102,14 +94,14 @@ class TwitterUtil
 
 	## 	search tweets method
 	def search_tweets(fetch_size, keyword, since_id)
-		tweets = @client.search(keyword, :count => fetch_size, :result_type => "recent", :since_id => since_id).results.reverse.map
+		tweets = @client.search(keyword, :count => fetch_size, :result_type => "recent", :since_id => since_id)
 		print_tweets(tweets)
 		return  tweets
 	end
 
 	## 	search tweets method by since_id and max_id
 	def search_tweets_by_both(fetch_size, keyword, since_id, max_id)
-		tweets =  @client.search(keyword, :count => fetch_size, :result_type => "recent", :since_id => since_id, :max_id => max_id).results.reverse.map
+		tweets =  @client.search(keyword, :count => fetch_size, :result_type => "recent", :since_id => since_id, :max_id => max_id)
 		print_tweets(tweets)
 		return  tweets
 	end
