@@ -30,10 +30,8 @@ search_datetime | 検索された時間
 ### Definition
 column | comment
 --- | ---
-tag_type | キーワードのカテゴリー
-tag | キーワードとして保存される情報
-name | 名称
-count | 検索結果の量
+keyword_id | 外部キー
+total_count | 検索結果の量
 base_date | 基準日
 rank | カテゴリー内のランキング
 

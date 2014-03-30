@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140330022531) do
+ActiveRecord::Schema.define(version: 20140330173738) do
 
-  create_table "days", force: true do |t|
-    t.string   "tag_type"
-    t.string   "tag"
-    t.string   "name"
-    t.integer  "count"
+  create_table "day_trends", force: true do |t|
+    t.integer  "keyword_id"
+    t.integer  "total_count"
     t.date     "base_date"
+    t.integer  "rank"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "day_trends", ["keyword_id"], name: "index_day_trends_on_keyword_id"
 
   create_table "keywords", force: true do |t|
     t.string   "tag_type"

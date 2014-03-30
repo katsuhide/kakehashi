@@ -3,7 +3,7 @@ Kakehashi::Application.routes.draw do
   root "main#kakehashi"
 
   scope 'api' do
-    get 'days'  => 'day#list'
+    get 'daytrends'  => 'day_trend#list'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

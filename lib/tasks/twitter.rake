@@ -140,23 +140,23 @@ def update_trendlist
 	trends.each do |trend|
 		# 集計結果
 		keyword_id = trend[0]
-		count = trend[1]
+		total_count = trend[1]
 
 		# keyword info
 		keyword = Keyword.find_by(id:keyword_id)
 
 		# trend info
-		tag = keyword['tag']
-		day_trend = Day.find_by(tag:tag)
+		today = Date.today()
+		keyword_id = keyword['id']
+		day_trend = DayTrend.where(base_date:today).find_by(keyword_id:keyword_id)
 		if day_trend.nil? then
-			day_trend = Day.new()
-			day_trend['tag_type'] = keyword['tag_type']
-			day_trend['tag'] = keyword['tag']
-			day_trend['name'] = keyword['name']
-			day_trend['count'] = count
+			day_trend = DayTrend.new()
+			day_trend['keyword_id'] = keyword['id']
+			day_trend['total_count'] = total_count
+			day_trend['base_date'] = today
 			day_trend.save
 		else
-			day_trend['count'] = count
+			day_trend['total_count'] = total_count
 			day_trend.save
 		end
 	end
@@ -179,6 +179,18 @@ def update_keyword_to_latest
 
 end
 
+# update ranking
+def update_ranking
+	today = Date.today()
+	rank = 1
+	DayTrend.where(base_date:today).order("total_count").reverse_order.each do |trend|
+		trend['rank'] = rank
+		rank += 1
+		trend.save
+	end
+
+end
+
 namespace :twitter do
 	desc 'test'
 	task :test => :environment do
@@ -195,6 +207,7 @@ namespace :twitter do
 	task :all => :environment do
 		count_tweets
 		update_trendlist
+		update_ranking
 	end
 
 	desc 'count tweets per hour'
@@ -210,6 +223,11 @@ namespace :twitter do
 	desc 'update keyword by latest since_id'
 	task :update_keyword => :environment do
 		update_keyword_to_latest
+	end
+
+	desc 'update ranking'
+	task :update_ranking => :environment do
+		update_ranking
 	end
 
 end

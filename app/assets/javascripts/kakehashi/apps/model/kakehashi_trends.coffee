@@ -9,5 +9,5 @@ App.module 'Trends', (Trends, App, Backbone) ->
 	# Trend Collection
 	class Trends.TrendList extends Backbone.Collection
 		model: Trends.Trend
-		url: 'api/days'
+		url: 'api/daytrends'
 
