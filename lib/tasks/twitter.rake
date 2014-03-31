@@ -103,15 +103,13 @@ def execute_search_tweet(keywords)
 			# create the trend result
 			create_trend_result(keyword, tweets)
 
-			# update since_id
-			since_id = tweets[tweets.size - 1]['id']
 		rescue Twitter::Error::TooManyRequests => tw_error
 			@logger.error(tw_error.to_s + " during searching " + search_word)
-			swith_twitter_account()
+			@tw.change_client
 		rescue => ex
 			@logger.error(ex)
 		ensure
-			@logger.info("END!!!" + "keyword: " + search_word + ", since_id: " + since_id.to_s)
+			@logger.info("END!!!" + "keyword: " + search_word + ".")
 			# update keyword data
 			if !tweets.nil? then
 			update_keyword(keyword, tweets)

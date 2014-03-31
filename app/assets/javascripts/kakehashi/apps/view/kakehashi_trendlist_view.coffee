@@ -24,4 +24,3 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		templateHelpers:
 			getRank2: ->
 				console.log "getRank2"
-				1 + 20
