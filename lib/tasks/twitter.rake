@@ -11,7 +11,7 @@ def initalize_twitter
 	@logger = Logger.new('log/twitter.log')
 	@logger.level = Logger::INFO
 	@tw = TwitterUtil.new(@logger, @config)
-	@fetch_size = @config["fetch_size"]
+	@fetch_size = @config["fetch_size"].to_i
 	@execute_datetime = Time.now()
 end
 
@@ -54,6 +54,12 @@ def search_tweets(keyword, since_id)
 	return contruct_result(tweets)
 end
 
+## 	search tweets method by since_id and max_id
+def search_tweets_by_both(keyword, since_id, max_id)
+	tweets  = @tw.search_tweets_by_both(@fetch_size, keyword, since_id, max_id)
+	return contruct_result(tweets)
+end
+
 ## 	再帰検索
 def repeat_back_search(keyword, since_id, min_id, base_tweets)
 	tweets = search_tweets_by_both(keyword, since_id, min_id-1)
@@ -66,12 +72,6 @@ def repeat_back_search(keyword, since_id, min_id, base_tweets)
 	return base_tweets
 end
 
-## 	search tweets method by since_id and max_id
-def search_tweets_by_both(keyword, since_id, max_id)
-	tweets  = @tw.search_tweets_by_both(@fetch_size, keyword, since_id, max_id)
-	return contruct_result(tweets)
-end
-
 ## 	since_id以降のTweetを全件取得する
 def search_all_tweets(keyword, since_id)
 	## 直近のTweetを取得
@@ -80,8 +80,8 @@ def search_all_tweets(keyword, since_id)
 	@logger.info("Count:" + tweets.size.to_s + ", Min_id: " + @tw.get_min_id(tweets).to_s + ", Max_id: " + @tw.get_max_id(tweets).to_s)
 
 	## そこから前回取得結果まで遡る
-	@logger.info("Start getting the other tweets")
 	if tweets.count != 0 then
+		@logger.info("Start getting the other tweets")
 		min_id = @tw.get_min_id(tweets)
 		tweets = repeat_back_search(keyword, since_id, min_id, tweets)
 	end
@@ -113,7 +113,9 @@ def execute_search_tweet(keywords)
 		ensure
 			@logger.info("END!!!" + "keyword: " + search_word + ", since_id: " + since_id.to_s)
 			# update keyword data
+			if !tweets.nil? then
 			update_keyword(keyword, tweets)
+			end
 		end
 	}
 end

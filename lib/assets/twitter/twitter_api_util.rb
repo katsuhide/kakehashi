@@ -52,7 +52,7 @@ class TwitterUtil
 			h.store("id", tweet.id)
 			h.store("time", tweet.created_at)
 			h.store("text", tweet.text)
-			@logger.debug(p h)
+			# @logger.debug(p h)
 		end
 	end
 
@@ -94,14 +94,14 @@ class TwitterUtil
 
 	## 	search tweets method
 	def search_tweets(fetch_size, keyword, since_id)
-		tweets = @client.search(keyword, :count => fetch_size, :result_type => "recent", :since_id => since_id)
+		tweets = @client.search(keyword, :count => fetch_size, :result_type => "recent", :since_id => since_id).take(fetch_size)
 		print_tweets(tweets)
 		return  tweets
 	end
 
 	## 	search tweets method by since_id and max_id
 	def search_tweets_by_both(fetch_size, keyword, since_id, max_id)
-		tweets =  @client.search(keyword, :count => fetch_size, :result_type => "recent", :since_id => since_id, :max_id => max_id)
+		tweets =  @client.search(keyword, :count => fetch_size, :result_type => "recent", :since_id => since_id, :max_id => max_id).take(fetch_size)
 		print_tweets(tweets)
 		return  tweets
 	end
