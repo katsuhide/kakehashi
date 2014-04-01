@@ -15,6 +15,18 @@ def initalize_twitter
 	@execute_datetime = Time.now()
 end
 
+def get_search_keyword(keyword)
+	tag_type = keyword['tag_type']
+	prefix = nil
+	case tag_type
+	when "sake" then
+		prefix = "酒 "
+	else
+		prefix = ""
+	end
+	return prefix + keyword['search_word']
+end
+
 def get_keywords
 	keywords = Keyword.all
 	return keywords
@@ -91,7 +103,7 @@ end
 
 def execute_search_tweet(keywords)
 	keywords.each{|keyword|
-		search_word = keyword['search_word']
+		search_word = get_search_keyword(keyword)
 		since_id = keyword['since_id'].nil? ? 0 : keyword['since_id']
 		tweets = nil
 
@@ -171,8 +183,8 @@ def update_keyword_to_latest
 	keywords = get_keywords
 
 	keywords.each do |keyword|
-		tweet = @tw.search_tweet(keyword['search_word'])
-		new_since_id = tweet.nil? ? since_id : tweet['id']
+		tweet = @tw.search_tweet(get_search_keyword(keyword))
+		new_since_id = tweet.nil? ? keyword['since_id'] : tweet['id']
 		keyword['since_id'] = new_since_id
 		keyword.save
 	end
@@ -196,10 +208,10 @@ namespace :twitter do
 	task :test => :environment do
 		initalize_twitter
 		@client = @tw.get_client
-		keyword = "獺祭"
-		tweets = @client.search(keyword, :count => 2, :result_type => "recent", :since_id => 0).take(1)
+		keyword = "酒 南"
+		tweets = @client.search(keyword, :count => 2, :result_type => "recent", :since_id => 0).take(2)
 		tweets.each do |tweet|
-			pp tweet['id']
+			pp tweet['text']
 		end
 	end
 
