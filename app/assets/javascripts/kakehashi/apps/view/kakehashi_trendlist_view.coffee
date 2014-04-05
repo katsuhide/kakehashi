@@ -7,6 +7,13 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		modelEvents:
 			'change': 'render'
 
+		events:
+			'click #hoge': 'hogeFunction'
+
+		hogeFunction: ->
+			alert "Hoge is hoge!"
+
+
 	# Item List View
 	class Views.ListView extends Backbone.Marionette.CompositeView
 		template: 'kakehashi/apps/templates/trends'

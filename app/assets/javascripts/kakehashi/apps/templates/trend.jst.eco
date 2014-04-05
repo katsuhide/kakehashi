@@ -1,5 +1,5 @@
 <td><%= @['rank'] %></td>
-<td><img src="assets/sake/<%=@['tag'] %>.jpg"></td>
+<td id="hoge"><img src="assets/sake/<%=@['tag'] %>.jpg"></td>
 <td><%= @['name'] %></td>
 <td><%= @['land_of_origin'] %></td>
 <td><%= @['total_count'] %></td>
