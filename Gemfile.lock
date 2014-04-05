@@ -63,6 +63,7 @@ GEM
     foundation-rails (5.2.1.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
+    google-analytics-rails (0.0.5)
     hike (1.2.3)
     hirb (0.7.1)
     hirb-unicode (0.0.5)
@@ -190,6 +191,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   eco
   foundation-rails
+  google-analytics-rails
   hirb
   hirb-unicode
   jbuilder (~> 1.2)

@@ -77,4 +77,8 @@ Kakehashi::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # googleanalyticsで取得したTrackerIDをセット
+  GA.tracker = "UA-37101629-3"
+
 end

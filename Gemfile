@@ -75,3 +75,6 @@ gem 'twitter'
 
 # Rails4 asset pipeline (https://devcenter.heroku.com/articles/rails-4-asset-pipeline)
 gem 'rails_12factor', group: :production
+
+# google analytics
+gem 'google-analytics-rails'
