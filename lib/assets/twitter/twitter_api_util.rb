@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 require 'twitter'
-require 'yaml'
 require 'logger'
 
 class TwitterUtil
@@ -19,15 +18,19 @@ class TwitterUtil
 	## 	get next index of twitter client
 	def get_next_client_index(in_use_index)
 		current_index = in_use_index.nil? ? -1: in_use_index
-		oauth = @config['oauth']
-		client_num = oauth.count
+		client_num = @config['twitter_oauth_count']
 		return current_index < (client_num - 1) ? current_index + 1 : current_index + 1 - client_num
 	end
 
 	## 	get available client
 	def get_available_client()
 		@in_use_index = get_next_client_index(@in_use_index)
-		return @config['oauth'][@in_use_index]
+		oauth = Hash.new()
+		oauth['consumer_key'] = @config['consumer_keys'][@in_use_index]
+		oauth['consumer_secret'] = @config['consumer_secrets'][@in_use_index]
+		oauth['access_token'] = @config['access_tokens'][@in_use_index]
+		oauth['access_token_secret'] = @config['access_token_secrets'][@in_use_index]
+		return oauth
 	end
 
 	## 	create the twitter client

@@ -1,9 +1,15 @@
 require 'twitter'
-require 'yaml'
 require_relative '../assets/twitter/twitter_api_util'
 
 def read_configuration
-	return YAML.load_file("lib/assets/twitter/twitter_config.yml")
+	@config = Hash.new()
+	@config['fetch_size'] = 100
+	@config['twitter_oauth_count'] = ENV['CONSUMER_KEY'].split(',').count
+	@config['consumer_keys'] = ENV['CONSUMER_KEY'].split(',')
+	@config['consumer_secrets'] = ENV['CONSUMER_SECRET'].split(',')
+	@config['access_tokens'] = ENV['ACCESS_TOKEN'].split(',')
+	@config['access_token_secrets'] = ENV['ACCESS_TOKEN_SECRET'].split(',')
+	return @config
 end
 
 def initalize_twitter
@@ -11,7 +17,7 @@ def initalize_twitter
 	@logger = Logger.new('log/twitter.log')
 	@logger.level = Logger::INFO
 	@tw = TwitterUtil.new(@logger, @config)
-	@fetch_size = @config["fetch_size"].to_i
+	@fetch_size = @config["fetch_size"]
 	@execute_datetime = Time.now()
 end
 
@@ -124,7 +130,7 @@ def execute_search_tweet(keywords)
 			@logger.info("END!!!" + "keyword: " + search_word + ".")
 			# update keyword data
 			if !tweets.nil? then
-			update_keyword(keyword, tweets)
+				update_keyword(keyword, tweets)
 			end
 		end
 	}
