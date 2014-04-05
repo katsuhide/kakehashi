@@ -1,1 +1,14 @@
-<div id="hoge"><span data-tooltip class="has-tip" title=<%= @getTooltipMsg() %> ><img src="assets/sake/<%=@['tag'] %>.jpg"></span></div>
+<div id="trend">
+	<span data-tooltip class="has-tip" title=<%= @getTooltipMsg() %> >
+		<% rank = @['rank'] %>
+		<% if rank <= 5: %>
+			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size77">
+		<% else if rank <= 10: %>
+			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size44">
+		<% else if rank <= 30: %>
+			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size33">
+		<% else: %>
+			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size22">
+		<% end %>
+	</span>
+</div>

@@ -1,3 +1,7 @@
-<div id="datasource-logo"><i class="fa fa-twitter fa-3x"></i></div>
+<div id="datasource-logo">
+	<span data-tooltip data-options="disable_for_touch:true" class="has-tip [tip-top tip-bottom tip-left tip-right] [radius round]" title="Tooltips are awesome, you should totally use them!">
+		<i class="fa fa-twitter fa-3x"></i>
+	</span>
+</div>
 <div id="trend-list">
 </div>
