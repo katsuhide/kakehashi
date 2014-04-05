@@ -10,13 +10,20 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 
 		events:
 			'click #trend': 'trendFunction'
+			'mouseover #trend': 'trendFunction'
+
+		initTooltip: ->
+			$(document).foundation()
 
 		onShow: ->
 			$("#trend-list").nested 'append', @
+			@initTooltip()
+			# $(document).foundation()
 
 		trendFunction: ->
 			console.log "hogeFunction"
 			# $("#trend-list").nested {selector: '.box'}
+
 
 		templateHelpers :
 			getTooltipMsg: ->

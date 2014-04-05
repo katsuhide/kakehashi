@@ -1,7 +1,9 @@
 <div id="trend">
-	<span data-tooltip class="has-tip" title=<%= @getTooltipMsg() %> >
+	<span data-tooltip class="has-tip [tip-bottom tip-right] [radius round] " title=<%= @getTooltipMsg() %> >
 		<% rank = @['rank'] %>
-		<% if rank <= 5: %>
+		<% if rank <= 1: %>
+			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size99">
+		<% else if rank <= 5: %>
 			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size77">
 		<% else if rank <= 10: %>
 			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size44">

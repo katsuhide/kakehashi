@@ -65,7 +65,7 @@ group :assets do
 end
 
 # foundation
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 5.2.2.0'
 
 # spring
 gem "spring", group: :development

@@ -31,11 +31,11 @@ body{
 	margin: auto auto auto auto;
 	text-align: left;
 	img {
-		width: 200px;
-		height: 200px;
-		border-radius: 200px;
-    -webkit-border-radius: 200px;
-    -moz-border-radius: 200px;
+		width: 300px;
+		height: 300px;
+		border-radius: 300px;
+    -webkit-border-radius: 300px;
+    -moz-border-radius: 300px;
 	}
 }
 
@@ -52,4 +52,6 @@ body{
 	}
 }
 
-
+.has-tip open {
+	color: red;
+}
