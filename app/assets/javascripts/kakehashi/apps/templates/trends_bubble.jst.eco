@@ -1,0 +1,5 @@
+<div id="datasource-logo"><i class="fa fa-twitter fa-3x"></i></div>
+<div id="trend-list">
+</div>
+<%= console.log "nested execute" %>
+<%= $("#trend-list").nested {selector: '.box'} %>
