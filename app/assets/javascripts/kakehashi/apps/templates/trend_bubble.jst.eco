@@ -1,1 +1,1 @@
-<div id="hoge"><img src="assets/sake/<%=@['tag'] %>.jpg"></div>
+<div id="hoge"><span data-tooltip class="has-tip" title=<%= @getTooltipMsg() %> ><img src="assets/sake/<%=@['tag'] %>.jpg"></span></div>
