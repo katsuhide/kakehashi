@@ -15,28 +15,34 @@
 <body>
 
 	<a class="btn" id="test">Test</a>
+	<a class="btn" id="add">Add</a>
 	<div id="bubble-list">
-		<div id="hoge" class="box size11">1</div>
+<!-- 		<div id="hoge" class="box size11">1</div>
 		<div class="box size21">2</div>
 		<div class="box size32">3</div>
 		<div class="box size11">4</div>
 		<div class="box size21">5</div>
-		<div class="box size12">6</div>
-		<div class="box size21">7</div>
-		<div class="box size11">8</div>
-	</div>
+ -->	</div>
 
 	<script type="text/javascript" >
 
 	$(function() {
 		console.log("hoge")
-		$("#bubble-list").nested({selector: '.box'});
+		// $("#bubble-list").nested({selector: '.box'});
+		$("#bubble-list").nested();
 
 		$('#test').click(function(){
 			console.log("hoge2")
 			$("#bubble-list").nested({selector: '.box'});
 		})
 
+		$('#add').click(function(){
+			console.log("add")
+			// var boxes = makeBoxes();
+			// $("#bubble-list").append(boxes).nested('append', boxes);
+			var box = makeBoxes2();
+			$("#bubble-list").append(box).nested('append', box);
+		})
 	});
 
 	</script>

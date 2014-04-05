@@ -2,7 +2,7 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 	# Trend List Item Views
 	class Views.ItemView extends Marionette.ItemView
 		# tagName: 'tr'
-		tagName: 'div class="box size22"'
+		tagName: 'div class="box size11"'
 		# template: 'kakehashi/apps/templates/trend'
 		template: 'kakehashi/apps/templates/trend_bubble'
 
@@ -12,9 +12,12 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		events:
 			'click #hoge': 'hogeFunction'
 
+		onShow: ->
+			$("#trend-list").nested 'append', @
+
 		hogeFunction: ->
 			console.log "Hoge is hoge!"
-			$("#trend-list").nested {selector: '.box'}
+			# $("#trend-list").nested {selector: '.box'}
 
 	# Item List View
 	class Views.ListView extends Backbone.Marionette.CompositeView
@@ -24,13 +27,10 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		itemViewContainer: '#trend-list'
 
 		collectionEvents:
-			'all': 'update'
+			'all': 'someEvent'
 
-		onRender: ->
-			@update
+		someEvent: ->
+			# console.log "some event happends"
 
 		update: ->
-
-		templateHelpers:
-			getRank2: ->
-				console.log "getRank2"
+			# console.log "update"

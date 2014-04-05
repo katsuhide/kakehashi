@@ -13,3 +13,9 @@ makeBoxes = function() {
   return boxes;
 };
 
+makeBoxes2 = function() {
+    var box = document.createElement('div');
+    box.className = 'box size' +  Math.ceil( Math.random()*3 ) +  Math.ceil( Math.random()*3 );
+    // add box DOM node to array of new elements
+  return box;
+};
