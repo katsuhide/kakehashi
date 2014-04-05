@@ -13,6 +13,18 @@
 
 ActiveRecord::Schema.define(version: 20140330173738) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "commitments", force: true do |t|
+    t.string   "title"
+    t.boolean  "is_completed"
+    t.date     "due_date"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "day_trends", force: true do |t|
     t.integer  "keyword_id"
     t.integer  "total_count"
@@ -22,7 +34,7 @@ ActiveRecord::Schema.define(version: 20140330173738) do
     t.datetime "updated_at"
   end
 
-  add_index "day_trends", ["keyword_id"], name: "index_day_trends_on_keyword_id"
+  add_index "day_trends", ["keyword_id"], name: "index_day_trends_on_keyword_id", using: :btree
 
   create_table "keywords", force: true do |t|
     t.string   "tag_type"
@@ -43,6 +55,27 @@ ActiveRecord::Schema.define(version: 20140330173738) do
     t.datetime "updated_at"
   end
 
-  add_index "trends", ["keyword_id"], name: "index_trends_on_keyword_id"
+  add_index "trends", ["keyword_id"], name: "index_trends_on_keyword_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
