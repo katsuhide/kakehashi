@@ -18,6 +18,7 @@
     "backbone": "~1.1.2",
     "marionette": "~1.6.4",
     "fontawesome": "~4.0.3",
-    "nested": "*"
+    "nested": "*",
+    "tooltipster": "~3.2.1"
   }
 }

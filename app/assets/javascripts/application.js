@@ -17,6 +17,7 @@
 //= require marionette
 //= require foundation
 //= require nested/jquery.nested.js
+//= require tooltipster/js/jquery.tooltipster.js
 //= require kakehashi/kakehashi.js
 //= require_tree .
 //= require turbolinks

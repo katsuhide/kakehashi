@@ -10,26 +10,44 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 
 		events:
 			'click #trend': 'trendFunction'
-			'mouseover #trend': 'trendFunction'
+			# 'mouseover #trend': 'initTooltip'
 
 		initTooltip: ->
-			$(document).foundation()
+			$("#bubble-#{@model.get 'rank'}").tooltipster(
+				content: $('<span><strong>' + @createTooltipMsg() + '</strong></span>')
+				)
+			# $(document).foundation()
+			# bubble_id = '#bubble-' +  @model.get 'rank'
+			# $(document).foundation
+  	# 		tooltips:
+  	# 			selector : bubble_id
+  	# 			tooltip_class : '.tooltip'
+  	# 			tip_template : (selector, content) ->
+			#       '<span data-selector="' + selector + '" class="' + Foundation.libs.tooltips.settings.tooltipClass.substring(1) + '">' + content + '<span class="nub"></span></span>'
 
 		onShow: ->
 			$("#trend-list").nested 'append', @
 			@initTooltip()
-			# $(document).foundation()
 
 		trendFunction: ->
-			console.log "hogeFunction"
+			console.log "trendFunction"
 			# $("#trend-list").nested {selector: '.box'}
 
+			# @initTooltip()
+			# $("#trend-list").nested {selector: '.box'}
+
+		createTooltipMsg: ->
+			rank = @model.get 'rank'
+			name = @model.get 'name'
+			origin = @model.get 'land_of_origin'
+			total_count = @model.get 'total_count'
+			msg = "No." + rank + "</br>" + name + " @ " + origin + "</br>" + total_count
 
 		templateHelpers :
 			getTooltipMsg: ->
-				@createTooltipMsg()
+				@createTooltipMsg2()
 
-			createTooltipMsg: ->
+			createTooltipMsg2: ->
 				"No." + @['rank'] + "-" + @['name'] + "@" + @['land_of_origin'] + ":" + @['total_count']
 
 	# Item List View
@@ -41,6 +59,9 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 
 		collectionEvents:
 			'all': 'someEvent'
+
+		onShow: ->
+			# $(document).foundation()
 
 		someEvent: ->
 			# console.log "some event happends"

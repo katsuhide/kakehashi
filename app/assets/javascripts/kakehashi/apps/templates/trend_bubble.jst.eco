@@ -1,16 +1,16 @@
 <div id="trend">
-	<span data-tooltip class="has-tip [tip-bottom tip-right] [radius round] " title=<%= @getTooltipMsg() %> >
+	<!-- <span data-tooltip class="has-tip" title=<%#= @getTooltipMsg() %> > -->
 		<% rank = @['rank'] %>
 		<% if rank <= 1: %>
-			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size99">
+		<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size99" id="bubble-<%= @['rank'] %>">
 		<% else if rank <= 5: %>
-			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size77">
+		<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size77" id="bubble-<%= @['rank'] %>">
 		<% else if rank <= 10: %>
-			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size44">
+		<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size44" id="bubble-<%= @['rank'] %>">
 		<% else if rank <= 30: %>
-			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size33">
+		<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size33" id="bubble-<%= @['rank'] %>">
 		<% else: %>
-			<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size22">
+		<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size22" id="bubble-<%= @['rank'] %>">
 		<% end %>
-	</span>
+	<!-- </span> -->
 </div>
