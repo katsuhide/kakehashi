@@ -14,6 +14,7 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 
 		initTooltip: ->
 			$("#bubble-#{@model.get 'rank'}").tooltipster(
+				fixedWidth: '200'
 				content: $('<span><strong>' + @createTooltipMsg() + '</strong></span>')
 				)
 			# $(document).foundation()
@@ -41,7 +42,7 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 			name = @model.get 'name'
 			origin = @model.get 'land_of_origin'
 			total_count = @model.get 'total_count'
-			msg = "No." + rank + "</br>" + name + " @ " + origin + "</br>" + total_count
+			msg = 'No.' + rank + '</br>' + name + ' @ ' + origin + '</br><i class="fa fa-twitter fa-lg"></i>' + total_count
 
 		templateHelpers :
 			getTooltipMsg: ->

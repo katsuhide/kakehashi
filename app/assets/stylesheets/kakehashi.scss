@@ -20,7 +20,8 @@ body{
 }
 
 #datasource-logo {
-	color: $_base-text-color;
+	// color: $_base-text-color;
+	color: #705C5F;
 }
 
 #main-contents {
@@ -52,6 +53,6 @@ body{
 	}
 }
 
-.has-tip open {
-	color: red;
+#footer {
+	text-align: center;
 }
