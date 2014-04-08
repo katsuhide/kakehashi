@@ -6,6 +6,7 @@ App = window.App = new Backbone.Marionette.Application()
 
 App.addRegions
 	header: '#header'
+	trend_header: '#trend-header'
 	main: '#main-contents'
 	footer: '#footer'
 

@@ -19,6 +19,12 @@ body{
 	font-family: 'Codystar';
 }
 
+#trend-header {
+	li {
+		color: black;
+	}
+}
+
 #datasource-logo {
 	color: #705C5F;
 }
@@ -28,8 +34,12 @@ body{
 	text-align: right;
 }
 
-#main-contents {
+#main-section {
 	margin: $_tabbar-height auto 0 auto;
+}
+
+#trend-header {
+	text-align: center;
 }
 
 #trend {

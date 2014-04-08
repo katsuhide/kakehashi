@@ -14,6 +14,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 	_.extend KAKEHASHI.Controller.prototype,
 		start: ->
 			@showHeader @trendList
+			@showTrendHeader()
 			@showFooter @trendList
 			@trendList.fetch()
 
@@ -22,6 +23,11 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 				collection: trendList
 
 			App.header.show header
+
+		showTrendHeader: ->
+			trend_header = new App.Layout.TrendHeader
+
+			App.trend_header.show trend_header
 
 		showFooter: (trendList) ->
 			footer = new App.Layout.Footer

@@ -8,9 +8,25 @@ App.module 'Layout', (Layout, App, Backbone) ->
 		onShow: ->
 			$(document).foundation()
 
-	# Main
-	# class Layout.Main extends Backbone.Marionette.ItemView
-	# 	template: 'kakehashi/apps/templates/main'
+	# Trend Header
+	class Layout.TrendHeader extends Backbone.Marionette.ItemView
+
+		template: 'kakehashi/apps/templates/trend_header'
+
+		events:
+			'click #bubble_btn': 'clickBubbleBtn'
+			'click #table_btn': 'clickTableBtn'
+
+		onShow: ->
+			$(document).foundation()
+
+		clickBubbleBtn: ->
+			controller = new App.KAKEHASHI.Controller()
+			controller.showTarget('bubble')
+
+		clickTableBtn: ->
+			controller = new App.KAKEHASHI.Controller()
+			controller.showTarget('table')
 
 	# Footer
 	class Layout.Footer extends Backbone.Marionette.ItemView

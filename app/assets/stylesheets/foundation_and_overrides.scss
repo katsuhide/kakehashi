@@ -39,6 +39,7 @@
 // $include-xl-html-grid-classes: false;
 
 // $row-width: rem-calc(1000);
+$row-width: rem-calc($_width_pixel);
 // $column-gutter: rem-calc(30);
 // $total-columns: 12;
 
