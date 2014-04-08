@@ -1,4 +1,18 @@
-<div id="datasource-logo"><i class="fa fa-twitter fa-3x"></i></div>
+<div class="row">
+  <div class="large-4 columns">
+    <p></p>
+  </div>
+  <div id="datasource-logo" class="large-4 columns">
+    <i class="fa fa-twitter fa-3x"></i>
+  </div>
+  <div class="large-4 columns">
+    <a href="#" data-dropdown="view-mode-btn" class="button dropdown">View Mode</a><br>
+    <ul id="view-mode-btn" data-dropdown-content class="f-dropdown">
+      <li><a href="#bubble">Bubble View</a></li>
+      <li><a href="#table">Table View</a></li>
+    </ul>
+  </div>
+</div>
 <table id="trend">
   <thead>
     <tr>
@@ -10,5 +24,4 @@
     </tr>
   </thead>
   <tbody id="trend-list"></tbody>
-  <!-- <tr id="trend-list" data-tooltip class="has-tip" title="This sake's rank is XXX !"></tr> -->
 </table>

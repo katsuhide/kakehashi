@@ -15,7 +15,6 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 		start: ->
 			@showHeader @trendList
 			@showFooter @trendList
-			@showMain @trendList
 			@trendList.fetch()
 
 		showHeader: (trendList) ->
@@ -30,12 +29,18 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 			App.footer.show footer
 
-		showMain: (trendList) ->
-			App.main.show new KAKEHASHI.Views.ListView
-				collection: trendList
+		showMain: (trendList, target) ->
+			switch target
+				when 'table'
+					App.main.show new KAKEHASHI.Views.TableListView
+						collection: trendList
+				else
+					App.main.show new KAKEHASHI.Views.ListView
+						collection: trendList
 
 		showTarget: (target) ->
-			# console.log "target parametter:" + target
+			@trendList.fetch()
+			@showMain(@trendList, target)
 
 
 	# Initialize

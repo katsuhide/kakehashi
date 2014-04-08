@@ -14,7 +14,6 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 
 		initTooltip: ->
 			$("#bubble-#{@model.get 'rank'}").tooltipster(
-				fixedWidth: '200'
 				content: $('<span><strong>' + @createTooltipMsg() + '</strong></span>')
 				)
 			# $(document).foundation()
@@ -62,7 +61,7 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 			'all': 'someEvent'
 
 		onShow: ->
-			# $(document).foundation()
+			$(document).foundation()
 
 		someEvent: ->
 			# console.log "some event happends"

@@ -5,6 +5,8 @@ App.module 'Layout', (Layout, App, Backbone) ->
 
 		template: 'kakehashi/apps/templates/header'
 
+		onShow: ->
+			$(document).foundation()
 
 	# Main
 	# class Layout.Main extends Backbone.Marionette.ItemView
