@@ -5,7 +5,7 @@
 	<i class="fa fa-twitter fa-3x"></i>
 </div>
 <div class="small-4 columns">
-	<a href="#" data-dropdown="view-mode-btn" class="button dropdown">View Mode</a><br>
+	<a href="#" data-dropdown="view-mode-btn" class="button dropdown" data-options="is_hover:true">View Mode</a><br>
 	<ul id="view-mode-btn" data-dropdown-content class="f-dropdown">
 		<li id="bubble_btn">Bubble View</li>
 		<li id="table_btn">Table View</li>
