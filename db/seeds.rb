@@ -86,3 +86,16 @@ keywords = [
 
 keywords.each do |keyword| setup_keyword(keyword) end
 
+# create day_trends
+rank = 1
+Keyword.all.each do | keyword|
+	row = DayTrend.new()
+	row['keyword_id'] = keyword['id']
+	row['total_count'] = 0
+	row['base_date'] = Date.today()
+	row['rank'] = rank
+	rank += 1
+	if DayTrend.where(base_date: row['base_date'], keyword_id: row['keyword_id']).count == 0 then
+		row.save
+	end
+end
