@@ -10,7 +10,7 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 			'click #trend': 'trendFunction'
 
 		initTooltip: ->
-			$("#bubble-#{@model.get 'rank'}").tooltipster(
+			$("#bubble-#{@model.get 'keyword_id'}").tooltipster(
 				content: $('<span><strong>' + @createTooltipMsg() + '</strong></span>')
 				)
 
