@@ -67,6 +67,19 @@ body{
 	}
 }
 
+.top-bar-section .dropdown li:not(.has-form) a:not(.button) {
+    color: white;
+    background: #2bdb6d;
+  }
+
+  .left-small {
+  width: $_tabbar-width;
+}
+
+.tab-bar-section.middle {
+  left: $_tabbar-width;
+}
+
 #footer {
 	text-align: center;
 	margin: 30px;

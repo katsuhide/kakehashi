@@ -649,6 +649,7 @@ $tabbar-height: rem-calc($_tabbar-height);
 // Off Canvas Divider Styles
 // $tabbar-right-section-border: solid 1px scale-color($tabbar-bg, $lightness: 13%);
 // $tabbar-left-section-border: solid 1px scale-color($tabbar-bg, $lightness: -50%);
+$tabbar-left-section-border: solid 0px scale-color($tabbar-bg, $lightness: -50%);
 
 // Off Canvas Tab Bar Headers
 $tabbar-header-color: $_top-text-color;
@@ -1140,9 +1141,11 @@ $tabbar-menu-icon-hover: scale-color($tabbar-menu-icon-color, $lightness: -50%);
 // Background color for the top bar
 // $topbar-bg-color: #333;
 // $topbar-bg: $topbar-bg-color;
+$topbar-bg: $_top-bg-color;
 
 // Height and margin
 // $topbar-height: 45px;
+$topbar-height: $_tabbar-height;
 // $topbar-margin-bottom: 0;
 
 // Controlling the styles for the title in the top bar
@@ -1167,6 +1170,7 @@ $tabbar-menu-icon-hover: scale-color($tabbar-menu-icon-color, $lightness: -50%);
 // $topbar-link-font-size: rem-calc(13);
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
 // $topbar-link-bg-hover: #272727;
+$topbar-link-bg-hover: #DEEB70;
 // $topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
 // $topbar-link-font-family: $body-font-family;
