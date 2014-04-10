@@ -16,18 +16,18 @@
 								<section class="top-bar-section">
 									<ul class="right">
 										<li class='has-dropdown'>
-											<a href="#"><i class="fa fa-bar-chart-o fa-lg"></i></a>
+											<a><i class="fa fa-bar-chart-o fa-lg"></i></a>
 											<ul class="dropdown">
-												<li><a>Bubble View</a></li>
-												<li><a>Table View</a></li>
+												<li id="bubble_btn"><a>Bubble View</a></li>
+												<li id="table_btn"><a>Table View</a></li>
 											</ul>
 										</li>
 										<li class='has-dropdown'>
-											<a href="#"><i class="fa fa-calendar fa-lg"></i></a>
+											<a><i class="fa fa-calendar fa-lg"></i></a>
 											<ul class="dropdown">
-												<li><a href="">All</a></li>
-												<li><a href="">Today</a></li>
-												<li><a href="">This Month</a></li>
+												<li><a>All</a></li>
+												<li><a>Today</a></li>
+												<li><a>This Month</a></li>
 											</ul>
 										</li>
 									</ul>
@@ -78,5 +78,17 @@
 <%= javascript_tag do %>
 $(function() {
 	App.start();
+
+	$('#bubble_btn').click(function() {
+		var controller = new App.KAKEHASHI.Controller();
+		controller.showTarget('bubble');
+	});
+
+	$('#table_btn').click(function() {
+		var controller = new App.KAKEHASHI.Controller();
+		controller.showTarget('table');
+	});
+
 });
+
 <% end %>
