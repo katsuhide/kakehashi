@@ -160,23 +160,23 @@ def update_trendlist
 		keyword_id = trend[0]
 		total_count = trend[1]
 
-		# keyword info
-		keyword = Keyword.find_by(id:keyword_id)
+		# DayTrendレコードを探す
+		day_trend = DayTrend.where(keyword_id:keyword_id).order("base_date DESC").take(1).pop
 
-		# trend info
+		# 結果を更新する
 		today = Date.today()
-		keyword_id = keyword['id']
-		day_trend = DayTrend.where(base_date:today).find_by(keyword_id:keyword_id)
 		if day_trend.nil? then
+			# 新規レコードの作成
 			day_trend = DayTrend.new()
-			day_trend['keyword_id'] = keyword['id']
+			day_trend['keyword_id'] = keyword_id
 			day_trend['total_count'] = total_count
 			day_trend['base_date'] = today
-			day_trend.save
 		else
-			day_trend['total_count'] = total_count
-			day_trend.save
+			# 既存レコードの更新
+			day_trend['total_count'] += total_count		# 前回値の足し合わせる
+			day_trend['base_date'] = today	# 当日以外の可能性があるため更新
 		end
+		day_trend.save
 	end
 end
 
@@ -209,6 +209,13 @@ def update_ranking
 
 end
 
+# clear trend table
+def clear_trend_table
+	# Trendテーブルを全件削除する
+	Trend.delete_all
+
+end
+
 namespace :twitter do
 	desc 'test'
 	task :test => :environment do
@@ -226,6 +233,7 @@ namespace :twitter do
 		count_tweets
 		update_trendlist
 		update_ranking
+		clear_trend_table
 	end
 
 	desc 'count tweets per hour'
@@ -246,6 +254,11 @@ namespace :twitter do
 	desc 'update ranking'
 	task :update_ranking => :environment do
 		update_ranking
+	end
+
+	desc 'cleate trend table'
+	task :clear_trend_table => :environment do
+		clear_trend_table
 	end
 
 end
