@@ -14,19 +14,15 @@ App.module 'Layout', (Layout, App, Backbone) ->
 		template: 'kakehashi/apps/templates/trend_header'
 
 		events:
-			'click #bubble_btn': 'clickBubbleBtn'
-			'click #table_btn': 'clickTableBtn'
+			'click #datasource-logo': 'clickLogo'
 
 		onShow: ->
 			$(document).foundation()
 
-		clickBubbleBtn: ->
+		clickLogo: ->
 			controller = new App.KAKEHASHI.Controller()
-			controller.showTarget('bubble')
+			controller.test()
 
-		clickTableBtn: ->
-			controller = new App.KAKEHASHI.Controller()
-			controller.showTarget('table')
 
 	# Footer
 	class Layout.Footer extends Backbone.Marionette.ItemView

@@ -35,19 +35,35 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 			App.footer.show footer
 
-		showMain: (trendList, target) ->
-			switch target
+		showMain: (view_mode) ->
+			switch view_mode
 				when 'table'
 					App.main.show new KAKEHASHI.Views.TableListView
-						collection: trendList
+						collection: @trendList
 				else
 					App.main.show new KAKEHASHI.Views.ListView
-						collection: trendList
+						collection: @trendList
 
-		showTarget: (target) ->
-			@trendList.fetch()
-			@showMain(@trendList, target)
+		showTarget: (tag_type, view_mode) ->
+			@trendList.fetch({
+				data: {
+					tag_type: tag_type
+				}
+			})
+			@showMain(view_mode)
 
+		changeViewMode: (view_mode) ->
+			url = location.href
+			tag_type = url.substring(url.lastIndexOf('/') + 1)
+			@showTarget(tag_type, view_mode)
+
+		test: ->
+			@trendList.fetch({
+				data : {
+					tag_type : "sake"
+				}
+			})
+			console.log @trendList
 
 	# Initialize
 	KAKEHASHI.addInitializer ->
