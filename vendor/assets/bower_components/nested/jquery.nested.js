@@ -63,7 +63,7 @@ if (!Object.keys) {
         selector: '.box',
         minWidth: 50,
         minColumns: 1,
-        gutter: 1,
+        gutter: 10,
         centered: false,
 resizeToFit: true, // will resize block bigger than the gap
 resizeToFitOptions: {
@@ -72,7 +72,7 @@ resizeAny: true // will resize any block to fit the gap
 animate: true,
 animationOptions: {
     speed: 20,
-    duration: 100,
+    duration: 10,
     queue: true,
     complete: function () {}
 }

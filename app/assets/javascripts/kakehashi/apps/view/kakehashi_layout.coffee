@@ -20,8 +20,7 @@ App.module 'Layout', (Layout, App, Backbone) ->
 			$(document).foundation()
 
 		clickLogo: ->
-			controller = new App.KAKEHASHI.Controller()
-			controller.test()
+			console.log "click logo"
 
 
 	# Footer

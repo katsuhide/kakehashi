@@ -15,7 +15,7 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 				)
 
 		onShow: ->
-			$("#trend-list").nested 'append', @
+			$("#trend-list").nested 'append'
 			@initTooltip()
 
 		trendFunction: ->
@@ -43,4 +43,3 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 
 		onShow: ->
 			$(document).foundation()
-
