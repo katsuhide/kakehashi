@@ -7,7 +7,7 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 			'change': 'render'
 
 		events:
-			'click #trend': 'trendFunction'
+			'click #trend': 'clickTrend'
 
 		initTooltip: ->
 			$("#bubble-#{@model.get 'keyword_id'}").tooltipster(
@@ -18,8 +18,8 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 			$("#trend-list").nested 'append'
 			@initTooltip()
 
-		trendFunction: ->
-			console.log "trendFunction"
+		clickTrend: ->
+			console.log "click trend"
 
 		createTooltipMsg: ->
 			rank = @model.get 'rank'
