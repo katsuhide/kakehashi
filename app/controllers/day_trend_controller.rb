@@ -7,11 +7,11 @@ class DayTrendController < ApplicationController
 		case tag_type
 		when "sake" then
 			p "list sake"
-			daytrends = DayTrend.where(base_date: today).joins(:keyword).select('*').order("day_trends.total_count").reverse_order
+			daytrends = DayTrend.where(base_date: today).joins(:keyword).select('*').order("day_trends.rank")
 		else
 			# defaultはとりあえず"sake"にしておく
 			p "list default"
-			daytrends = DayTrend.where(base_date: today).joins(:keyword).select('*').order("day_trends.total_count").reverse_order
+			daytrends = DayTrend.where(base_date: today).joins(:keyword).select('*').order("day_trends.rank")
 		end
 		return daytrends
 	end
