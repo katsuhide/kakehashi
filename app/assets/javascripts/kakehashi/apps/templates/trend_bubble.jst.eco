@@ -11,4 +11,4 @@
 	<% else: %>
 	<img src="assets/sake/<%=@['tag'] %>.jpg" class="box size22" id="bubble-<%= @['keyword_id'] %>">
 	<% end %>
-</div>>
+</div>

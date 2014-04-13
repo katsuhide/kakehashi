@@ -63,16 +63,16 @@ if (!Object.keys) {
         selector: '.box',
         minWidth: 50,
         minColumns: 1,
-        gutter: 10,
+        gutter: 20,
         centered: false,
-resizeToFit: true, // will resize block bigger than the gap
+resizeToFit: false, // will resize block bigger than the gap
 resizeToFitOptions: {
 resizeAny: true // will resize any block to fit the gap
 },
 animate: true,
 animationOptions: {
-    speed: 20,
-    duration: 10,
+    speed: 10,
+    duration: 100,
     queue: true,
     complete: function () {}
 }
