@@ -6,13 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# Keyword.first_or_create([
-# 	{ tag_type: 'sake', tag: 'dassai', search_word: '獺祭', name: '獺祭', land_of_origin: '山口' },
-# 	{ tag_type: 'sake', tag: 'koshinokanbai', search_word: '越乃寒梅', name: '越乃寒梅', land_of_origin: '新潟' },
-# 	{ tag_type: 'sake', tag: 'goninnmusume', search_word: '五人娘', name: '五人娘', land_of_origin: '千葉' },
-# 	{ tag_type: 'sake', tag: 'kenbishi', search_word: '剣菱', name: '剣菱', land_of_origin: '兵庫' },
-# ])
+# get keyword_id
+def get_keyword_id(tag)
+	return Keyword.where(tag:tag).take(1).pop['id']
+end
 
+#########################################################
+# setup the keyword data
+#########################################################
 def setup_keyword(keyword)
 	if Keyword.where(tag:keyword[:tag]).size == 0 then
 		Keyword.create(keyword)
@@ -20,73 +21,190 @@ def setup_keyword(keyword)
 end
 
 keywords = [
-	## 北海道地方
-	{ tag_type: 'sake', tag: 'kunimare', search_word: '国稀', name: '国稀', land_of_origin: '北海道' },
-
-	## 東北地方
-	{ tag_type: 'sake', tag: 'densyu', search_word: '田酒', name: '田酒', land_of_origin: '青森県' },
-	{ tag_type: 'sake', tag: 'nanbubijin', search_word: '南部美人', name: '南部美人', land_of_origin: '岩手県' },
-	{ tag_type: 'sake', tag: 'urakasumi', search_word: '浦霞', name: '浦霞', land_of_origin: '宮城県' },
-	{ tag_type: 'sake', tag: 'shirataki', search_word: '白瀑', name: '白瀑', land_of_origin: '秋田県' },
-	{ tag_type: 'sake', tag: 'juyondai', search_word: '十四代', name: '十四代', land_of_origin: '山形県' },
-	{ tag_type: 'sake', tag: 'hiroki', search_word: '飛露喜', name: '飛露喜', land_of_origin: '福島県' },
-
-	## 関東地方
-	{ tag_type: 'sake', tag: 'satonohomare', search_word: '郷乃誉', name: '郷乃誉', land_of_origin: '茨城県' },
-	{ tag_type: 'sake', tag: 'hououbiden', search_word: '鳳凰美田', name: '鳳凰美田', land_of_origin: '栃木県' },
-	{ tag_type: 'sake', tag: 'ozenoyukidoke', search_word: '尾瀬の雪どけ', name: '尾瀬の雪どけ', land_of_origin: '群馬県' },
-	{ tag_type: 'sake', tag: 'shinkame', search_word: '神亀', name: '神亀', land_of_origin: '埼玉県' },
-	{ tag_type: 'sake', tag: 'goninnmusume', search_word: '五人娘', name: '五人娘', land_of_origin: '千葉県' },
-	{ tag_type: 'sake', tag: 'sawanoi', search_word: '澤乃井', name: '澤乃井', land_of_origin: '東京都' },
-	{ tag_type: 'sake', tag: 'izumibashi', search_word: 'いづみ橋', name: 'いづみ橋', land_of_origin: '神奈川県' },
-
-	## 中部地方
-	{ tag_type: 'sake', tag: 'kubota', search_word: '久保田', name: '久保田', land_of_origin: '新潟県' },
-	{ tag_type: 'sake', tag: 'masuizumi', search_word: '満寿泉', name: '満寿泉', land_of_origin: '富山県' },
-	{ tag_type: 'sake', tag: 'tengumai', search_word: '天狗舞', name: '天狗舞', land_of_origin: '石川県' },
-	{ tag_type: 'sake', tag: 'kokuryu', search_word: '黒龍', name: '黒龍', land_of_origin: '福井県' },
-	{ tag_type: 'sake', tag: 'shunnoten', search_word: '春鶯囀', name: '春鶯囀', land_of_origin: '山梨県' },
-	{ tag_type: 'sake', tag: 'masumi', search_word: '真澄', name: '真澄', land_of_origin: '長野県' },
-	{ tag_type: 'sake', tag: 'michisakari', search_word: '三千盛', name: '三千盛', land_of_origin: '岐阜県' },
-	{ tag_type: 'sake', tag: 'garyubai', search_word: '臥龍梅', name: '臥龍梅', land_of_origin: '静岡県' },
-	{ tag_type: 'sake', tag: 'kuheiji', search_word: '醸し人九平次', name: '醸し人九平次', land_of_origin: '愛知県' },
-
-	## 近畿地方
-	{ tag_type: 'sake', tag: 'mienishiki', search_word: '三重錦', name: '三重錦', land_of_origin: '三重県' },
-	{ tag_type: 'sake', tag: 'daijiro', search_word: '大治郎', name: '大治郎', land_of_origin: '滋賀県' },
-	{ tag_type: 'sake', tag: 'tamanohikari', search_word: '玉乃光', name: '玉乃光', land_of_origin: '京都府' },
-	{ tag_type: 'sake', tag: 'akishika', search_word: '秋鹿', name: '秋鹿', land_of_origin: '大阪府' },
-	{ tag_type: 'sake', tag: 'kenbishi', search_word: '剣菱', name: '剣菱', land_of_origin: '兵庫県' },
-	{ tag_type: 'sake', tag: 'kazenomori', search_word: '風の森', name: '風の森', land_of_origin: '奈良県' },
-	{ tag_type: 'sake', tag: 'kuroushi', search_word: '黒牛', name: '黒牛', land_of_origin: '和歌山県' },
-
-	## 中国地方
-	{ tag_type: 'sake', tag: 'takaisami', search_word: '鷹勇', name: '鷹勇', land_of_origin: '鳥取県' },
-	{ tag_type: 'sake', tag: 'rihaku', search_word: '李白', name: '李白', land_of_origin: '島根県' },
-	{ tag_type: 'sake', tag: 'sakehitosuji', search_word: '酒一筋', name: '酒一筋', land_of_origin: '岡山県' },
-	{ tag_type: 'sake', tag: 'taketsuru', search_word: '竹鶴', name: '竹鶴', land_of_origin: '広島県' },
-	{ tag_type: 'sake', tag: 'dassai', search_word: '獺祭', name: '獺祭', land_of_origin: '山口県' },
-
-	## 四国地方
-	{ tag_type: 'sake', tag: 'miyoshikiku', search_word: '三芳菊', name: '三芳菊', land_of_origin: '徳島県' },
-	{ tag_type: 'sake', tag: 'yorokobigaijin', search_word: '悦凱陣', name: '悦凱陣', land_of_origin: '香川県' },
-	{ tag_type: 'sake', tag: 'ishizuchi', search_word: '石鎚', name: '石鎚', land_of_origin: '愛媛県' },
-	{ tag_type: 'sake', tag: 'minami', search_word: '南', name: '南', land_of_origin: '高知県' },
-
-	## 九州地方
-	{ tag_type: 'sake', tag: 'niwanouguisu', search_word: '庭のうぐいす', name: '庭のうぐいす', land_of_origin: '福岡県' },
-	{ tag_type: 'sake', tag: 'azumaichi', search_word: '東一', name: '東一', land_of_origin: '佐賀県' },
-	{ tag_type: 'sake', tag: '64sake', search_word: '六十餘洲', name: '六十餘洲', land_of_origin: '長崎県' },
-	{ tag_type: 'sake', tag: 'reizan', search_word: 'れいざん', name: 'れいざん', land_of_origin: '熊本県' },
-	{ tag_type: 'sake', tag: 'takakiya', search_word: '鷹来屋', name: '鷹来屋', land_of_origin: '大分県' },
-	{ tag_type: 'sake', tag: 'yumenonakamade', search_word: '夢の中まで', name: '夢の中まで', land_of_origin: '宮崎県' },
-	{ tag_type: 'sake', tag: 'kojyu', search_word: '幸寿', name: '幸寿', land_of_origin: '鹿児島県' },
-	{ tag_type: 'sake', tag: 'reimei', search_word: '黎明', name: '黎明', land_of_origin: '沖縄県' },
+	## Sake
+	{ tag_type: 'sake', tag: 'kunimare', name: '国稀', image_url: 'kunimare.jpg' },
+	{ tag_type: 'sake', tag: 'densyu', name: '田酒', image_url: 'densyu.jpg' },
+	{ tag_type: 'sake', tag: 'nanbubijin', name: '南部美人', image_url: 'nanbubijin.jpg' },
+	{ tag_type: 'sake', tag: 'urakasumi', name: '浦霞', image_url: 'urakasumi.jpg' },
+	{ tag_type: 'sake', tag: 'shirataki', name: '白瀑', image_url: 'shirataki.jpg' },
+	{ tag_type: 'sake', tag: 'juyondai', name: '十四代', image_url: 'juyondai.jpg' },
+	{ tag_type: 'sake', tag: 'hiroki', name: '飛露喜', image_url: 'hiroki.jpg' },
+	{ tag_type: 'sake', tag: 'satonohomare', name: '郷乃誉', image_url: 'satonohomare.jpg' },
+	{ tag_type: 'sake', tag: 'hououbiden', name: '鳳凰美田', image_url: 'hououbiden.jpg' },
+	{ tag_type: 'sake', tag: 'ozenoyukidoke', name: '尾瀬の雪どけ', image_url: 'ozenoyukidoke.jpg' },
+	{ tag_type: 'sake', tag: 'shinkame', name: '神亀', image_url: 'shinkame.jpg' },
+	{ tag_type: 'sake', tag: 'goninnmusume', name: '五人娘', image_url: 'goninnmusume.jpg' },
+	{ tag_type: 'sake', tag: 'sawanoi', name: '澤乃井', image_url: 'sawanoi.jpg' },
+	{ tag_type: 'sake', tag: 'izumibashi', name: 'いづみ橋', image_url: 'izumibashi.jpg' },
+	{ tag_type: 'sake', tag: 'kubota', name: '久保田', image_url: 'kubota.jpg' },
+	{ tag_type: 'sake', tag: 'masuizumi', name: '満寿泉', image_url: 'masuizumi.jpg' },
+	{ tag_type: 'sake', tag: 'tengumai', name: '天狗舞', image_url: 'tengumai.jpg' },
+	{ tag_type: 'sake', tag: 'kokuryu', name: '黒龍', image_url: 'kokuryu.jpg' },
+	{ tag_type: 'sake', tag: 'shunnoten', name: '春鶯囀', image_url: 'shunnoten.jpg' },
+	{ tag_type: 'sake', tag: 'masumi', name: '真澄', image_url: 'masumi.jpg' },
+	{ tag_type: 'sake', tag: 'michisakari', name: '三千盛', image_url: 'michisakari.jpg' },
+	{ tag_type: 'sake', tag: 'garyubai', name: '臥龍梅', image_url: 'garyubai.jpg' },
+	{ tag_type: 'sake', tag: 'kuheiji', name: '醸し人九平次', image_url: 'kuheiji.jpg' },
+	{ tag_type: 'sake', tag: 'mienishiki', name: '三重錦', image_url: 'mienishiki.jpg' },
+	{ tag_type: 'sake', tag: 'daijiro', name: '大治郎', image_url: 'daijiro.jpg' },
+	{ tag_type: 'sake', tag: 'tamanohikari', name: '玉乃光', image_url: 'tamanohikari.jpg' },
+	{ tag_type: 'sake', tag: 'akishika', name: '秋鹿', image_url: 'akishika.jpg' },
+	{ tag_type: 'sake', tag: 'kenbishi', name: '剣菱', image_url: 'kenbishi.jpg' },
+	{ tag_type: 'sake', tag: 'kazenomori', name: '風の森', image_url: 'kazenomori.jpg' },
+	{ tag_type: 'sake', tag: 'kuroushi', name: '黒牛', image_url: 'kuroushi.jpg' },
+	{ tag_type: 'sake', tag: 'takaisami', name: '鷹勇', image_url: 'takaisami.jpg' },
+	{ tag_type: 'sake', tag: 'rihaku', name: '李白', image_url: 'rihaku.jpg' },
+	{ tag_type: 'sake', tag: 'sakehitosuji', name: '酒一筋', image_url: 'sakehitosuji.jpg' },
+	{ tag_type: 'sake', tag: 'taketsuru', name: '竹鶴', image_url: 'taketsuru.jpg' },
+	{ tag_type: 'sake', tag: 'dassai', name: '獺祭', image_url: 'dassai.jpg' },
+	{ tag_type: 'sake', tag: 'miyoshikiku', name: '三芳菊', image_url: 'miyoshikiku.jpg' },
+	{ tag_type: 'sake', tag: 'yorokobigaijin', name: '悦凱陣', image_url: 'yorokobigaijin.jpg' },
+	{ tag_type: 'sake', tag: 'ishizuchi', name: '石鎚', image_url: 'ishizuchi.jpg' },
+	{ tag_type: 'sake', tag: 'minami', name: '南', image_url: 'minami.jpg' },
+	{ tag_type: 'sake', tag: 'niwanouguisu', name: '庭のうぐいす', image_url: 'niwanouguisu.jpg' },
+	{ tag_type: 'sake', tag: 'azumaichi', name: '東一', image_url: 'azumaichi.jpg' },
+	{ tag_type: 'sake', tag: '64sake', name: '六十餘洲', image_url: '64sake.jpg' },
+	{ tag_type: 'sake', tag: 'reizan', name: 'れいざん', image_url: 'reizan.jpg' },
+	{ tag_type: 'sake', tag: 'takakiya', name: '鷹来屋', image_url: 'takakiya.jpg' },
+	{ tag_type: 'sake', tag: 'yumenonakamade', name: '夢の中まで', image_url: 'yumenonakamade.jpg' },
+	{ tag_type: 'sake', tag: 'kojyu', name: '幸寿', image_url: 'kojyu.jpg' },
+	{ tag_type: 'sake', tag: 'reimei', name: '黎明', image_url: 'reimei.jpg' },
 ]
 
 keywords.each do |keyword| setup_keyword(keyword) end
 
-# create day_trends
+#########################################################
+# setup the search_condition data
+#########################################################
+def setup_search_condition(row)
+	keyword_id = get_keyword_id(row[:tag])
+	if SearchCondition.where(keyword_id: keyword_id).size == 0 then
+		data = {}
+		data[:keyword_id] = keyword_id
+		data[:search_word] = row[:search_word]
+		SearchCondition.create(data)
+	end
+end
+
+search_conditions = [
+	{ search_word: '国稀 酒', tag: 'kunimare' },
+	{ search_word: '田酒 酒', tag: 'densyu' },
+	{ search_word: '南部美人 酒', tag: 'nanbubijin' },
+	{ search_word: '浦霞 酒', tag: 'urakasumi' },
+	{ search_word: '白瀑 酒', tag: 'shirataki' },
+	{ search_word: '十四代 酒', tag: 'juyondai' },
+	{ search_word: '飛露喜 酒', tag: 'hiroki' },
+	{ search_word: '郷乃誉 酒', tag: 'satonohomare' },
+	{ search_word: '鳳凰美田 酒', tag: 'hououbiden' },
+	{ search_word: '尾瀬の雪どけ 酒', tag: 'ozenoyukidoke' },
+	{ search_word: '神亀 酒', tag: 'shinkame' },
+	{ search_word: '五人娘 酒', tag: 'goninnmusume' },
+	{ search_word: '澤乃井 酒', tag: 'sawanoi' },
+	{ search_word: 'いづみ橋 酒', tag: 'izumibashi' },
+	{ search_word: '久保田 酒', tag: 'kubota' },
+	{ search_word: '満寿泉 酒', tag: 'masuizumi' },
+	{ search_word: '天狗舞 酒', tag: 'tengumai' },
+	{ search_word: '黒龍 酒', tag: 'kokuryu' },
+	{ search_word: '春鶯囀 酒', tag: 'shunnoten' },
+	{ search_word: '真澄 酒', tag: 'masumi' },
+	{ search_word: '三千盛 酒', tag: 'michisakari' },
+	{ search_word: '臥龍梅 酒', tag: 'garyubai' },
+	{ search_word: '醸し人九平次 酒', tag: 'kuheiji' },
+	{ search_word: '三重錦 酒', tag: 'mienishiki' },
+	{ search_word: '大治郎 酒', tag: 'daijiro' },
+	{ search_word: '玉乃光 酒', tag: 'tamanohikari' },
+	{ search_word: '秋鹿 酒', tag: 'akishika' },
+	{ search_word: '剣菱 酒', tag: 'kenbishi' },
+	{ search_word: '風の森 酒', tag: 'kazenomori' },
+	{ search_word: '黒牛 酒', tag: 'kuroushi' },
+	{ search_word: '鷹勇 酒', tag: 'takaisami' },
+	{ search_word: '李白 酒', tag: 'rihaku' },
+	{ search_word: '酒一筋 酒', tag: 'sakehitosuji' },
+	{ search_word: '竹鶴 酒', tag: 'taketsuru' },
+	{ search_word: '獺祭 酒', tag: 'dassai' },
+	{ search_word: '三芳菊 酒', tag: 'miyoshikiku' },
+	{ search_word: '悦凱陣 酒', tag: 'yorokobigaijin' },
+	{ search_word: '石鎚 酒', tag: 'ishizuchi' },
+	{ search_word: '南 酒', tag: 'minami' },
+	{ search_word: '庭のうぐいす 酒', tag: 'niwanouguisu' },
+	{ search_word: '東一 酒', tag: 'azumaichi' },
+	{ search_word: '六十餘洲 酒', tag: '64sake' },
+	{ search_word: 'れいざん 酒', tag: 'reizan' },
+	{ search_word: '鷹来屋 酒', tag: 'takakiya' },
+	{ search_word: '夢の中まで 酒', tag: 'yumenonakamade' },
+	{ search_word: '幸寿 酒', tag: 'kojyu' },
+	{ search_word: '黎明 酒', tag: 'reimei' },
+]
+search_conditions.each do |row| setup_search_condition(row) end
+
+#########################################################
+# setup the sake data
+#########################################################
+def setup_sake(row)
+	keyword_id = get_keyword_id(row[:tag])
+	if Sake.where(keyword_id: keyword_id).size == 0 then
+		data = {}
+		data[:keyword_id] = keyword_id
+		data[:land_of_origin] = row[:land_of_origin]
+		Sake.create(data)
+	end
+end
+
+sakes = [
+	{ land_of_origin: '北海道', tag: 'kunimare' },
+	{ land_of_origin: '青森県', tag: 'densyu' },
+	{ land_of_origin: '岩手県', tag: 'nanbubijin' },
+	{ land_of_origin: '宮城県', tag: 'urakasumi' },
+	{ land_of_origin: '秋田県', tag: 'shirataki' },
+	{ land_of_origin: '山形県', tag: 'juyondai' },
+	{ land_of_origin: '福島県', tag: 'hiroki' },
+	{ land_of_origin: '茨城県', tag: 'satonohomare' },
+	{ land_of_origin: '栃木県', tag: 'hououbiden' },
+	{ land_of_origin: '群馬県', tag: 'ozenoyukidoke' },
+	{ land_of_origin: '埼玉県', tag: 'shinkame' },
+	{ land_of_origin: '千葉県', tag: 'goninnmusume' },
+	{ land_of_origin: '東京都', tag: 'sawanoi' },
+	{ land_of_origin: '神奈川県', tag: 'izumibashi' },
+	{ land_of_origin: '新潟県', tag: 'kubota' },
+	{ land_of_origin: '富山県', tag: 'masuizumi' },
+	{ land_of_origin: '石川県', tag: 'tengumai' },
+	{ land_of_origin: '福井県', tag: 'kokuryu' },
+	{ land_of_origin: '山梨県', tag: 'shunnoten' },
+	{ land_of_origin: '長野県', tag: 'masumi' },
+	{ land_of_origin: '岐阜県', tag: 'michisakari' },
+	{ land_of_origin: '静岡県', tag: 'garyubai' },
+	{ land_of_origin: '愛知県', tag: 'kuheiji' },
+	{ land_of_origin: '三重県', tag: 'mienishiki' },
+	{ land_of_origin: '滋賀県', tag: 'daijiro' },
+	{ land_of_origin: '京都府', tag: 'tamanohikari' },
+	{ land_of_origin: '大阪府', tag: 'akishika' },
+	{ land_of_origin: '兵庫県', tag: 'kenbishi' },
+	{ land_of_origin: '奈良県', tag: 'kazenomori' },
+	{ land_of_origin: '和歌山県', tag: 'kuroushi' },
+	{ land_of_origin: '鳥取県', tag: 'takaisami' },
+	{ land_of_origin: '島根県', tag: 'rihaku' },
+	{ land_of_origin: '岡山県', tag: 'sakehitosuji' },
+	{ land_of_origin: '広島県', tag: 'taketsuru' },
+	{ land_of_origin: '山口県', tag: 'dassai' },
+	{ land_of_origin: '徳島県', tag: 'miyoshikiku' },
+	{ land_of_origin: '香川県', tag: 'yorokobigaijin' },
+	{ land_of_origin: '愛媛県', tag: 'ishizuchi' },
+	{ land_of_origin: '高知県', tag: 'minami' },
+	{ land_of_origin: '福岡県', tag: 'niwanouguisu' },
+	{ land_of_origin: '佐賀県', tag: 'azumaichi' },
+	{ land_of_origin: '長崎県', tag: '64sake' },
+	{ land_of_origin: '熊本県', tag: 'reizan' },
+	{ land_of_origin: '大分県', tag: 'takakiya' },
+	{ land_of_origin: '宮崎県', tag: 'yumenonakamade' },
+	{ land_of_origin: '鹿児島県', tag: 'kojyu' },
+	{ land_of_origin: '沖縄県', tag: 'reimei' },
+]
+
+sakes.each do |row| setup_sake(row) end
+
+#########################################################
+# setup the day_trend data
+#########################################################
 rank = 1
 Keyword.all.each do | keyword|
 	row = DayTrend.new()

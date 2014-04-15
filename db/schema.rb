@@ -11,19 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405033111) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "commitments", force: true do |t|
-    t.string   "title"
-    t.boolean  "is_completed"
-    t.date     "due_date"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140414150537) do
 
   create_table "day_trends", force: true do |t|
     t.integer  "keyword_id"
@@ -34,18 +22,35 @@ ActiveRecord::Schema.define(version: 20140405033111) do
     t.datetime "updated_at"
   end
 
-  add_index "day_trends", ["keyword_id"], name: "index_day_trends_on_keyword_id", using: :btree
+  add_index "day_trends", ["keyword_id"], name: "index_day_trends_on_keyword_id"
 
   create_table "keywords", force: true do |t|
     t.string   "tag_type"
     t.string   "tag"
-    t.string   "search_word"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_url"
+  end
+
+  create_table "sakes", force: true do |t|
+    t.integer  "keyword_id"
     t.string   "land_of_origin"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "since_id"
   end
+
+  add_index "sakes", ["keyword_id"], name: "index_sakes_on_keyword_id"
+
+  create_table "search_conditions", force: true do |t|
+    t.integer  "keyword_id"
+    t.string   "search_word"
+    t.decimal  "since_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "search_conditions", ["keyword_id"], name: "index_search_conditions_on_keyword_id"
 
   create_table "trends", force: true do |t|
     t.integer  "keyword_id"
@@ -55,27 +60,6 @@ ActiveRecord::Schema.define(version: 20140405033111) do
     t.datetime "updated_at"
   end
 
-  add_index "trends", ["keyword_id"], name: "index_trends_on_keyword_id", using: :btree
-
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "name"
-  end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "trends", ["keyword_id"], name: "index_trends_on_keyword_id"
 
 end

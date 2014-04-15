@@ -21,20 +21,8 @@ def initalize_twitter
 	@execute_datetime = Time.now()
 end
 
-def get_search_keyword(keyword)
-	tag_type = keyword['tag_type']
-	prefix = nil
-	case tag_type
-	when "sake" then
-		prefix = "酒 "
-	else
-		prefix = ""
-	end
-	return prefix + keyword['search_word']
-end
-
 def get_keywords
-	keywords = Keyword.all
+	keywords = SearchCondition.all
 	return keywords
 end
 
@@ -46,11 +34,11 @@ def create_trend_result(keyword, tweets)
 	trend.save
 end
 
-def update_keyword(keyword, tweets)
+def update_keyword(search_condition, tweets)
 	latest_tweet = tweets[tweets.size - 1]
 	if !tweets.nil? && !latest_tweet.nil? then
-		keyword['since_id'] = latest_tweet['id']
-		keyword.save
+		search_condition['since_id'] = latest_tweet['id']
+		search_condition.save
 	end
 end
 
@@ -107,19 +95,19 @@ def search_all_tweets(keyword, since_id)
 end
 
 
-def execute_search_tweet(keywords)
-	keywords.each{|keyword|
-		search_word = get_search_keyword(keyword)
-		since_id = keyword['since_id'].nil? ? 0 : keyword['since_id']
+def execute_search_tweet(search_conditions)
+	search_conditions.each{|search_condition|
+		search_word = search_condition['search_word']
+		since_id = search_condition['since_id'].nil? ? 0 : search_condition['since_id']
 		tweets = nil
 
 		begin
 			# search all tweets
-			@logger.info("START!!!" + "keyword: " + search_word + ", since_id: " + since_id.to_s)
+			@logger.info("START!!!" + "search_condition: " + search_word + ", since_id: " + since_id.to_s)
 			tweets = search_all_tweets(search_word, since_id).sort_by{|tweet| tweet['id']}
 
 			# create the trend result
-			create_trend_result(keyword, tweets)
+			create_trend_result(search_condition, tweets)
 
 		rescue Twitter::Error::TooManyRequests => tw_error
 			@logger.error(tw_error.to_s + " during searching " + search_word)
@@ -127,10 +115,10 @@ def execute_search_tweet(keywords)
 		rescue => ex
 			@logger.error(ex)
 		ensure
-			@logger.info("END!!!" + "keyword: " + search_word + ".")
-			# update keyword data
+			@logger.info("END!!!" + "search_condition: " + search_word + ".")
+			# update search_condition data
 			if !tweets.nil? then
-				update_keyword(keyword, tweets)
+				update_keyword(search_condition, tweets)
 			end
 		end
 	}
@@ -142,10 +130,10 @@ def count_tweets
 	initalize_twitter
 
 	# get the keyword list
-	keywords = get_keywords
+	search_conditions = get_keywords
 
 	# execute process each keyword
-	execute_search_tweet(keywords)
+	execute_search_tweet(search_conditions)
 
 end
 
@@ -186,13 +174,13 @@ def update_keyword_to_latest
 	initalize_twitter
 
 	# get the keyword list
-	keywords = get_keywords
+	search_conditions = get_keywords
 
-	keywords.each do |keyword|
-		tweet = @tw.search_tweet(get_search_keyword(keyword))
-		new_since_id = tweet.nil? ? keyword['since_id'] : tweet['id']
-		keyword['since_id'] = new_since_id
-		keyword.save
+	search_conditions.each do |search_condition|
+		tweet = @tw.search_tweet(search_condition['search_word'])
+		new_since_id = tweet.nil? ? search_condition['since_id'] : tweet['id']
+		search_condition['since_id'] = new_since_id
+		search_condition.save
 	end
 
 end

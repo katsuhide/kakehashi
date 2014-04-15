@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  keyword_id: 
+  search_word: MyString
+  since_id: 9.99
+
+two:
+  keyword_id: 
+  search_word: MyString
+  since_id: 9.99
