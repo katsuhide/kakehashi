@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414150537) do
+ActiveRecord::Schema.define(version: 20140416161808) do
 
   create_table "day_trends", force: true do |t|
     t.integer  "keyword_id"
@@ -51,6 +51,15 @@ ActiveRecord::Schema.define(version: 20140414150537) do
   end
 
   add_index "search_conditions", ["keyword_id"], name: "index_search_conditions_on_keyword_id"
+
+  create_table "traditionals", force: true do |t|
+    t.integer  "keyword_id"
+    t.string   "land_of_origin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "traditionals", ["keyword_id"], name: "index_traditionals_on_keyword_id"
 
   create_table "trends", force: true do |t|
     t.integer  "keyword_id"

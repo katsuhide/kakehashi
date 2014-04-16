@@ -69,6 +69,37 @@ keywords = [
 	{ tag_type: 'sake', tag: 'yumenonakamade', name: '夢の中まで', image_url: 'yumenonakamade.jpg' },
 	{ tag_type: 'sake', tag: 'kojyu', name: '幸寿', image_url: 'kojyu.jpg' },
 	{ tag_type: 'sake', tag: 'reimei', name: '黎明', image_url: 'reimei.jpg' },
+
+	## Traditional
+	{ tag_type: 'traditional', tag: 'aiduhongo', name: '会津本郷焼', image_url: 'aiduhongo.jpg' },
+	{ tag_type: 'traditional', tag: 'oborisoma', name: '大堀相馬焼', image_url: 'oborisoma.jpg' },
+	{ tag_type: 'traditional', tag: 'akadu', name: '赤津焼', image_url: 'akadu.jpg' },
+	{ tag_type: 'traditional', tag: 'kasama', name: '笠間焼', image_url: 'kasama.jpg' },
+	{ tag_type: 'traditional', tag: 'masiko', name: '益子焼', image_url: 'masiko.jpg' },
+	{ tag_type: 'traditional', tag: 'echizen', name: '越前焼', image_url: 'echizen.jpg' },
+	{ tag_type: 'traditional', tag: 'kutani', name: '九谷焼', image_url: 'kutani.jpg' },
+	{ tag_type: 'traditional', tag: 'iga', name: '伊賀焼', image_url: 'iga.jpg' },
+	{ tag_type: 'traditional', tag: 'setosometuke', name: '瀬戸染付焼', image_url: 'setosometuke.jpg' },
+	{ tag_type: 'traditional', tag: 'tokoname', name: '常滑焼', image_url: 'tokoname.jpg' },
+	{ tag_type: 'traditional', tag: 'mino', name: '美濃焼', image_url: 'mino.jpg' },
+	{ tag_type: 'traditional', tag: 'yokkaichibanko', name: '四日市萬古焼', image_url: 'yokkaichibanko.jpg' },
+	{ tag_type: 'traditional', tag: 'izushi', name: '出石焼', image_url: 'izushi.jpg' },
+	{ tag_type: 'traditional', tag: 'kyo', name: '京焼', image_url: 'kyo.jpg' },
+	{ tag_type: 'traditional', tag: 'kiyomizu', name: '清水焼', image_url: 'kiyomizu.jpg' },
+	{ tag_type: 'traditional', tag: 'shigara', name: '信楽焼', image_url: 'shigara.jpg' },
+	{ tag_type: 'traditional', tag: 'tanbatachikui', name: '丹波立杭焼', image_url: 'tanbatachikui.jpg' },
+	{ tag_type: 'traditional', tag: 'iwami', name: '石見焼', image_url: 'iwami.jpg' },
+	{ tag_type: 'traditional', tag: 'bizen', name: '備前焼', image_url: 'bizen.jpg' },
+	{ tag_type: 'traditional', tag: 'tobe', name: '砥部焼', image_url: 'tobe.jpg' },
+	{ tag_type: 'traditional', tag: 'agano', name: '上野焼', image_url: 'agano.jpg' },
+	{ tag_type: 'traditional', tag: 'arita', name: '有田焼', image_url: 'arita.jpg' },
+	{ tag_type: 'traditional', tag: 'imari', name: '伊万里焼', image_url: 'imari.jpg' },
+	{ tag_type: 'traditional', tag: 'karatuyaki', name: '唐津焼', image_url: 'karatuyaki.jpg' },
+	{ tag_type: 'traditional', tag: 'koishiwara', name: '小石原焼', image_url: 'koishiwara.jpg' },
+	{ tag_type: 'traditional', tag: 'tuboya', name: '壺屋焼', image_url: 'tuboya.jpg' },
+	{ tag_type: 'traditional', tag: 'hasami', name: '波佐見焼', image_url: 'hasami.jpg' },
+	{ tag_type: 'traditional', tag: 'mikawachi', name: '三川内焼', image_url: 'mikawachi.jpg' },
+
 ]
 
 keywords.each do |keyword| setup_keyword(keyword) end
@@ -134,6 +165,37 @@ search_conditions = [
 	{ search_word: '夢の中まで 酒', tag: 'yumenonakamade' },
 	{ search_word: '幸寿 酒', tag: 'kojyu' },
 	{ search_word: '黎明 酒', tag: 'reimei' },
+
+	## Traditional
+	{ search_word: '会津本郷焼', tag: 'aiduhongo' },
+	{ search_word: '大堀相馬焼', tag: 'oborisoma' },
+	{ search_word: '赤津焼', tag: 'akadu' },
+	{ search_word: '笠間焼', tag: 'kasama' },
+	{ search_word: '益子焼', tag: 'masiko' },
+	{ search_word: '越前焼', tag: 'echizen' },
+	{ search_word: '九谷焼', tag: 'kutani' },
+	{ search_word: '伊賀焼', tag: 'iga' },
+	{ search_word: '瀬戸染付焼', tag: 'setosometuke' },
+	{ search_word: '常滑焼', tag: 'tokoname' },
+	{ search_word: '美濃焼', tag: 'mino' },
+	{ search_word: '四日市萬古焼', tag: 'yokkaichibanko' },
+	{ search_word: '出石焼', tag: 'izushi' },
+	{ search_word: '京焼', tag: 'kyo' },
+	{ search_word: '清水焼', tag: 'kiyomizu' },
+	{ search_word: '信楽焼', tag: 'shigara' },
+	{ search_word: '丹波立杭焼', tag: 'tanbatachikui' },
+	{ search_word: '石見焼', tag: 'iwami' },
+	{ search_word: '備前焼', tag: 'bizen' },
+	{ search_word: '砥部焼', tag: 'tobe' },
+	{ search_word: '上野焼', tag: 'agano' },
+	{ search_word: '有田焼', tag: 'arita' },
+	{ search_word: '伊万里焼', tag: 'imari' },
+	{ search_word: '唐津焼', tag: 'karatuyaki' },
+	{ search_word: '小石原焼', tag: 'koishiwara' },
+	{ search_word: '壺屋焼', tag: 'tuboya' },
+	{ search_word: '波佐見焼', tag: 'hasami' },
+	{ search_word: '三川内焼', tag: 'mikawachi' },
+
 ]
 search_conditions.each do |row| setup_search_condition(row) end
 
@@ -201,6 +263,54 @@ sakes = [
 ]
 
 sakes.each do |row| setup_sake(row) end
+
+#########################################################
+# setup the traditional data
+#########################################################
+def setup_traditional(row)
+	keyword_id = get_keyword_id(row[:tag])
+	if Traditional.where(keyword_id: keyword_id).size == 0 then
+		data = {}
+		data[:keyword_id] = keyword_id
+		data[:land_of_origin] = row[:land_of_origin]
+		Traditional.create(data)
+	end
+end
+
+traditionals = [
+	{ land_of_origin: '福島県', tag: 'aiduhongo' },
+	{ land_of_origin: '福島県', tag: 'oborisoma' },
+	{ land_of_origin: '愛知県', tag: 'akadu' },
+	{ land_of_origin: '茨木県', tag: 'kasama' },
+	{ land_of_origin: '栃木県', tag: 'masiko' },
+	{ land_of_origin: '福井県', tag: 'echizen' },
+	{ land_of_origin: '石川県', tag: 'kutani' },
+	{ land_of_origin: '三重県', tag: 'iga' },
+	{ land_of_origin: '愛知県', tag: 'setosometuke' },
+	{ land_of_origin: '愛知県', tag: 'tokoname' },
+	{ land_of_origin: '岐阜県', tag: 'mino' },
+	{ land_of_origin: '三重県', tag: 'yokkaichibanko' },
+	{ land_of_origin: '兵庫県', tag: 'izushi' },
+	{ land_of_origin: '京都府', tag: 'kyo' },
+	{ land_of_origin: '京都府', tag: 'kiyomizu' },
+	{ land_of_origin: '滋賀県', tag: 'shigara' },
+	{ land_of_origin: '兵庫県', tag: 'tanbatachikui' },
+	{ land_of_origin: '島根県', tag: 'iwami' },
+	{ land_of_origin: '岡山県', tag: 'bizen' },
+	{ land_of_origin: '愛媛県', tag: 'tobe' },
+	{ land_of_origin: '福岡県', tag: 'agano' },
+	{ land_of_origin: '佐賀県', tag: 'arita' },
+	{ land_of_origin: '佐賀県', tag: 'imari' },
+	{ land_of_origin: '佐賀県', tag: 'karatuyaki' },
+	{ land_of_origin: '福岡県', tag: 'koishiwara' },
+	{ land_of_origin: '沖縄県', tag: 'tuboya' },
+	{ land_of_origin: '長崎県', tag: 'hasami' },
+	{ land_of_origin: '長崎県', tag: 'mikawachi' },
+
+]
+
+traditionals.each do |row| setup_traditional(row) end
+
 
 #########################################################
 # setup the day_trend data
