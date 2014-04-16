@@ -153,7 +153,7 @@ def update_trendlist
 
 		# 結果を更新する
 		today = Date.today()
-		if day_trend.nil? then
+		if day_trend.nil? || today != day_trend['base_date'] then
 			# 新規レコードの作成
 			day_trend = DayTrend.new()
 			day_trend['keyword_id'] = keyword_id
