@@ -188,13 +188,18 @@ end
 # update ranking
 def update_ranking
 	today = Date.today()
-	rank = 1
-	DayTrend.where(base_date:today).order("total_count").reverse_order.each do |trend|
-		trend['rank'] = rank
-		rank += 1
-		trend.save
+	Keyword.select(:tag_type).uniq.each do |keyword|
+		tag_type = keyword['tag_type']
+		rank = 1
+		# DayTrend.where(base_date:today).order("total_count").reverse_order.each do |trend|
+		# Keyword.where(tag_type: tag_type).joins(:day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order("day_trends.total_count DESC", "Keywords.id").each do |trend|
+		DayTrend.where(base_date: today).joins(:keyword).where(Keyword.arel_table[:tag_type].eq(tag_type)).select('day_trends.id as day_trend_id').order("day_trends.total_count DESC", "keywords.id").each do |row|
+			trend = DayTrend.where(id:row['day_trend_id']).pop
+			trend['rank'] = rank
+			rank += 1
+			trend.save
+		end
 	end
-
 end
 
 # clear trend table

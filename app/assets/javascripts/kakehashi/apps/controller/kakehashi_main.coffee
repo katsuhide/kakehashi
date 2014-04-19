@@ -54,7 +54,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 		changeViewMode: (view_mode) ->
 			url = location.href
-			tag_type = url.substring(url.lastIndexOf('/') + 1)
+			tag_type = url.substring(url.lastIndexOf('#') + 1)
 			@showTarget(tag_type, view_mode)
 
 		test: ->
