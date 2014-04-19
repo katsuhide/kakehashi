@@ -29,6 +29,9 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 			msg = 'No.' + rank + '</br>' + name + ' @ ' + origin + '</br><i class="fa fa-twitter fa-lg"></i>' + total_count
 
 		templateHelpers :
+			getImageURL: (model)->
+				image_url_full = "assets/" + model['tag_type'] + "/" + model['image_url']
+
 			getTooltipMsg: ->
 				@createTooltipMsg2()
 

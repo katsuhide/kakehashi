@@ -1,5 +1,6 @@
+<% image_url_full = @getImageURL(@) %>
 <td><%= @['rank'] %></td>
-<td><img src="assets/<%= @['tag_type'] %>/<%=@['image_url'] %>"></td>
+<td><img src=<%= image_url_full %> ></td>
 <td><%= @['name'] %></td>
 <td><%= @['land_of_origin'] %></td>
 <td><%= @['total_count'] %></td>
