@@ -1,0 +1,33 @@
+<nav class="tab-bar">
+	<section class="left-small">
+		<h1 id="service-name">KAKUDUKE</h1>
+	</section>
+
+	<section class="middle tab-bar-section">
+		<nav class="top-bar" data-topbar>
+			<section class="top-bar-section">
+				<ul class="right">
+					<li class='has-dropdown'>
+						<a><i class="fa fa-bar-chart-o fa-lg"></i></a>
+						<ul class="dropdown">
+							<li id="bubble_btn"><a>Bubble View</a></li>
+							<li id="table_btn"><a>Table View</a></li>
+						</ul>
+					</li>
+					<li class='has-dropdown'>
+						<a><i class="fa fa-calendar fa-lg"></i></a>
+						<ul class="dropdown">
+							<li><a>All</a></li>
+							<li><a>Today</a></li>
+							<li><a>This Month</a></li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</nav>
+	</section>
+
+	<section class="right-small">
+		<a class="right-off-canvas-toggle"><i class="fa fa-heart"></i> <i class="fa fa-angle-double-right"></i></a>
+	</section>
+</nav><!-- tab-bar end -->

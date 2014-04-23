@@ -14,7 +14,9 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 	_.extend KAKEHASHI.Controller.prototype,
 		start: ->
 			@showHeader @trendList
+			@showTopBar()
 			@showTrendHeader()
+			@showRightMenu()
 			@showFooter @trendList
 			@trendList.fetch()
 
@@ -24,10 +26,20 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 			App.header.show header
 
+		showTopBar: ->
+			top_bar = new App.Layout.TopBar
+
+			App.top_bar.show top_bar
+
 		showTrendHeader: ->
 			trend_header = new App.Layout.TrendHeader
 
 			App.trend_header.show trend_header
+
+		showRightMenu: ->
+			right_menu = new App.Layout.RightMenu
+
+			App.right_menu.show right_menu
 
 		showFooter: (trendList) ->
 			footer = new App.Layout.Footer
@@ -58,12 +70,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 			@showTarget(tag_type, view_mode)
 
 		test: ->
-			@trendList.fetch({
-				data : {
-					tag_type : "sake"
-				}
-			})
-			console.log @trendList
+			console.log "hoge"
 
 	# Initialize
 	KAKEHASHI.addInitializer ->
