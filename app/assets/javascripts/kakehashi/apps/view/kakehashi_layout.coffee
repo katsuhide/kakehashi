@@ -1,4 +1,4 @@
-App.module 'Layout', (Layout, App, Backbone) ->
+App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 
 	# Header
 	class Layout.Header extends Backbone.Marionette.ItemView
@@ -18,12 +18,12 @@ App.module 'Layout', (Layout, App, Backbone) ->
 			$(document).foundation()
 
 		clickBubbleBtn: ->
-			controller = new App.KAKEHASHI.Controller()
-			controller.changeViewMode('bubble')
+			App.KAKEHASHI.controller.showMain('bubble')
 
 		clickTableBtn: ->
-			controller = new App.KAKEHASHI.Controller()
-			controller.changeViewMode('table')
+			# controller = new App.KAKEHASHI.Controller()
+			# controller.changeViewMode('table')
+			App.KAKEHASHI.controller.showMain('table')
 
 	# Trend Header
 	class Layout.TrendHeader extends Backbone.Marionette.ItemView

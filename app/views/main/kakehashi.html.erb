@@ -1,0 +1,44 @@
+<section id="kakehashiapp">
+	<header id="header"></header>
+
+	<section id="main">
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+
+				<div class="fixed">
+					<div id="top-bar-section">
+					</div>
+				</div>
+
+				<div id="right-menu-section">
+				</div>
+
+				<!-- Main Section -->
+				<div id="main-section">
+					<div class="row">
+						<section id="trend-header"></section>
+					</div>
+					<!-- Main Contents -->
+					<div class="row">
+						<section class="main-section" id="main-contents"></section>
+					</div>
+				</div>
+
+				<a class="exit-off-canvas"></a>
+
+			</div>
+		</div><!-- off-canvas-wrap end -->
+
+	</section><!-- section main end -->
+
+	<footer id="footer"></footer>
+
+</section>
+
+<%= javascript_tag do %>
+$(function() {
+	App.start();
+
+});
+
+<% end %>
