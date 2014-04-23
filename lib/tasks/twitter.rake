@@ -153,16 +153,22 @@ def update_trendlist
 
 		# 結果を更新する
 		today = Date.today()
-		if day_trend.nil? || today != day_trend['base_date'] then
-			# 新規レコードの作成
+		if day_trend.nil? then
+			# 一件もデータがない場合、新規レコードの作成
 			day_trend = DayTrend.new()
 			day_trend['keyword_id'] = keyword_id
 			day_trend['total_count'] = total_count
 			day_trend['base_date'] = today
+		elsif today != day_trend['base_date']  then
+			# 当日以外のデータがある場合、足し上げた上で新規レコード作成
+			prev_count = day_trend['total_count']
+			day_trend = DayTrend.new()
+			day_trend['keyword_id'] = keyword_id
+			day_trend['total_count'] = prev_count + total_count
+			day_trend['base_date'] = today
 		else
-			# 既存レコードの更新
+			# 当日レコードがある場合、既存レコードの更新
 			day_trend['total_count'] += total_count		# 前回値の足し合わせる
-			day_trend['base_date'] = today	# 当日以外の可能性があるため更新
 		end
 		day_trend.save
 	end
