@@ -13,14 +13,22 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 		events:
 			'click #bubble_btn' :'clickBubbleBtn'
 			'click #table_btn' :'clickTableBtn'
+			'click #week_btn' :'clickWeekBtn'
+			'click #month_btn' :'clickMonthBtn'
+			'click #all_btn' :'clickAllBtn'
 		ui:
 			view_mode: '.view-mode i'
 			bubble_btn: '#bubble_btn i'
 			table_btn: '#table_btn i'
+			period: '.period i'
+			week_btn: '#week_btn i'
+			month_btn: '#month_btn i'
+			all_btn: '#all_btn i'
 
 		onShow: ->
 			$(document).foundation()
 			@toggleViewModeBtn()
+			@togglePeriodBtn()
 
 		toggleViewModeBtn: ->
 			@ui.view_mode.addClass 'not-selected'
@@ -30,6 +38,21 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 					@ui.bubble_btn.removeClass 'not-selected'
 				when 'table'
 					@ui.table_btn.removeClass 'not-selected'
+				else
+					@ui.bubble_btn.removeClass 'not-selected'
+
+		togglePeriodBtn: ->
+			@ui.period.addClass 'not-selected'
+			period = App.KAKEHASHI.controller.period
+			switch period
+				when 'week'
+					@ui.week_btn.removeClass 'not-selected'
+				when 'month'
+					@ui.month_btn.removeClass 'not-selected'
+				when 'all'
+					@ui.all_btn.removeClass 'not-selected'
+				else
+					@ui.week_btn.removeClass 'not-selected'
 
 		clickBubbleBtn: ->
 			App.KAKEHASHI.controller.view_mode = 'bubble'
@@ -40,6 +63,18 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 			App.KAKEHASHI.controller.view_mode = 'table'
 			@toggleViewModeBtn()
 			App.KAKEHASHI.controller.showMain()
+
+		clickWeekBtn: ->
+			App.KAKEHASHI.controller.period = 'week'
+			@togglePeriodBtn()
+
+		clickMonthBtn: ->
+			App.KAKEHASHI.controller.period = 'month'
+			@togglePeriodBtn()
+
+		clickAllBtn: ->
+			App.KAKEHASHI.controller.period = 'all'
+			@togglePeriodBtn()
 
 	# Trend Header
 	class Layout.TrendHeader extends Backbone.Marionette.ItemView
