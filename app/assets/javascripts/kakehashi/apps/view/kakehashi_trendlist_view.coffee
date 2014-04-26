@@ -21,12 +21,23 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		clickTrend: ->
 			console.log "click trend"
 
+		getCount: ->
+			switch App.KAKEHASHI.controller.period
+				when 'week'
+					count = @model.get 'week_count'
+				when 'month'
+					count = @model.get 'month_count'
+				when 'all'
+					count = @model.get 'total_count'
+				else
+					count = @model.get 'total_count'
+
 		createTooltipMsg: ->
 			rank = @model.get 'rank'
 			name = @model.get 'name'
 			origin = @model.get 'land_of_origin'
-			total_count = @model.get 'total_count'
-			msg = 'No.' + rank + '</br>' + name + ' @ ' + origin + '</br><i class="fa fa-twitter fa-lg"></i>' + total_count
+			count = @getCount()
+			msg = 'No.' + rank + '</br>' + name + ' @ ' + origin + '</br><i class="fa fa-twitter fa-lg"></i>' + count
 
 		templateHelpers :
 			getImageURL: (model)->
@@ -36,6 +47,7 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 				@createTooltipMsg2()
 
 			createTooltipMsg2: ->
+				console.log "createTooltipMsg2"
 				"No." + @['rank'] + "-" + @['name'] + "@" + @['land_of_origin'] + ":" + @['total_count']
 
 	# Item List View

@@ -53,6 +53,7 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 					@ui.all_btn.removeClass 'not-selected'
 				else
 					@ui.week_btn.removeClass 'not-selected'
+			App.KAKEHASHI.controller.showMain()
 
 		clickBubbleBtn: ->
 			App.KAKEHASHI.controller.view_mode = 'bubble'
