@@ -13,16 +13,32 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 		events:
 			'click #bubble_btn' :'clickBubbleBtn'
 			'click #table_btn' :'clickTableBtn'
+		ui:
+			view_mode: '.view-mode i'
+			bubble_btn: '#bubble_btn i'
+			table_btn: '#table_btn i'
 
 		onShow: ->
 			$(document).foundation()
+			@toggleViewModeBtn()
+
+		toggleViewModeBtn: ->
+			@ui.view_mode.addClass 'not-selected'
+			view_mode = App.KAKEHASHI.controller.view_mode
+			switch view_mode
+				when 'bubble'
+					@ui.bubble_btn.removeClass 'not-selected'
+				when 'table'
+					@ui.table_btn.removeClass 'not-selected'
 
 		clickBubbleBtn: ->
 			App.KAKEHASHI.controller.view_mode = 'bubble'
+			@toggleViewModeBtn()
 			App.KAKEHASHI.controller.showMain()
 
 		clickTableBtn: ->
 			App.KAKEHASHI.controller.view_mode = 'table'
+			@toggleViewModeBtn()
 			App.KAKEHASHI.controller.showMain()
 
 	# Trend Header

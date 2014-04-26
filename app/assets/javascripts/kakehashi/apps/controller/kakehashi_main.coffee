@@ -74,5 +74,5 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 		controller = new KAKEHASHI.Controller()
 		controller.router = new KAKEHASHI.Router
 			controller: controller
-		controller.start()
 		@controller = controller
+		controller.start()
