@@ -7,6 +7,8 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 	# Controller
 	KAKEHASHI.Controller = ->
+		@period = 'week'
+		@view_mode = 'bubble'
 		@trendList = new App.Trends.TrendList()
 		@
 
@@ -47,8 +49,8 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 			App.footer.show footer
 
-		showMain: (view_mode) ->
-			switch view_mode
+		showMain: ->
+			switch @.view_mode
 				when 'table'
 					App.main.show new KAKEHASHI.Views.TableListView
 						collection: @trendList
@@ -56,18 +58,13 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 					App.main.show new KAKEHASHI.Views.ListView
 						collection: @trendList
 
-		showTarget: (tag_type, view_mode) ->
+		showTarget: (tag_type) ->
 			@trendList.fetch({
 				data: {
 					tag_type: tag_type
 				}
 			})
-			@showMain(view_mode)
-
-		changeViewMode: (view_mode) ->
-			url = location.href
-			tag_type = url.substring(url.lastIndexOf('#') + 1)
-			@showTarget(tag_type, view_mode)
+			@showMain()
 
 		test: ->
 			console.log "hoge"
