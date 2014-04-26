@@ -146,7 +146,7 @@ def update_trendlist
 	trends.each do |trend|
 		# 集計結果
 		keyword_id = trend[0]
-		total_count = trend[1]
+		count = trend[1]
 
 		# DayTrendレコードを探す
 		day_trend = DayTrend.where(keyword_id:keyword_id).order("base_date DESC").take(1).pop
@@ -157,18 +157,30 @@ def update_trendlist
 			# 一件もデータがない場合、新規レコードの作成
 			day_trend = DayTrend.new()
 			day_trend['keyword_id'] = keyword_id
-			day_trend['total_count'] = total_count
+			day_trend['day_count'] = count
+			day_trend['week_count'] = count
+			day_trend['month_count'] = count
+			day_trend['total_count'] = count
 			day_trend['base_date'] = today
 		elsif today != day_trend['base_date']  then
-			# 当日以外のデータがある場合、足し上げた上で新規レコード作成
-			prev_count = day_trend['total_count']
+			# 当日以外のデータがある場合(日付が変わった場合)、足し上げた上で新規レコード作成
+			prev_day_count = 0
+			prev_week_count = today.strftime('%m') == 0 ? 0 : day_trend['week_count']
+			prev_month_count = today.strftime('%m') == day_trend['base_date'].strftime('%m') ? day_trend['month_count'] : 0
+			prev_total_count = day_trend['total_count']
 			day_trend = DayTrend.new()
 			day_trend['keyword_id'] = keyword_id
-			day_trend['total_count'] = prev_count + total_count
+			day_trend['day_count'] = prev_day_count + count
+			day_trend['week_count'] = prev_week_count + count
+			day_trend['month_count'] = prev_month_count + count
+			day_trend['total_count'] = prev_total_count + count
 			day_trend['base_date'] = today
 		else
-			# 当日レコードがある場合、既存レコードの更新
-			day_trend['total_count'] += total_count		# 前回値の足し合わせる
+			# 当日レコードがある場合、既存レコードの更新(前回値の足し合わせる)
+			day_trend['day_count'] += count
+			day_trend['week_count'] += count
+			day_trend['month_count'] += count
+			day_trend['total_count'] += count
 		end
 		day_trend.save
 	end
