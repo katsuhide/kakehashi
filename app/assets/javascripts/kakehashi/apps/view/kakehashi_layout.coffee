@@ -87,8 +87,7 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 			$(document).foundation()
 
 		clickLogo: ->
-			console.log App.KAKEHASHI.controller.period
-			console.log App.KAKEHASHI.controller.view_mode
+			console.log 'click logo'
 
 	# Right Menu
 	class Layout.RightMenu extends Backbone.Marionette.ItemView

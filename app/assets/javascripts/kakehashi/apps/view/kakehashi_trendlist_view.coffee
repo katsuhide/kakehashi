@@ -6,9 +6,6 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		modelEvents:
 			'change': 'render'
 
-		events:
-			'click #trend': 'clickTrend'
-
 		initTooltip: ->
 			$("#bubble-#{@model.get 'keyword_id'}").tooltipster(
 				content: $('<span><strong>' + @createTooltipMsg() + '</strong></span>')
@@ -17,9 +14,6 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		onShow: ->
 			$("#trend-list").nested 'append'
 			@initTooltip()
-
-		clickTrend: ->
-			console.log "click trend"
 
 		getCount: ->
 			switch App.KAKEHASHI.controller.period
@@ -42,13 +36,6 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		templateHelpers :
 			getImageURL: (model)->
 				image_url_full = "assets/" + model['tag_type'] + "/" + model['image_url']
-
-			getTooltipMsg: ->
-				@createTooltipMsg2()
-
-			createTooltipMsg2: ->
-				console.log "createTooltipMsg2"
-				"No." + @['rank'] + "-" + @['name'] + "@" + @['land_of_origin'] + ":" + @['total_count']
 
 	# Item List View
 	class Views.ListView extends Backbone.Marionette.CompositeView
