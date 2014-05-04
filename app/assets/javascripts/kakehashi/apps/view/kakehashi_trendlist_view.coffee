@@ -26,8 +26,19 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 				else
 					count = @model.get 'total_count'
 
+		getRank: ->
+			switch App.KAKEHASHI.controller.period
+				when 'week'
+					rank = @model.get 'week_rank'
+				when 'month'
+					rank = @model.get 'month_rank'
+				when 'all'
+					rank = @model.get 'total_rank'
+				else
+					rank = @model.get 'total_rank'
+
 		createTooltipMsg: ->
-			rank = @model.get 'rank'
+			rank = @getRank()
 			name = @model.get 'name'
 			origin = @model.get 'land_of_origin'
 			count = @getCount()
@@ -36,6 +47,17 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		templateHelpers :
 			getImageURL: (model)->
 				image_url_full = "assets/" + model['tag_type'] + "/" + model['image_url']
+
+			getRank: (model)->
+				switch App.KAKEHASHI.controller.period
+					when 'week'
+						rank = model['week_rank']
+					when 'month'
+						rank = model['month_rank']
+					when 'all'
+						rank = model['total_rank']
+					else
+						rank = model['total_rank']
 
 	# Item List View
 	class Views.ListView extends Backbone.Marionette.CompositeView

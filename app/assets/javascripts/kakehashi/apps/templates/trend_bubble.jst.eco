@@ -1,6 +1,6 @@
 <% image_url_full = @getImageURL(@) %>
 <div id="trend">
-	<% rank = @['rank'] %>
+	<% rank = @getRank(@) %>
 	<% if rank <= 1: %>
 	<img src=<%= image_url_full %> class="box size99" id="bubble-<%= @['keyword_id'] %>">
 	<% else if rank <= 5: %>

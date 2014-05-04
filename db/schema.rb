@@ -11,18 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140426143436) do
+ActiveRecord::Schema.define(version: 20140504074807) do
 
   create_table "day_trends", force: true do |t|
     t.integer  "keyword_id"
     t.integer  "total_count"
     t.date     "base_date"
-    t.integer  "rank"
+    t.integer  "total_rank"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "day_count"
     t.integer  "week_count"
     t.integer  "month_count"
+    t.integer  "day_rank"
+    t.integer  "week_rank"
+    t.integer  "month_rank"
   end
 
   add_index "day_trends", ["keyword_id"], name: "index_day_trends_on_keyword_id"

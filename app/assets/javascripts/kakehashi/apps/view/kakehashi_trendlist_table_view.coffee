@@ -19,6 +19,17 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 					else
 						count = model['total_count']
 
+			getRank: (model)->
+				switch App.KAKEHASHI.controller.period
+					when 'week'
+						rank = model['week_rank']
+					when 'month'
+						rank = model['month_rank']
+					when 'all'
+						rank = model['total_rank']
+					else
+						rank = model['total_rank']
+
 	# Item List View
 	class Views.TableListView extends Backbone.Marionette.CompositeView
 		template: 'kakehashi/apps/templates/trends'

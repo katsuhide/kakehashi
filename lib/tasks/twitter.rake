@@ -152,7 +152,6 @@ def update_trendlist
 		day_trend = DayTrend.where(keyword_id:keyword_id).order("base_date DESC").take(1).pop
 
 		# 結果を更新する
-		today = Date.today()
 		if day_trend.nil? then
 			# 一件もデータがない場合、新規レコードの作成
 			day_trend = DayTrend.new()
@@ -161,12 +160,12 @@ def update_trendlist
 			day_trend['week_count'] = count
 			day_trend['month_count'] = count
 			day_trend['total_count'] = count
-			day_trend['base_date'] = today
-		elsif today != day_trend['base_date']  then
+			day_trend['base_date'] = @today
+		elsif @today != day_trend['base_date']  then
 			# 当日以外のデータがある場合(日付が変わった場合)、足し上げた上で新規レコード作成
 			prev_day_count = 0
-			prev_week_count = today.strftime('%m') == 0 ? 0 : day_trend['week_count']
-			prev_month_count = today.strftime('%m') == day_trend['base_date'].strftime('%m') ? day_trend['month_count'] : 0
+			prev_week_count = @today.strftime('%m') == 0 ? 0 : day_trend['week_count']
+			prev_month_count = @today.strftime('%m') == day_trend['base_date'].strftime('%m') ? day_trend['month_count'] : 0
 			prev_total_count = day_trend['total_count']
 			day_trend = DayTrend.new()
 			day_trend['keyword_id'] = keyword_id
@@ -174,7 +173,7 @@ def update_trendlist
 			day_trend['week_count'] = prev_week_count + count
 			day_trend['month_count'] = prev_month_count + count
 			day_trend['total_count'] = prev_total_count + count
-			day_trend['base_date'] = today
+			day_trend['base_date'] = @today
 		else
 			# 当日レコードがある場合、既存レコードの更新(前回値の足し合わせる)
 			day_trend['day_count'] += count
@@ -203,28 +202,68 @@ def update_keyword_to_latest
 
 end
 
+# set ranking each count
+def set_ranking_each_count(tag_type, target_column, target_rank)
+	query = 'day_trends.' + target_column + ' DESC'
+	rank = 1
+	DayTrend.where(base_date: @today).joins(:keyword).where(Keyword.arel_table[:tag_type].eq(tag_type)).select('day_trends.id as day_trend_id').order(query, "keywords.id").each do |row|
+		trend = DayTrend.where(id:row['day_trend_id']).pop
+		trend[target_rank] = rank
+		rank += 1
+		trend.save
+	end
+end
+
+# set ranking each tag_type
+def set_ranking_each_tag_type(tag_type)
+	# total_count
+	target_rank = 'total_rank'
+	target_column = 'total_count'
+	set_ranking_each_count(tag_type, target_column, target_rank)
+
+	# day_count
+	target_rank = 'day_rank'
+	target_column = 'day_count'
+	set_ranking_each_count(tag_type, target_column, target_rank)
+
+	# week_count
+	target_rank = 'week_rank'
+	target_column = 'day_count'
+	set_ranking_each_count(tag_type, target_column, target_rank)
+
+	# month_count
+	target_rank = 'month_rank'
+	target_column = 'month_count'
+	set_ranking_each_count(tag_type, target_column, target_rank)
+
+	# rank = 1
+	# DayTrend.where(base_date: @today).joins(:keyword).where(Keyword.arel_table[:tag_type].eq(tag_type)).select('day_trends.id as day_trend_id').order("day_trends.total_count DESC", "keywords.id").each do |row|
+	# 	trend = DayTrend.where(id:row['day_trend_id']).pop
+	# 	trend['rank'] = rank
+	# 	rank += 1
+	# 	trend.save
+	# end
+end
+
 # update ranking
 def update_ranking
-	today = Date.today()
+	# sort each tag_type
 	Keyword.select(:tag_type).uniq.each do |keyword|
 		tag_type = keyword['tag_type']
-		rank = 1
-		# DayTrend.where(base_date:today).order("total_count").reverse_order.each do |trend|
-		# Keyword.where(tag_type: tag_type).joins(:day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order("day_trends.total_count DESC", "Keywords.id").each do |trend|
-		DayTrend.where(base_date: today).joins(:keyword).where(Keyword.arel_table[:tag_type].eq(tag_type)).select('day_trends.id as day_trend_id').order("day_trends.total_count DESC", "keywords.id").each do |row|
-			trend = DayTrend.where(id:row['day_trend_id']).pop
-			trend['rank'] = rank
-			rank += 1
-			trend.save
-		end
+		set_ranking_each_tag_type(tag_type)
 	end
 end
 
 # clear trend table
 def clear_trend_table
-	# Trendテーブルを全件削除する
 	Trend.delete_all
+end
 
+# set today
+def set_today
+	if @today.nil?
+		@today = Date.today()
+	end
 end
 
 namespace :twitter do
@@ -241,6 +280,7 @@ namespace :twitter do
 
 	desc 'count tweets and udpate the trendlist'
 	task :all => :environment do
+		set_today
 		count_tweets
 		update_trendlist
 		update_ranking
@@ -254,6 +294,7 @@ namespace :twitter do
 
 	desc 'update the trendlist of day'
 	task :update_trendlist => :environment do
+		set_today
 		update_trendlist
 	end
 
@@ -264,6 +305,7 @@ namespace :twitter do
 
 	desc 'update ranking'
 	task :update_ranking => :environment do
+		set_today
 		update_ranking
 	end
 

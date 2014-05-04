@@ -7,13 +7,13 @@ class DayTrendController < ApplicationController
 		case tag_type
 		when "sake" then
 			# daytrends = DayTrend.where(base_date: today).joins(:keyword).select('*').order("day_trends.rank")
-			daytrends = Keyword.joins(:sake, :search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order("day_trends.rank")
+			daytrends = Keyword.joins(:sake, :search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order("day_trends.total_rank")
 		when "traditional" then
-			daytrends = Keyword.joins(:traditional, :search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order("day_trends.rank")
+			daytrends = Keyword.joins(:traditional, :search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order("day_trends.total_rank")
 		else
 			# defaultはとりあえず"sake"にしておく
 			p "list default"
-			daytrends = Keyword.joins(:sake, :search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order("day_trends.rank")
+			daytrends = Keyword.joins(:sake, :search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order("day_trends.total_rank")
 		end
 		return daytrends
 	end
