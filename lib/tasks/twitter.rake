@@ -274,6 +274,17 @@ def update_executed_datetime
 	end
 end
 
+# reset today's day_trend
+def reset_day_trend
+	DayTrend.where(base_date:@today).each do |row|
+		row['day_count'] = 0
+		row['week_count'] = 0
+		row['month_count'] = 0
+		row['total_count'] = 0
+		row.save
+	end
+end
+
 # set today
 def set_today
 	if @today.nil?
@@ -340,4 +351,9 @@ namespace :twitter do
 		update_executed_datetime
 	end
 
+	desc 'reset the day_trend'
+	task :reset_day_trend => :environment do
+		set_today
+		reset_day_trend
+	end
 end
