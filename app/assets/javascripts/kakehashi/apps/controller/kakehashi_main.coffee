@@ -68,6 +68,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 			@trendList.fetch({
 				data: {
 					tag_type: tag_type
+					period: @period
 				}
 			})
 			if tag_type?
