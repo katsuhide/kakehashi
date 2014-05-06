@@ -38,11 +38,20 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 					rank = @model.get 'total_rank'
 
 		createTooltipMsg: ->
+			tag_type = @model.get 'tag_type'
 			rank = @getRank()
 			name = @model.get 'name'
 			origin = @model.get 'land_of_origin'
 			count = @getCount()
-			msg = 'No.' + rank + '</br>' + name + ' @ ' + origin + '</br><i class="fa fa-twitter fa-lg"></i>' + count
+			msg = 'No.' + rank + '</br>'
+			switch tag_type
+				when 'sake', 'traditional'
+					msg += name + ' @ ' + origin + '</br>'
+				when 'anime'
+					msg += name + '</br>'
+				else
+					msg += name + '</br>'
+			msg += '<i class="fa fa-twitter fa-lg"></i>' + count
 
 		templateHelpers :
 			getImageURL: (model)->

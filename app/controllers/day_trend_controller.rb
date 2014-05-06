@@ -10,6 +10,8 @@ class DayTrendController < ApplicationController
 			daytrends = Keyword.joins(:sake, :search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order("day_trends.total_rank")
 		when "traditional" then
 			daytrends = Keyword.joins(:traditional, :search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order("day_trends.total_rank")
+		when "anime" then
+			daytrends = Keyword.where(tag_type:'anime').joins(:search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*')
 		else
 			# defaultはとりあえず"sake"にしておく
 			p "list default"

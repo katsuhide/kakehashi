@@ -4,7 +4,9 @@
       <th>Rank.</th>
       <th></th>
       <th>名称</th>
+      <% if @doesDisplayLandOfOrigin() :%>
       <th>原産地</th>
+      <% end %>
       <th>Tweet Hit数</th>
     </tr>
   </thead>

@@ -30,8 +30,29 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 					else
 						rank = model['total_rank']
 
+			doesDisplayLandOfOrigin: ->
+				tag_type = App.KAKEHASHI.controller.tag_type
+				switch tag_type
+					when 'sake', 'traditional'
+						true
+					when 'anime'
+						false
+					else
+						true
+
 	# Item List View
 	class Views.TableListView extends Backbone.Marionette.CompositeView
 		template: 'kakehashi/apps/templates/trends'
 		itemView: Views.ItemView
 		itemViewContainer: '#trend-list'
+
+		templateHelpers :
+			doesDisplayLandOfOrigin: ->
+				tag_type = App.KAKEHASHI.controller.tag_type
+				switch tag_type
+					when 'sake', 'traditional'
+						true
+					when 'anime'
+						false
+					else
+						true

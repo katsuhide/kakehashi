@@ -2,5 +2,7 @@
 <td><%= @getRank(@) %></td>
 <td><img src=<%= image_url_full %> ></td>
 <td><%= @['name'] %></td>
+<% if @doesDisplayLandOfOrigin(): %>
 <td><%= @['land_of_origin'] %></td>
+<% end %>
 <td><%= @getCount(@) %></td>

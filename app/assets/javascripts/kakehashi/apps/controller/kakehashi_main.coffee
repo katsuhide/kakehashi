@@ -9,6 +9,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 	KAKEHASHI.Controller = ->
 		@period = 'week'
 		@view_mode = 'bubble'
+		@tag_type = ''
 		@trendList = new App.Trends.TrendList()
 		@lastExecuteList = new App.LastExecutes.LastExecuteList()
 		@
@@ -63,12 +64,14 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 						collection: @trendList
 
 		showTarget: (tag_type) ->
+			@tag_type = tag_type
 			@trendList.fetch({
 				data: {
 					tag_type: tag_type
 				}
 			})
-			# @showMain()
+			if tag_type?
+				@showMain()
 
 	# Initialize
 	KAKEHASHI.addInitializer ->
