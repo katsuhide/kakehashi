@@ -228,7 +228,7 @@ def set_ranking_each_tag_type(tag_type)
 
 	# week_count
 	target_rank = 'week_rank'
-	target_column = 'day_count'
+	target_column = 'week_count'
 	set_ranking_each_count(tag_type, target_column, target_rank)
 
 	# month_count

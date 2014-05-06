@@ -50,6 +50,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 			App.footer.show footer
 
 		showMain: ->
+			@trendList.sort()
 			switch @.view_mode
 				when 'table'
 					App.main.show new KAKEHASHI.Views.TableListView
@@ -64,10 +65,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 					tag_type: tag_type
 				}
 			})
-			@showMain()
-
-		test: ->
-			console.log "hoge"
+			# @showMain()
 
 	# Initialize
 	KAKEHASHI.addInitializer ->
