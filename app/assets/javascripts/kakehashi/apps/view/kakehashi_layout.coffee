@@ -87,7 +87,7 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 			$(document).foundation()
 
 		clickLogo: ->
-			console.log 'click logo'
+			console.log @.collection.models[0].get 'executed_time'
 
 	# Right Menu
 	class Layout.RightMenu extends Backbone.Marionette.ItemView

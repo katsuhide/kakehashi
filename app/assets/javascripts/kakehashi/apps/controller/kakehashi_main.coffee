@@ -10,6 +10,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 		@period = 'week'
 		@view_mode = 'bubble'
 		@trendList = new App.Trends.TrendList()
+		@lastExecuteList = new App.LastExecutes.LastExecuteList()
 		@
 
 	# extend Controller
@@ -17,7 +18,8 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 		start: ->
 			@showHeader @trendList
 			@showTopBar()
-			@showTrendHeader()
+			@lastExecuteList.fetch()
+			@showTrendHeader @lastExecuteList
 			@showRightMenu()
 			@showFooter @trendList
 			@trendList.fetch()
@@ -33,8 +35,9 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 			App.top_bar.show top_bar
 
-		showTrendHeader: ->
+		showTrendHeader: (lastExecuteList)->
 			trend_header = new App.Layout.TrendHeader
+				collection: lastExecuteList
 
 			App.trend_header.show trend_header
 

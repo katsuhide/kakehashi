@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140504074807) do
+ActiveRecord::Schema.define(version: 20140506035226) do
 
   create_table "day_trends", force: true do |t|
     t.integer  "keyword_id"
@@ -37,6 +37,12 @@ ActiveRecord::Schema.define(version: 20140504074807) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_url"
+  end
+
+  create_table "last_executes", force: true do |t|
+    t.datetime "executed_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sakes", force: true do |t|

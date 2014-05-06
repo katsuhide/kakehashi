@@ -259,10 +259,29 @@ def clear_trend_table
 	Trend.delete_all
 end
 
+# update last executed datetime
+def update_executed_datetime
+	rows = LastExecute.all
+	if rows.size == 0
+		le = LastExecute.new()
+		le['executed_time'] = @now
+		le.save
+	else
+		rows.each do |row|
+			row['executed_time'] = @now
+			row.save
+		end
+	end
+end
+
 # set today
 def set_today
 	if @today.nil?
 		@today = Date.today()
+	end
+
+	if @now.nil?
+		@now = Time.now()
 	end
 end
 
@@ -285,6 +304,7 @@ namespace :twitter do
 		update_trendlist
 		update_ranking
 		clear_trend_table
+		update_executed_datetime
 	end
 
 	desc 'count tweets per hour'
@@ -312,6 +332,12 @@ namespace :twitter do
 	desc 'cleate trend table'
 	task :clear_trend_table => :environment do
 		clear_trend_table
+	end
+
+	desc 'update last executed datetime'
+	task :update_executed_datetime => :environment do
+		set_today
+		update_executed_datetime
 	end
 
 end
