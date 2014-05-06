@@ -17,6 +17,8 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 
 		getCount: ->
 			switch App.KAKEHASHI.controller.period
+				when 'day'
+					count = @model.get 'day_count'
 				when 'week'
 					count = @model.get 'week_count'
 				when 'month'
@@ -28,6 +30,8 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 
 		getRank: ->
 			switch App.KAKEHASHI.controller.period
+				when 'day'
+					rank = @model.get 'day_rank'
 				when 'week'
 					rank = @model.get 'week_rank'
 				when 'month'
@@ -59,6 +63,8 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 
 			getRank: (model)->
 				switch App.KAKEHASHI.controller.period
+					when 'day'
+						rank = model['day_rank']
 					when 'week'
 						rank = model['week_rank']
 					when 'month'
