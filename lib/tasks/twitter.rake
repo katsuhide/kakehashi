@@ -9,7 +9,12 @@ def read_configuration
 	@config['consumer_secrets'] = ENV['CONSUMER_SECRET'].split(',')
 	@config['access_tokens'] = ENV['ACCESS_TOKEN'].split(',')
 	@config['access_token_secrets'] = ENV['ACCESS_TOKEN_SECRET'].split(',')
-	@config['sleep_time'] = 300
+	case Rails.env
+	when 'development' then
+		@config['sleep_time'] = 300
+	else
+		@config['sleep_time'] = 1
+	end
 	return @config
 end
 
