@@ -9,6 +9,7 @@ def read_configuration
 	@config['consumer_secrets'] = ENV['CONSUMER_SECRET'].split(',')
 	@config['access_tokens'] = ENV['ACCESS_TOKEN'].split(',')
 	@config['access_token_secrets'] = ENV['ACCESS_TOKEN_SECRET'].split(',')
+	@config['sleep_time'] = 300
 	return @config
 end
 
@@ -22,7 +23,8 @@ def initalize_twitter
 end
 
 def get_keywords
-	keywords = SearchCondition.all
+	# 更新されていないものから検索する
+	keywords = SearchCondition.all.order("updated_at")
 	return keywords
 end
 
