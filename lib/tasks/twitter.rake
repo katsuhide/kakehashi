@@ -14,7 +14,7 @@ end
 
 def initalize_twitter
 	@config = read_configuration
-	@logger = Logger.new('log/twitter.log')
+	@logger = Logger.new('log/twitter.log', 'daily')
 	@logger.level = Logger::INFO
 	@tw = TwitterUtil.new(@logger, @config)
 	@fetch_size = @config["fetch_size"]
@@ -26,71 +26,128 @@ def get_keywords
 	return keywords
 end
 
-def create_trend_result(keyword, tweets)
+def create_trend_result(search_condition, tweets)
 	trend = Trend.new()
-	trend['keyword_id'] = keyword['id']
+	trend['keyword_id'] = search_condition['keyword_id']
 	trend['count'] = tweets.size
 	trend['search_datetime'] = @execute_datetime
 	trend.save
+	msg = '[create_trend_result]'
+	msg += ' keyword_id: ' + search_condition['keyword_id'].to_s
+	msg += ', search word: ' + search_condition['search_word']
+	msg += ', count: ' + tweets.size.to_s
+	@logger.info(msg)
 end
 
 def update_keyword(search_condition, tweets)
 	latest_tweet = tweets[tweets.size - 1]
+	msg = "[update_keyword] Search Word: " + search_condition['search_word']
+	msg += ", Before Since Id: " + search_condition['since_id'].to_s
+	str = latest_tweet.nil? ? 'nil' : latest_tweet['id'].to_s
+	msg += ', After Since Id: ' + str
+	@logger.info(msg)
 	if !tweets.nil? && !latest_tweet.nil? then
 		search_condition['since_id'] = latest_tweet['id']
 		search_condition.save
+		@logger.info('[update_keyword] update the search_condition.')
 	end
 end
 
 ## 	construct result
 def contruct_result(tweets)
-	result = []
-	tweets.each{|tweet|
-		h = Hash::new
-		h.store("id", tweet.id)
-		h.store("time", tweet.created_at)
-		result.push(h)
-	}
+	result = nil
+	if !tweets.nil?
+		result = []
+		tweets.each{|tweet|
+			h = Hash::new
+			h.store("id", tweet.id)
+			h.store("time", tweet.created_at)
+			result.push(h)
+		}
+	end
 	return result
 end
 
 ## 	search tweets method
 def search_tweets(keyword, since_id)
-	tweets = @tw.search_tweets(@fetch_size, keyword, since_id)
+	begin
+		tweets = @tw.search_tweets(@fetch_size, keyword, since_id)
+	rescue Twitter::Error::TooManyRequests => tw_error
+		@logger.error('[search_tweets]'+ tw_error.to_s + ". Search Word: " + keyword)
+		tweets = nil
+	rescue => ex
+		@logger.error(ex)
+		tweets = []	# 予期せぬエラーの場合は空を返してリトライさせない
+	end
 	return contruct_result(tweets)
 end
 
 ## 	search tweets method by since_id and max_id
 def search_tweets_by_both(keyword, since_id, max_id)
-	tweets  = @tw.search_tweets_by_both(@fetch_size, keyword, since_id, max_id)
+	begin
+		tweets  = @tw.search_tweets_by_both(@fetch_size, keyword, since_id, max_id)
+	rescue Twitter::Error::TooManyRequests => tw_error
+		@logger.error('[search_tweets_by_both]'+ tw_error.to_s + ". Search Word: " + keyword)
+		tweets = nil
+	rescue => ex
+		@logger.error(ex)
+		tweets = []	# 予期せぬエラーの場合は空を返してリトライさせない
+	end
 	return contruct_result(tweets)
 end
 
 ## 	再帰検索
-def repeat_back_search(keyword, since_id, min_id, base_tweets)
+def repeat_back_search(keyword, since_id, min_id, base_tweets, repeat_count)
 	tweets = search_tweets_by_both(keyword, since_id, min_id-1)
-	min_id = @tw.get_min_id(tweets)
-	base_tweets += tweets
-	if tweets.count != 0 then
-		@logger.info("Count:" + tweets.size.to_s + ", Min_id: " + min_id.to_s + ", Max_id: " + @tw.get_max_id(tweets).to_s)
-		base_tweets = repeat_back_search(keyword, since_id, min_id, base_tweets)
+	repeat_count += 1
+
+	if tweets.nil?
+		# nilの場合はエラーのためclientを変えてリトライ
+		@logger.info('[repeat_back_search] Twitter Error. Retry.')
+		begin
+			@tw.change_client
+			@logger.info('[repeat_back_search] Twitter API Client has been changed.')
+			base_tweets = repeat_back_search(keyword, since_id, min_id, base_tweets, repeat_count)
+		rescue Twitter::Error::TooManyRequests => tw_error
+			@logger.error('[search_tweets_by_both]'+ tw_error.to_s + ". Search Word: " + keyword)
+		rescue TwitterAPIError => tw_api_error
+			@logger.error('[search_tweets_by_both]' + tw_api_error.to_s)
+		end
+	elsif tweets.count != 0
+		# 空でなければ再帰検索
+		min_id = @tw.get_min_id(tweets)
+		base_tweets += tweets
+		@logger.info("[repeat_back_search] Repeat_Count: " + repeat_count.to_s + ", Count:" + tweets.size.to_s + ", Min_id: " + min_id.to_s + ", Max_id: " + @tw.get_max_id(tweets).to_s)
+		base_tweets = repeat_back_search(keyword, since_id, min_id, base_tweets, repeat_count)
+	else
+		# 空の場合はエラーだけどリトライしない
+		@logger.info('[repeat_back_search] Twitter Error. Can\'t Retry.')
 	end
+
 	return base_tweets
 end
 
 ## 	since_id以降のTweetを全件取得する
 def search_all_tweets(keyword, since_id)
-	## 直近のTweetを取得
+	## 直近のTweetを1回取得
 	@logger.info("Start getting the latest tweets.")
 	tweets = search_tweets(keyword, since_id)
-	@logger.info("Count:" + tweets.size.to_s + ", Min_id: " + @tw.get_min_id(tweets).to_s + ", Max_id: " + @tw.get_max_id(tweets).to_s)
 
-	## そこから前回取得結果まで遡る
+	if tweets.nil?
+		@logger.info('[search_all_tweets] Twitter Error has happend in first time.')
+		tweets = []
+	else
+		@logger.info("Count:" + tweets.size.to_s + ", Min_id: " + @tw.get_min_id(tweets).to_s + ", Max_id: " + @tw.get_max_id(tweets).to_s)
+	end
+
+	# そこから前回取得結果まで遡る
 	if tweets.count != 0 then
 		@logger.info("Start getting the other tweets")
 		min_id = @tw.get_min_id(tweets)
-		tweets = repeat_back_search(keyword, since_id, min_id, tweets)
+		repeat_count = 0
+		tweets = repeat_back_search(keyword, since_id, min_id, tweets, repeat_count)
 	end
+
 	return tweets
 end
 
@@ -101,25 +158,17 @@ def execute_search_tweet(search_conditions)
 		since_id = search_condition['since_id'].nil? ? 0 : search_condition['since_id']
 		tweets = nil
 
-		begin
-			# search all tweets
-			@logger.info("START!!!" + "search_condition: " + search_word + ", since_id: " + since_id.to_s)
-			tweets = search_all_tweets(search_word, since_id).sort_by{|tweet| tweet['id']}
+		# search all tweets
+		@logger.info("START!!!" + "search_condition: " + search_word + ", since_id: " + since_id.to_s)
+		tweets = search_all_tweets(search_word, since_id).sort_by{|tweet| tweet['id']}
 
-			# create the trend result
-			create_trend_result(search_condition, tweets)
+		# create the trend result
+		create_trend_result(search_condition, tweets)
 
-		rescue Twitter::Error::TooManyRequests => tw_error
-			@logger.error(tw_error.to_s + " during searching " + search_word)
-			@tw.change_client
-		rescue => ex
-			@logger.error(ex)
-		ensure
-			@logger.info("END!!!" + "search_condition: " + search_word + ".")
-			# update search_condition data
-			if !tweets.nil? then
-				update_keyword(search_condition, tweets)
-			end
+		@logger.info("END!!!" + "search_condition: " + search_word + ".")
+		# update search_condition data
+		if !tweets.nil? then
+			update_keyword(search_condition, tweets)
 		end
 	}
 end
@@ -300,12 +349,16 @@ namespace :twitter do
 	desc 'test'
 	task :test => :environment do
 		initalize_twitter
-		@client = @tw.get_client
-		keyword = "酒 南"
-		tweets = @client.search(keyword, :count => 2, :result_type => "recent", :since_id => 0).take(2)
-		tweets.each do |tweet|
-			pp tweet['text']
-		end
+		# @client = @tw.get_client
+		# keyword = "酒 南"
+		# tweets = @client.search(keyword, :count => 2, :result_type => "recent", :since_id => 0).take(2)
+		# tweets.each do |tweet|
+		# 	pp tweet['text']
+		# end
+
+		since_id = 0
+		keyword = 'RecDesktop'
+		pp @tw.search_tweets(@fetch_size, keyword, since_id)
 	end
 
 	desc 'count tweets and udpate the trendlist'

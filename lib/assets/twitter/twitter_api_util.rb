@@ -2,24 +2,43 @@
 require 'twitter'
 require 'logger'
 
+class TwitterAPIError < StandardError
+end
+
 class TwitterUtil
 	## 	initialize
 	def initialize(log = nil, config)
 		@config = config
-		create_client(get_available_client())
 		@logger = log
 		if @logger.nil? then
 			@logger = Logger.new(STDOUT)
 			@logger.level = Logger::INFO
 		end
 		@logger.debug("Twitter Util initialize")
+		@loop_count = 0
+		create_client(get_available_client())
 	end
 
 	## 	get next index of twitter client
 	def get_next_client_index(in_use_index)
 		current_index = in_use_index.nil? ? -1: in_use_index
 		client_num = @config['twitter_oauth_count']
-		return current_index < (client_num - 1) ? current_index + 1 : current_index + 1 - client_num
+		# if current_index >= (client_num - 1)
+		if @loop_count.nil?
+			@loop_count = 0
+		elsif @loop_count >= 3
+			@logger.warn('[get_next_client_index] loop_count has been exceeded from limit.')
+			raise TwitterAPIError.new('Have no more api client.' )
+		end
+		# return current_index + 1
+		next_index = current_index < (client_num - 1) ? current_index + 1 : current_index + 1 - client_num
+		if next_index == 0 && current_index != -1
+			sleep @config['sleep_time'].to_i
+			@loop_count += 1
+			@logger.warn('[get_next_client_index] Go to the next round of the api client. [loop_count: ' + @loop_count.to_s + ']')
+		end
+		return next_index
+		# return current_index < (client_num - 1) ? current_index + 1 : current_index + 1 - client_num
 	end
 
 	## 	get available client
@@ -30,22 +49,24 @@ class TwitterUtil
 		oauth['consumer_secret'] = @config['consumer_secrets'][@in_use_index]
 		oauth['access_token'] = @config['access_tokens'][@in_use_index]
 		oauth['access_token_secret'] = @config['access_token_secrets'][@in_use_index]
+		@logger.info('[get_available_client] Have gotten the oauth info.')
 		return oauth
 	end
 
 	## 	create the twitter client
 	def create_client(oauth)
 		@client = Twitter::REST::Client.new(
-			 consumer_key: oauth["consumer_key"],
-			 consumer_secret: oauth["consumer_secret"],
-			 access_token: oauth["access_token"],
-			 access_token_secret: oauth["access_token_secret"]
-		)
+			consumer_key: oauth["consumer_key"],
+			consumer_secret: oauth["consumer_secret"],
+			access_token: oauth["access_token"],
+			access_token_secret: oauth["access_token_secret"]
+			)
 	end
 
 	## 	change twitter client
 	def change_client
 		create_client(get_available_client())
+		@logger.info('[change_client] Twitter API Client has been changed.')
 	end
 
 	## 	print tweet
