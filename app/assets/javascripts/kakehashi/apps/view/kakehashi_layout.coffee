@@ -96,6 +96,10 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 
 		clickLogo: ->
 			console.log @.collection.models[0].get 'executed_time'
+			console.log App.KAKEHASHI.controller.searchConditionList.debug()
+
+			# searchConditionList = new App.SearchConditions.SearchConditionList()
+			# console.log searchConditionList.fetch().responseJSON
 
 	# Right Menu
 	class Layout.RightMenu extends Backbone.Marionette.ItemView

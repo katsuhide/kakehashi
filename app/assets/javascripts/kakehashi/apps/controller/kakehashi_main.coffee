@@ -12,6 +12,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 		@tag_type = ''
 		@trendList = new App.Trends.TrendList()
 		@lastExecuteList = new App.LastExecutes.LastExecuteList()
+		@searchConditionList = new App.SearchConditions.SearchConditionList()
 		@
 
 	# extend Controller
@@ -20,6 +21,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 			@showHeader @trendList
 			@showTopBar()
 			@lastExecuteList.fetch()
+			@searchConditionList.fetch()
 			@showTrendHeader @lastExecuteList
 			@showRightMenu()
 			@showFooter @trendList

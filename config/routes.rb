@@ -5,6 +5,7 @@ Kakehashi::Application.routes.draw do
   scope 'api' do
     get 'daytrends'  => 'day_trend#list'
     get 'lastexecutes' => 'last_execute#list'
+    get 'search_conditions' => 'search_condition#list'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
