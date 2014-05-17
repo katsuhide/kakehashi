@@ -53,6 +53,8 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 					msg += name + ' @ ' + origin + '</br>'
 				when 'anime'
 					msg += name + '</br>'
+				when 'company'
+					msg += name + '</br>'
 				else
 					msg += name + '</br>'
 			msg += '<i class="fa fa-twitter fa-lg"></i>' + count

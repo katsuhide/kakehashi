@@ -2,7 +2,8 @@
 	<ul class="off-canvas-list">
 		<li><label><i class="fa fa-heart fa-2x"></i> Category</label></li>
 		<li><a href="#sake"> SAKE</a></li>
-		<li><a href="#traditional"> JAPANESE TRADITIONAL PRODUCT</a></li>
+		<li><a href="#traditional"> JAPANESE TRADITIONAL</a></li>
 		<li><a href="#anime"> ANIME</a></li>
+		<li><a href="#company"> COMPANY</a></li>
 	</ul>
 </aside>

@@ -174,6 +174,35 @@ keywords = [
 	{ tag_type: 'anime', tag: 'seikoku', name: '星刻の竜騎士', image_url: 'seikoku.jpg' },
 	{ tag_type: 'anime', tag: 'conan', name: '名探偵コナン', image_url: 'conan.jpg' },
 
+	# company
+	{ tag_type: 'company', tag: 'mizuho_bank', name: 'みずほ銀行', image_url: 'mizuho_bank.jpg' },
+{ tag_type: 'company', tag: 'mitsubishi_bank', name: '三菱東京UFJ銀行', image_url: 'mitsubishi_bank.jpg' },
+{ tag_type: 'company', tag: 'mitsui_bank', name: '三井住友銀行', image_url: 'mitsui_bank.jpg' },
+{ tag_type: 'company', tag: 'risona_bank', name: 'りそな銀行', image_url: 'risona_bank.jpg' },
+{ tag_type: 'company', tag: 'srisona_ban', name: '埼玉りそな銀行', image_url: 'srisona_ban.jpg' },
+{ tag_type: 'company', tag: 'mitsubishi_tbank', name: '三菱UFJ信託銀行', image_url: 'mitsubishi_tbank.jpg' },
+{ tag_type: 'company', tag: 'mizuho_tbank', name: 'みずほ信託銀行', image_url: 'mizuho_tbank.jpg' },
+{ tag_type: 'company', tag: 'mitsui_tbank', name: '三井住友信託銀行', image_url: 'mitsui_tbank.jpg' },
+{ tag_type: 'company', tag: 'nomura_tbank', name: '野村信託銀行 ', image_url: 'nomura_tbank.jpg' },
+{ tag_type: 'company', tag: 'aozora_bank', name: 'あおぞら銀行', image_url: 'aozora_bank.jpg' },
+{ tag_type: 'company', tag: 'shinsei_bank', name: '新生銀行', image_url: 'shinsei_bank.jpg' },
+{ tag_type: 'company', tag: 'nocyu', name: '農林中央金庫', image_url: 'nocyu.jpg' },
+{ tag_type: 'company', tag: 'yucho', name: 'ゆうちょ銀行', image_url: 'yucho.jpg' },
+{ tag_type: 'company', tag: 'japan_nbank', name: 'ジャパンネット銀行', image_url: 'japan_nbank.jpg' },
+{ tag_type: 'company', tag: 'sbi_nbank', name: '住信SBIネット銀行', image_url: 'sbi_nbank.jpg' },
+{ tag_type: 'company', tag: 'sony_nbank', name: 'ソニー銀行', image_url: 'sony_nbank.jpg' },
+{ tag_type: 'company', tag: 'rakuten_nbank', name: '楽天銀行', image_url: 'rakuten_nbank.jpg' },
+{ tag_type: 'company', tag: 'jibun_nbank', name: 'じぶん銀行', image_url: 'jibun_nbank.jpg' },
+{ tag_type: 'company', tag: 'nomura_secu', name: '野村證券', image_url: 'nomura_secu.jpg' },
+{ tag_type: 'company', tag: 'daiwa_secu', name: '大和証券', image_url: 'daiwa_secu.jpg' },
+{ tag_type: 'company', tag: 'mizuho_secu', name: 'みずほ証券', image_url: 'mizuho_secu.jpg' },
+{ tag_type: 'company', tag: 'mitsubishi_secu', name: '三菱UFJモルガン・スタンレー証券', image_url: 'mitsubishi_secu.jpg' },
+{ tag_type: 'company', tag: 'mitsubishi_sho', name: '三菱商事', image_url: 'mitsubishi_sho.jpg' },
+{ tag_type: 'company', tag: 'sumitomo_sho', name: '住友商事', image_url: 'sumitomo_sho.jpg' },
+{ tag_type: 'company', tag: 'itochu', name: '伊藤忠商事', image_url: 'itochu.jpg' },
+{ tag_type: 'company', tag: 'marubeni', name: '丸紅', image_url: 'marubeni.jpg' },
+{ tag_type: 'company', tag: 'mitsui_sho', name: '三井物産', image_url: 'mitsui_sho.jpg' },
+
 ]
 
 keywords.each do |keyword| setup_keyword(keyword) end
@@ -351,6 +380,35 @@ search_conditions = [
 	{ search_word: '星刻の竜騎士', tag: 'seikoku' },
 	{ search_word: '名探偵コナン', tag: 'conan' },
 
+	# company
+	{ search_word: 'みずほ銀行', tag: 'mizuho_bank' },
+	{ search_word: '三菱東京UFJ銀行', tag: 'mitsubishi_bank' },
+	{ search_word: '三井住友銀行', tag: 'mitsui_bank' },
+	{ search_word: 'りそな銀行', tag: 'risona_bank' },
+	{ search_word: '埼玉りそな銀行', tag: 'srisona_ban' },
+	{ search_word: '三菱UFJ信託銀行', tag: 'mitsubishi_tbank' },
+	{ search_word: 'みずほ信託銀行', tag: 'mizuho_tbank' },
+	{ search_word: '三井住友信託銀行', tag: 'mitsui_tbank' },
+	{ search_word: '野村信託銀行 ', tag: 'nomura_tbank' },
+	{ search_word: 'あおぞら銀行', tag: 'aozora_bank' },
+	{ search_word: '新生銀行', tag: 'shinsei_bank' },
+	{ search_word: '農林中央金庫', tag: 'nocyu' },
+	{ search_word: 'ゆうちょ銀行', tag: 'yucho' },
+	{ search_word: 'ジャパンネット銀行', tag: 'japan_nbank' },
+	{ search_word: '住信SBIネット銀行', tag: 'sbi_nbank' },
+	{ search_word: 'ソニー銀行', tag: 'sony_nbank' },
+	{ search_word: '楽天銀行', tag: 'rakuten_nbank' },
+	{ search_word: 'じぶん銀行', tag: 'jibun_nbank' },
+	{ search_word: '野村證券', tag: 'nomura_secu' },
+	{ search_word: '大和証券', tag: 'daiwa_secu' },
+	{ search_word: 'みずほ証券', tag: 'mizuho_secu' },
+	{ search_word: '三菱UFJ 証券', tag: 'mitsubishi_secu' },
+	{ search_word: '三菱商事', tag: 'mitsubishi_sho' },
+	{ search_word: '住友商事', tag: 'sumitomo_sho' },
+	{ search_word: '伊藤忠商事', tag: 'itochu' },
+	{ search_word: '丸紅', tag: 'marubeni' },
+	{ search_word: '三井物産', tag: 'mitsui_sho' },
+
 ]
 search_conditions.each do |list| setup_search_condition(list) end
 
@@ -471,7 +529,7 @@ traditionals.each do |row| setup_traditional(row) end
 # setup the day_trend data
 #########################################################
 rank = 1
-Keyword.all.each do | keyword|
+Keyword.all.each do |keyword|
 	row = DayTrend.new()
 	row['keyword_id'] = keyword['id']
 	row['day_count'] = 0

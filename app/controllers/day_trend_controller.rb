@@ -23,6 +23,8 @@ class DayTrendController < ApplicationController
 			daytrends = Keyword.joins(:traditional, :search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order(sort_column)
 		when "anime" then
 			daytrends = Keyword.where(tag_type:'anime').joins(:search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order(sort_column)
+		when "company" then
+			daytrends = Keyword.where(tag_type:'company').joins(:search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order(sort_column)
 		else
 			# defaultはとりあえず"sake"にしておく
 			daytrends = Keyword.joins(:sake, :search_condition, :day_trend).where(DayTrend.arel_table[:base_date].eq(today)).select('*').order(sort_column)

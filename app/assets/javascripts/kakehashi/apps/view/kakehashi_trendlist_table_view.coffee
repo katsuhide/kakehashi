@@ -41,8 +41,10 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 						true
 					when 'anime'
 						false
+					when 'company'
+						false
 					else
-						true
+						false
 
 	# Item List View
 	class Views.TableListView extends Backbone.Marionette.CompositeView
