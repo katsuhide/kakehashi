@@ -181,13 +181,19 @@ keywords.each do |keyword| setup_keyword(keyword) end
 #########################################################
 # setup the search_condition data
 #########################################################
-def setup_search_condition(row)
-	keyword_id = get_keyword_id(row[:tag])
-	if SearchCondition.where(keyword_id: keyword_id).size == 0 then
+def setup_search_condition(list)
+	keyword_id = get_keyword_id(list[:tag])
+	rows = SearchCondition.where(keyword_id: keyword_id)
+	if rows.size == 0 then
 		data = {}
 		data[:keyword_id] = keyword_id
-		data[:search_word] = row[:search_word]
+		data[:search_word] = list[:search_word]
 		SearchCondition.create(data)
+	else
+		rows.each do |row|
+			row['search_word'] = list[:search_word]
+			row.save
+		end
 	end
 end
 
@@ -280,13 +286,13 @@ search_conditions = [
 	{ search_word: 'キャプテン・アース', tag: 'captain-earth' },
 	{ search_word: 'ニセコイ', tag: 'nisekoi' },
 	{ search_word: '暴れん坊力士 松太郎', tag: 'matsutaro' },
-	{ search_word: 'カードファイト ヴァンガード', tag: 'cf-vanguard' },
+	{ search_word: 'ヴァンガード', tag: 'cf-vanguard' },
 	{ search_word: 'ドラゴンボール改', tag: 'dragon_kai' },
 	{ search_word: 'ハイキュー', tag: 'haikyu' },
 	{ search_word: '遊戯王', tag: 'yugioh-arcv' },
 	{ search_word: 'ベイビーステップ', tag: 'babysteps' },
 	{ search_word: 'ダイヤのA', tag: 'diaace' },
-	{ search_word: 'ハピネスチャージプリキュア', tag: 'happiness-precure' },
+	{ search_word: 'プリキュア', tag: 'happiness-precure' },
 	{ search_word: 'ワンピース', tag: 'onepiece' },
 	{ search_word: '鎧武', tag: 'gaimu' },
 	{ search_word: 'トッキュウジャー', tag: 'tqg' },
@@ -296,7 +302,7 @@ search_conditions = [
 	{ search_word: '１週間フレンズ', tag: 'oneweekfriends' },
 	{ search_word: '彼女がフラグを折られたら', tag: 'gaworare' },
 	{ search_word: 'ノブナガ・ザ・フール', tag: 'nobunaga' },
-	{ search_word: 'オレカバトル＆ドラゴンコレクション', tag: 'oreca_dracolle' },
+	{ search_word: 'オレカバトル', tag: 'oreca_dracolle' },
 	{ search_word: 'ヒーローバンク', tag: 'herobank' },
 	{ search_word: 'マンガ家さんとアシスタントさんと', tag: 'mangakasan' },
 	{ search_word: 'ソノ黒キ鋼', tag: 'm3' },
@@ -307,11 +313,11 @@ search_conditions = [
 	{ search_word: '魔法少女大戦', tag: 'mahoushoujyotaisen' },
 	{ search_word: '史上最強の弟子ケンイチ', tag: 'kenichi' },
 	{ search_word: 'ソウルイーターノット', tag: 'souleaternot' },
-	{ search_word: 'HUNTER×HUNTER', tag: 'hxh' },
+	{ search_word: 'ハンターハンター', tag: 'hxh' },
 	{ search_word: 'ガイストクラッシャー', tag: 'gaist' },
 	{ search_word: 'ディスク・ウォーズ：アベンジャーズ', tag: 'dw_avengers' },
 	{ search_word: 'くつだる', tag: 'kutsudaru' },
-	{ search_word: 'ノーゲーム・ノーライフ', tag: 'ngnl' },
+	{ search_word: 'ノーゲーム ノーライフ', tag: 'ngnl' },
 	{ search_word: '棺姫のチャイカ', tag: 'chaika' },
 	{ search_word: '風雲維新ダイショーグン', tag: 'daishogun' },
 	{ search_word: 'NARUTO', tag: 'naruto' },
@@ -324,7 +330,7 @@ search_conditions = [
 	{ search_word: 'Blade&Soul', tag: 'bns' },
 	{ search_word: '僕らはみんな河合荘', tag: 'kawaisou' },
 	{ search_word: '悪魔のリドル', tag: 'akuma-riddle' },
-	{ search_word: 'selector infected WIXOSS', tag: 'selector-wixoss' },
+	{ search_word: '"selector infected WIXOSS"', tag: 'selector-wixoss' },
 	{ search_word: 'シドニアの騎士', tag: 'knightsofsidonia' },
 	{ search_word: 'ピンポン', tag: 'pingpong' },
 	{ search_word: '龍ヶ嬢七々々の埋蔵金', tag: 'nanana' },
@@ -333,10 +339,10 @@ search_conditions = [
 	{ search_word: '妖怪ウォッチ', tag: 'youkai-watch' },
 	{ search_word: '蟲師', tag: 'mushishi' },
 	{ search_word: 'ジョジョの奇妙な冒険', tag: 'jojo' },
-	{ search_word: 'デート・ア・ライブ', tag: 'date-a-live' },
+	{ search_word: 'デート ア ライブ', tag: 'date-a-live' },
 	{ search_word: 'レディジュエルペット', tag: 'jewelpet' },
 	{ search_word: 'テンカイナイト', tag: 'tenkaiknight' },
-	{ search_word: 'プリティリズム・オールスターセレクション', tag: 'prettyrhythm' },
+	{ search_word: 'プリティリズム', tag: 'prettyrhythm' },
 	{ search_word: 'FAIRY TAIL', tag: 'fairytail' },
 	{ search_word: '金田一少年の事件簿R', tag: 'kindaichi_r' },
 	{ search_word: 'ケロロ', tag: 'keroro' },
@@ -346,7 +352,7 @@ search_conditions = [
 	{ search_word: '名探偵コナン', tag: 'conan' },
 
 ]
-search_conditions.each do |row| setup_search_condition(row) end
+search_conditions.each do |list| setup_search_condition(list) end
 
 #########################################################
 # setup the sake data
