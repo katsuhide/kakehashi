@@ -54,6 +54,18 @@ body{
 	}
 }
 
+#trend-table {
+	margin: auto auto auto auto;
+	text-align: left;
+	img {
+		width: 150px;
+		height: 150px;
+		border-radius: 0px;
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+	}
+}
+
 .off-canvas-wrap {
 	.main-section {
 		text-align: center;

@@ -1,14 +1,14 @@
-<table id="trend">
+<table id="trend-table">
   <thead>
-    <tr>
+<!--     <tr>
       <th>Rank.</th>
       <th></th>
       <th>名称</th>
-      <% if @doesDisplayLandOfOrigin() :%>
+      <%# if @doesDisplayLandOfOrigin() :%>
       <th>原産地</th>
-      <% end %>
+      <%# end %>
       <th>Tweet Hit数</th>
     </tr>
-  </thead>
+ -->  </thead>
   <tbody id="trend-list"></tbody>
 </table>
