@@ -389,7 +389,7 @@ search_conditions = [
 	{ search_word: '三菱UFJ信託銀行', tag: 'mitsubishi_tbank' },
 	{ search_word: 'みずほ信託銀行', tag: 'mizuho_tbank' },
 	{ search_word: '三井住友信託銀行', tag: 'mitsui_tbank' },
-	{ search_word: '野村信託銀行 ', tag: 'nomura_tbank' },
+	{ search_word: '野村信託銀行', tag: 'nomura_tbank' },
 	{ search_word: 'あおぞら銀行', tag: 'aozora_bank' },
 	{ search_word: '新生銀行', tag: 'shinsei_bank' },
 	{ search_word: '農林中央金庫', tag: 'nocyu' },
