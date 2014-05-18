@@ -84,3 +84,9 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 
 		onShow: ->
 			$(document).foundation()
+			if twttr?
+				twttr.widgets.load()
+
+		templateHelpers:
+			getCategory: ->
+				App.KAKEHASHI.controller.tag_type
