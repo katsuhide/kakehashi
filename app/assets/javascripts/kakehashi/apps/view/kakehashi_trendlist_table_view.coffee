@@ -52,13 +52,20 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		itemView: Views.ItemView
 		itemViewContainer: '#trend-list'
 
+		onShow: ->
+			if twttr?
+				twttr.widgets.load()
+
 		templateHelpers :
 			doesDisplayLandOfOrigin: ->
 				tag_type = App.KAKEHASHI.controller.tag_type
 				switch tag_type
 					when 'sake', 'traditional'
 						true
-					when 'anime'
+					when 'anime', 'company'
 						false
 					else
 						true
+
+			getCategory: ->
+				App.KAKEHASHI.controller.tag_type

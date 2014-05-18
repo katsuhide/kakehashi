@@ -3,7 +3,7 @@
 </div>
 <div class="small-4 columns">
 	<% tag_type = @getCategory() %>
-	<% if tag_type == 'sake' or tag_type == '': %>
+  <% if tag_type == 'sake' or !tag_type? : %>
 	<a class="twitter-timeline" href="https://twitter.com/search?q=%E6%97%A5%E6%9C%AC%E9%85%92" data-widget-id="466982967093374976">Tweets about "SAKE"</a>
 	<% else if tag_type == 'traditional': %>
 	<a class="twitter-timeline" href="https://twitter.com/search?q=%E4%BC%9D%E7%B5%B1%E5%B7%A5%E8%8A%B8" data-widget-id="467838493368918016">Tweets about "JAPANESE TRADITIONAL"</a>

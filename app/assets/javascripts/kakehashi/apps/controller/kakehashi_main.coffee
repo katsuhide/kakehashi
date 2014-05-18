@@ -9,7 +9,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 	KAKEHASHI.Controller = ->
 		@period = 'week'
 		@view_mode = 'bubble'
-		@tag_type = ''
+		@tag_type = null
 		@trendList = new App.Trends.TrendList()
 		@lastExecuteList = new App.LastExecutes.LastExecuteList()
 		@searchConditionList = new App.SearchConditions.SearchConditionList()
