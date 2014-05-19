@@ -5,4 +5,4 @@
 <% if @doesDisplayLandOfOrigin(): %>
 <td><%= @['land_of_origin'] %></td>
 <% end %>
-<td><%= @getCount(@) %></td>
+<td><i class="fa fa-twitter fa-lg"></i><%= @getCount(@) %></td>
