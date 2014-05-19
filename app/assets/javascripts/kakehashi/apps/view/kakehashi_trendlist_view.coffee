@@ -6,6 +6,9 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		modelEvents:
 			'change': 'render'
 
+		events:
+			'dblclick #trend' :'dblclickBubble'
+
 		initTooltip: ->
 			$("#bubble-#{@model.get 'keyword_id'}").tooltipster(
 				content: $('<span><strong>' + @createTooltipMsg() + '</strong></span>')
@@ -14,6 +17,10 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		onShow: ->
 			$("#trend-list").nested 'append'
 			@initTooltip()
+
+		dblclickBubble: ->
+			console.log "dblclickBubble"
+			window.open("https://twitter.com/intent/tweet?button_hashtag=tag_name&text=messages")
 
 		getCount: ->
 			switch App.KAKEHASHI.controller.period
@@ -47,6 +54,8 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 			name = @model.get 'name'
 			origin = @model.get 'land_of_origin'
 			count = @getCount()
+			twitter_btn = '<a href="https://twitter.com/intent/tweet?button_hashtag=tag_name&text=messages" class="twitter-hashtag-button" data-lang="en">Tweet #tag_name</a>'
+
 			msg = 'No.' + rank + '</br>'
 			switch tag_type
 				when 'sake', 'traditional'
@@ -57,7 +66,9 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 					msg += name + '</br>'
 				else
 					msg += name + '</br>'
-			msg += '<i class="fa fa-twitter fa-lg"></i>' + count
+			msg += '<i class="fa fa-twitter fa-lg"></i>' + count + '</br>'
+			msg += twitter_btn
+
 
 		templateHelpers :
 			getImageURL: (model)->
