@@ -315,6 +315,12 @@ def clear_trend_table
 	Trend.delete_all
 end
 
+# clear day_trend table
+def clear_day_trend_table
+	target = Date.today - 1
+	DayTrend.where(DayTrend.arel_table[:base_date].lt target).delete_all
+end
+
 # update last executed datetime
 def update_executed_datetime
 	rows = LastExecute.all
@@ -403,6 +409,11 @@ namespace :twitter do
 	desc 'cleate trend table'
 	task :clear_trend_table => :environment do
 		clear_trend_table
+	end
+
+	desc 'cleate day_trend table'
+	task :clear_day_trend_table => :environment do
+		clear_day_trend_table
 	end
 
 	desc 'update last executed datetime'
