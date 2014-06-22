@@ -12,6 +12,7 @@
 						<ul class="dropdown">
 							<li class="view-mode" id="bubble_btn"><a>Bubble View<i class="fa fa-check-circle-o fa-lg"></i></a></li>
 							<li class="view-mode" id="table_btn"><a>Table View<i class="fa fa-check-circle-o fa-lg"></i></a></li>
+							<li class="view-mode" id="grid_btn"><a>Grid View<i class="fa fa-check-circle-o fa-lg"></i></a></li>
 						</ul>
 					</li>
 					<li class='has-dropdown'>

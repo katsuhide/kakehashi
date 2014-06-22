@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="kakehashi_test.css">
+</head>
+<body>
+	<div id='container'>
+		<div id='trend' class='trend-grid'>
+			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
+		</div>
+		<div id='trend' class='trend-grid'>
+			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
+		</div>
+		<div id='trend' class='trend-grid'>
+			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
+		</div>
+		<div id='trend' class='trend-grid'>
+			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
+		</div>
+		<div id='trend' class='trend-grid'>
+			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
+		</div>
+		<div id='trend' class='trend-grid'>
+			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
+		</div>
+		<div id='trend' class='trend-grid'>
+			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
+		</div>
+		<div id='trend' class='trend-grid'>
+			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
+		</div>
+		<div id='trend' class='trend-grid'>
+			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
+		</div>
+	</div>
+
+	<script src="../../jquery/dist/jquery.min.js"></script>
+	<script src="../../eventEmitter/EventEmitter.js"></script>
+	<script src="../../eventie/eventie.js"></script>
+	<script src="../../doc-ready/doc-ready.js"></script>
+	<script src="../../get-style-property/get-style-property.js"></script>
+	<script src="../../get-size/get-size.js"></script>
+	<script src="../../jquery-bridget/jquery.bridget.js"></script>
+	<script src="../../matches-selector/matches-selector.js"></script>
+	<script src="../../outlayer/item.js"></script>
+	<script src="../../outlayer/outlayer.js"></script>
+
+	<script src="../js/layout-mode.js"></script>
+	<script src="../js/item.js"></script>
+	<script src="../js/isotope.js"></script>
+	<script src="../js/layout-modes/fit-rows.js"></script>
+
+	<script>
+		$('#container').isotope({
+		  // options...
+		  itemSelector: '.trend-grid',
+	    layoutMode: 'fitRows',
+		  masonry: {
+		    columnWidth: 300
+		  }
+		});
+	</script>
+</body>
+</html>

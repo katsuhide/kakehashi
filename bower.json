@@ -19,6 +19,7 @@
     "marionette": "~1.6.4",
     "fontawesome": "~4.0.3",
     "nested": "*",
-    "tooltipster": "~3.2.1"
+    "tooltipster": "~3.2.1",
+    "isotope": "~2.0.0"
   }
 }

@@ -8,7 +8,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 	# Controller
 	KAKEHASHI.Controller = ->
 		@period = 'week'
-		@view_mode = 'bubble'
+		@view_mode = 'grid'
 		@tag_type = null
 		@trendList = new App.Trends.TrendList()
 		@lastExecuteList = new App.LastExecutes.LastExecuteList()
@@ -58,11 +58,17 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 		showMain: ->
 			@trendList.sort()
 			switch @.view_mode
+				when 'bubble'
+					App.main.show new KAKEHASHI.Views.ListView
+						collection: @trendList
 				when 'table'
 					App.main.show new KAKEHASHI.Views.TableListView
 						collection: @trendList
+				when 'grid'
+					App.main.show new KAKEHASHI.Views.GridListView
+						collection: @trendList
 				else
-					App.main.show new KAKEHASHI.Views.ListView
+					App.main.show new KAKEHASHI.Views.GridListView
 						collection: @trendList
 
 		showTarget: (tag_type) ->

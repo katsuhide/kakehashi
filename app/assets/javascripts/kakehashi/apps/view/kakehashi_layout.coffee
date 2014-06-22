@@ -13,6 +13,7 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 		events:
 			'click #bubble_btn' :'clickBubbleBtn'
 			'click #table_btn' :'clickTableBtn'
+			'click #grid_btn' :'clickGridBtn'
 			'click #day_btn' :'clickDayBtn'
 			'click #week_btn' :'clickWeekBtn'
 			'click #month_btn' :'clickMonthBtn'
@@ -21,6 +22,7 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 			view_mode: '.view-mode i'
 			bubble_btn: '#bubble_btn i'
 			table_btn: '#table_btn i'
+			grid_btn: '#grid_btn i'
 			period: '.period i'
 			day_btn: '#day_btn i'
 			week_btn: '#week_btn i'
@@ -40,8 +42,8 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 					@ui.bubble_btn.removeClass 'not-selected'
 				when 'table'
 					@ui.table_btn.removeClass 'not-selected'
-				else
-					@ui.bubble_btn.removeClass 'not-selected'
+				when 'grid'
+					@ui.grid_btn.removeClass 'not-selected'
 
 		togglePeriodBtn: ->
 			@ui.period.addClass 'not-selected'
@@ -66,6 +68,11 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 
 		clickTableBtn: ->
 			App.KAKEHASHI.controller.view_mode = 'table'
+			@toggleViewModeBtn()
+			App.KAKEHASHI.controller.showMain()
+
+		clickGridBtn: ->
+			App.KAKEHASHI.controller.view_mode = 'grid'
 			@toggleViewModeBtn()
 			App.KAKEHASHI.controller.showMain()
 

@@ -1,0 +1,4 @@
+<% image_url_full = @getImageURL(@) %>
+<div id='trend' class='trend-grid'>
+	<img src=<%= image_url_full %> >
+</div>
