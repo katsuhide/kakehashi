@@ -56,20 +56,23 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 			App.footer.show footer
 
 		showMain: ->
+			console.log "showMain!!!"
 			@trendList.sort()
 			switch @.view_mode
 				when 'bubble'
-					App.main.show new KAKEHASHI.Views.ListView
+					main = new KAKEHASHI.Views.ListView
 						collection: @trendList
 				when 'table'
-					App.main.show new KAKEHASHI.Views.TableListView
+					main = new KAKEHASHI.Views.TableListView
 						collection: @trendList
 				when 'grid'
-					App.main.show new KAKEHASHI.Views.GridListView
+					main = new KAKEHASHI.Views.GridListView
 						collection: @trendList
 				else
-					App.main.show new KAKEHASHI.Views.GridListView
+					main = new KAKEHASHI.Views.GridListView
 						collection: @trendList
+
+			App.main.show main
 
 		showTarget: (tag_type) ->
 			@tag_type = tag_type

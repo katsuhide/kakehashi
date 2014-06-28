@@ -102,10 +102,10 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 			$(document).foundation()
 
 		clickLogo: ->
-			$('#trend-list').isotope
-				itemSelector: '.trend-grid'
-				layoutMode : 'fitRows'
-			console.log "click Logo"
+			# $('#trend-list').isotope('destroy')
+			# App.removeRegion("main")
+			# App.addRegions
+			# 	main: '#main-contents'
 			# console.log @.collection.models[0].get 'executed_time'
 			# console.log App.KAKEHASHI.controller.searchConditionList.debug()
 
