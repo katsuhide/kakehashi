@@ -1,4 +1,3 @@
-<a href="https://twitter.com/intent/tweet?button_hashtag=tag_name&text=messages" class="twitter-hashtag-button" data-lang="en">Tweet #tag_name</a>
 <div id="datasource-logo">
 	<i class="fa fa-twitter fa-3x"></i>
 </div>

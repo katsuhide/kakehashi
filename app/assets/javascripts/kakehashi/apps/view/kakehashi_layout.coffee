@@ -102,8 +102,12 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 			$(document).foundation()
 
 		clickLogo: ->
-			console.log @.collection.models[0].get 'executed_time'
-			console.log App.KAKEHASHI.controller.searchConditionList.debug()
+			$('#trend-list').isotope
+				itemSelector: '.trend-grid'
+				layoutMode : 'fitRows'
+			console.log "click Logo"
+			# console.log @.collection.models[0].get 'executed_time'
+			# console.log App.KAKEHASHI.controller.searchConditionList.debug()
 
 			# searchConditionList = new App.SearchConditions.SearchConditionList()
 			# console.log searchConditionList.fetch().responseJSON

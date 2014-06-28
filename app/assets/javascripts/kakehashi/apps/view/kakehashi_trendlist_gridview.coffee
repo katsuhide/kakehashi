@@ -15,7 +15,20 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 				)
 
 		onShow: ->
+			console.log "onShow on ItemView"
 			# @initTooltip()
+			# @initIsotope()
+			# @appendIsotope()
+
+		appendIsotope: ->
+			console.log "appendIsotope by GridListView"
+			$('#trend-list').isotope 'addItems', @
+
+		initIsotope: ->
+			console.log "initIsotope on ItemView"
+			$('#trend-list').isotope
+				itemSelector: ".trend-grid"
+				layoutMode : "fitRows"
 
 		dblclickBubble: ->
 			console.log "dblclickBubble"
@@ -90,14 +103,30 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		itemView: Views.ItemView
 		itemViewContainer: '#trend-list'
 
-		onShow: ->
-			$(document).foundation()
-			$('#trend-list').isotope
-				itemSelector: '.trend-grid'
-				layoutMode : 'fitRows'
+		collectionEvents:
+			'all': 'update'
 
+		events:
+			'dblclick #trend-list' :'dblclickList'
+
+		onShow: ->
+			console.log "onShow on GridListView"
+			$(document).foundation()
+			@initIsotope()
 			if twttr?
 				twttr.widgets.load()
+
+		update: ->
+			console.log "collection update on GridListView"
+			# @initIsotope()
+
+		initIsotope: ->
+			console.log "initIsotope on GridListView"
+			$('#trend-list').isotope
+				itemSelector: '.trend-grid'
+				layoutMode : "fitRows"
+				masonry:
+					columnWidth: 300
 
 		templateHelpers:
 			getCategory: ->

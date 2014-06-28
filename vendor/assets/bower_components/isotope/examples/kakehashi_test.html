@@ -8,33 +8,33 @@
 </head>
 <body>
 	<div id='container'>
-		<div id='trend' class='trend-grid'>
+		<div><div id='trend' class='trend-grid'>
 			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
-		</div>
-		<div id='trend' class='trend-grid'>
+		</div></div>
+		<div><div id='trend' class='trend-grid'>
 			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
-		</div>
-		<div id='trend' class='trend-grid'>
+		</div></div>
+		<div><div id='trend' class='trend-grid'>
 			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
-		</div>
-		<div id='trend' class='trend-grid'>
+		</div></div>
+		<div><div id='trend' class='trend-grid'>
 			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
-		</div>
-		<div id='trend' class='trend-grid'>
+		</div></div>
+		<div><div id='trend' class='trend-grid'>
 			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
-		</div>
-		<div id='trend' class='trend-grid'>
+		</div></div>
+		<div><div id='trend' class='trend-grid'>
 			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
-		</div>
-		<div id='trend' class='trend-grid'>
+		</div></div>
+		<div><div id='trend' class='trend-grid'>
 			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
-		</div>
-		<div id='trend' class='trend-grid'>
+		</div></div>
+		<div><div id='trend' class='trend-grid'>
 			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
-		</div>
-		<div id='trend' class='trend-grid'>
+		</div></div>
+		<div><div id='trend' class='trend-grid'>
 			<img src='/Users/AirMyac/github/kakehashi/app/assets/images/sake/dassai.png'>
-		</div>
+		</div></div>
 	</div>
 
 	<script src="../../jquery/dist/jquery.min.js"></script>
@@ -52,14 +52,16 @@
 	<script src="../js/item.js"></script>
 	<script src="../js/isotope.js"></script>
 	<script src="../js/layout-modes/fit-rows.js"></script>
+	<script src="../js/layout-modes/masonry.js"></script>
 
 	<script>
-		$('#container').isotope({
+	$('#container').isotope({
 		  // options...
 		  itemSelector: '.trend-grid',
-	    layoutMode: 'fitRows',
+		  // layoutMode: 'fitRows',
+		  // layoutMode: 'masonry',
 		  masonry: {
-		    columnWidth: 300
+		  	columnWidth: 300
 		  }
 		});
 	</script>
