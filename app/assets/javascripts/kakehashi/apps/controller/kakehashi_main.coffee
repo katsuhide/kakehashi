@@ -57,7 +57,6 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 		showMain: ->
 			console.log "showMain!!!"
-			# App.main.empty()
 			@trendList.sort()
 			switch @.view_mode
 				when 'bubble'
@@ -77,6 +76,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 		showTarget: (tag_type) ->
 			@tag_type = tag_type
+			@trendList.reset()	#collectionが更新される前に再描画してしまわないように明示的に空にする
 			@trendList.fetch({
 				data: {
 					tag_type: @tag_type
