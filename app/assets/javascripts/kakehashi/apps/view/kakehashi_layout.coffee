@@ -102,6 +102,8 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 			$(document).foundation()
 
 		clickLogo: ->
+			console.log "click logo"
+			App.main.destroy()
 			# $('#trend-list').isotope('destroy')
 			# App.removeRegion("main")
 			# App.addRegions

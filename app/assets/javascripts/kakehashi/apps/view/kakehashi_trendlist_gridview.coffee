@@ -4,17 +4,34 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		template: 'kakehashi/apps/templates/trend_grid'
 
 		modelEvents:
-			'change': 'render'
+			'change': 'modelChange'
+			'add': 'modelAdd'
+			'remove': 'modelRemove'
+			# 'all': 'modelAll'
 
 		events:
 			'dblclick #trend' :'dblclickBubble'
+
+		# modelAll: ->
+		# 	console.log "modelAll"
+
+		modelRemove: ->
+			console.log "modelRemove"
+
+		modelChange: ->
+			console.log "modelChange"
+
+		modelAdd: ->
+			console.log "modelAdd"
+
+		onDestroy: ->
+			console.log "destroy the item view"
 
 		onRender: ->
 			# console.log (@model.get 'name') + " onRender on ItemView"
 
 		onShow: ->
-			console.log (@model.get 'name') + " onShow on ItemView"
-			# @initIsotope()
+			# console.log (@model.get 'name') + " onShow on ItemView"
 			@appendIsotope()
 
 		appendIsotope: ->
@@ -106,6 +123,16 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 		itemView: Views.ItemView
 		itemViewContainer: '#trend-list'
 
+		collectionEvents:
+			'change': 'collectionChange'
+			'add': 'collectionAdd'
+
+		collectionChange: ->
+			console.log "collectionChange"
+
+		collectionAdd: ->
+			console.log "collectionAdd"
+
 		onShow: ->
 			console.log "onShow on GridListView"
 			@initIsotope()
@@ -120,6 +147,9 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 				layoutMode : "fitRows"
 				masonry:
 					columnWidth: 200
+
+		onHoge: ->
+			"hoge"
 
 		templateHelpers:
 			getCategory: ->
