@@ -56,7 +56,6 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 			App.footer.show footer
 
 		showMain: ->
-			console.log "showMain!!!"
 			@trendList.sort()
 			switch @.view_mode
 				when 'bubble'
@@ -83,18 +82,12 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 					period: @period
 				}
 			})
-			if tag_type?
-				@showMain()
+			@showMain()
 
-		fetchData: ->
-			console.log "[before:]" + @trendList.length
-			@trendList.fetch({
-				data: {
-					tag_type: "sake"
-					period: @period
-				}
-			})
-			console.log "[after:]" + @trendList.length
+		resetIsotope: ->
+			_.each $('#trend-list').isotope('getItemElements'), (elements) ->
+				$('#trend-list').isotope 'remove', elements
+			$('#trend-list').isotope 'layout'
 
 	# Initialize
 	KAKEHASHI.addInitializer ->

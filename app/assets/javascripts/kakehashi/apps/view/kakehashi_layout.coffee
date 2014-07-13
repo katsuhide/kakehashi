@@ -64,17 +64,20 @@ App.module 'Layout', (Layout, App, Backbone, Marionette, $, _) ->
 		clickBubbleBtn: ->
 			App.KAKEHASHI.controller.view_mode = 'bubble'
 			@toggleViewModeBtn()
-			App.KAKEHASHI.controller.showMain()
+			# App.KAKEHASHI.controller.showMain()
+			App.KAKEHASHI.controller.showTarget App.KAKEHASHI.controller.tag_type
 
 		clickTableBtn: ->
 			App.KAKEHASHI.controller.view_mode = 'table'
 			@toggleViewModeBtn()
-			App.KAKEHASHI.controller.showMain()
+			# App.KAKEHASHI.controller.showMain()
+			App.KAKEHASHI.controller.showTarget App.KAKEHASHI.controller.tag_type
 
 		clickGridBtn: ->
 			App.KAKEHASHI.controller.view_mode = 'grid'
 			@toggleViewModeBtn()
-			App.KAKEHASHI.controller.showMain()
+			# App.KAKEHASHI.controller.showMain()
+			App.KAKEHASHI.controller.showTarget App.KAKEHASHI.controller.tag_type
 
 		clickDayBtn: ->
 			App.KAKEHASHI.controller.period = 'day'
