@@ -13,6 +13,21 @@
 
 ActiveRecord::Schema.define(version: 20140506035226) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "books", force: true do |t|
+    t.string   "isbn"
+    t.string   "title"
+    t.integer  "price"
+    t.string   "publish"
+    t.string   "published"
+    t.string   "date"
+    t.boolean  "cd"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "day_trends", force: true do |t|
     t.integer  "keyword_id"
     t.integer  "total_count"
@@ -28,7 +43,7 @@ ActiveRecord::Schema.define(version: 20140506035226) do
     t.integer  "month_rank"
   end
 
-  add_index "day_trends", ["keyword_id"], name: "index_day_trends_on_keyword_id"
+  add_index "day_trends", ["keyword_id"], name: "index_day_trends_on_keyword_id", using: :btree
 
   create_table "keywords", force: true do |t|
     t.string   "tag_type"
@@ -52,7 +67,7 @@ ActiveRecord::Schema.define(version: 20140506035226) do
     t.datetime "updated_at"
   end
 
-  add_index "sakes", ["keyword_id"], name: "index_sakes_on_keyword_id"
+  add_index "sakes", ["keyword_id"], name: "index_sakes_on_keyword_id", using: :btree
 
   create_table "search_conditions", force: true do |t|
     t.integer  "keyword_id"
@@ -62,7 +77,7 @@ ActiveRecord::Schema.define(version: 20140506035226) do
     t.datetime "updated_at"
   end
 
-  add_index "search_conditions", ["keyword_id"], name: "index_search_conditions_on_keyword_id"
+  add_index "search_conditions", ["keyword_id"], name: "index_search_conditions_on_keyword_id", using: :btree
 
   create_table "traditionals", force: true do |t|
     t.integer  "keyword_id"
@@ -71,7 +86,7 @@ ActiveRecord::Schema.define(version: 20140506035226) do
     t.datetime "updated_at"
   end
 
-  add_index "traditionals", ["keyword_id"], name: "index_traditionals_on_keyword_id"
+  add_index "traditionals", ["keyword_id"], name: "index_traditionals_on_keyword_id", using: :btree
 
   create_table "trends", force: true do |t|
     t.integer  "keyword_id"
@@ -81,6 +96,6 @@ ActiveRecord::Schema.define(version: 20140506035226) do
     t.datetime "updated_at"
   end
 
-  add_index "trends", ["keyword_id"], name: "index_trends_on_keyword_id"
+  add_index "trends", ["keyword_id"], name: "index_trends_on_keyword_id", using: :btree
 
 end
