@@ -1,4 +1,8 @@
 <% image_url_full = @getImageURL(@) %>
 <div id='trend' class='trend-grid'>
-	<img src=<%= image_url_full %> >
+	<div class='card'>
+		<img src=<%= image_url_full %> >
+		<p>No<%= @getRank(@) %>: <%= @['name'] %>
+			<i class="fa fa-twitter fa-lg"></i><%= @getCount(@) %></p>
+		</div>
 </div>

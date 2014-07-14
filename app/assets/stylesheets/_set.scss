@@ -3,6 +3,8 @@ $_tabbar-height: 60px;
 $_tabbar-width: 15rem;
 $_datasource-area-height: 54px;
 $_width_pixel: 2880;
+$_dark-color: #7f8c8d;
+
 
 // page color setting
 $_pattern: 0;
@@ -16,6 +18,7 @@ $_side-bg-color: #FFFFFF;
 $_side-text-color: #000000;
 $_btn-hover-color: #D0394D;
 $_btn-list-bg-color: #cccccc;
+$_card-bg-color: #E3E3E3;
 
 @if $_pattern==1 {
 	// pattern 1 : light blue

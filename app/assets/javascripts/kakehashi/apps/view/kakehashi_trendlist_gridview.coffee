@@ -71,6 +71,19 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 			getImageURL: (model)->
 				image_url_full = "assets/" + model['tag_type'] + "/" + model['image_url']
 
+			getCount: (model)->
+				switch App.KAKEHASHI.controller.period
+					when 'day'
+						count = model['day_count']
+					when 'week'
+						count = model['week_count']
+					when 'month'
+						count = model['month_count']
+					when 'all'
+						count = model['total_count']
+					else
+						count = model['total_count']
+
 			getRank: (model)->
 				switch App.KAKEHASHI.controller.period
 					when 'day'
@@ -83,6 +96,18 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 						rank = model['total_rank']
 					else
 						rank = model['total_rank']
+
+			doesDisplayLandOfOrigin: ->
+				tag_type = App.KAKEHASHI.controller.tag_type
+				switch tag_type
+					when 'sake', 'traditional'
+						true
+					when 'anime'
+						false
+					when 'company'
+						false
+					else
+						false
 
 	# Item List View
 	class Views.GridListView extends Backbone.Marionette.CompositeView
@@ -100,8 +125,8 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 			$('#trend-list').isotope
 				itemSelector: '.trend-grid'
 				layoutMode : "fitRows"
-				masonry:
-					columnWidth: 200
+				# masonry:
+				# 	columnWidth: 200
 
 		templateHelpers:
 			getCategory: ->
