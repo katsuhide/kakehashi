@@ -16,18 +16,6 @@ ActiveRecord::Schema.define(version: 20140506035226) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "books", force: true do |t|
-    t.string   "isbn"
-    t.string   "title"
-    t.integer  "price"
-    t.string   "publish"
-    t.string   "published"
-    t.string   "date"
-    t.boolean  "cd"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "day_trends", force: true do |t|
     t.integer  "keyword_id"
     t.integer  "total_count"
