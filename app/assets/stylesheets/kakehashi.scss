@@ -84,47 +84,53 @@ body{
 	}
 }
 
-.off-canvas-wrap {
-	.main-section {
-		text-align: center;
-	}
-
-	.tab-bar {
-		text-align: center;
-		a {
-			color: $_base-text-color;
-		}
-	}
-}
-
+// .top-bar-section, .right-small
 .top-bar-section, .right-small {
 	// 画像アイコン
 	i {
 		color: $_top-text-color;
 	}
-
-	.dropdown li:not(.has-form) a:not(.button) {
-		// dropdown list text color
-		color: $_btn-text-color;
-		// dropdown list bg color
-		background: $_btn-list-bg-color;
+	.dropdown {
+		li:not(.has-form) a:not(.button) {
+			color: $_btn-text-color;
+			background: $_btn-list-bg-color;
+			i {
+				color: $_btn-text-color;
+			}
+		}
+		li:not(.has-form):hover > a:not(.button) {
+			color: $_top-text-color;
+			background: $_top-bg-color;
+			i {
+				color: $_top-text-color;
+			}
+		}
+		i {
+			margin-left: 10px;
+		}
+		.not-selected {
+			display: none;
+		}
 	}
 
 	.left-small {
 		width: $_tabbar-width;
 	}
 
-	// 選択されているもののチェック
-	.dropdown {
-		i {
-			margin-left: 10px;
-			color: $_btn-text-color;
-		}
-		.not-selected {
-			display: none;
-		}
+}
+// end -- .top-bar-section, .right-small
+
+// off-canvas-list for right menu
+ul.off-canvas-list li {
+	a {
+		color: $_side-text-color;
+	}
+	a:hover {
+		color: $_side-text-color-hover;
+		background: $_side-bg-color-hover;
 	}
 }
+// end -- off-canvas-list for right menu
 
 .tab-bar-section.middle {
 	left: $_tabbar-width;
