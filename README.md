@@ -6,6 +6,7 @@
 * bundle install
 * install postgres
 * postgresを起動
+* rake db:create
 * rake db:migrate
 * rake db:seed
 * spring rails server
