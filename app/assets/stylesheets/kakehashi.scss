@@ -12,11 +12,13 @@ body{
 	}
 }
 
+
 #service-name {
 	text-align: center;
 	font-size: 2rem;
 	// font-weight: normal;
 	font-family: 'Codystar';
+	color: $_logo-color;
 }
 
 #trend-header {
@@ -93,9 +95,16 @@ body{
 	}
 }
 
-.top-bar-section {
+.top-bar-section, .right-small {
+	// 画像アイコン
+	i {
+		color: $_top-text-color;
+	}
+
 	.dropdown li:not(.has-form) a:not(.button) {
-		color: #333333;
+		// dropdown list text color
+		color: $_btn-text-color;
+		// dropdown list bg color
 		background: $_btn-list-bg-color;
 	}
 
@@ -103,9 +112,11 @@ body{
 		width: $_tabbar-width;
 	}
 
+	// 選択されているもののチェック
 	.dropdown {
 		i {
 			margin-left: 10px;
+			color: $_btn-text-color;
 		}
 		.not-selected {
 			display: none;
