@@ -42,18 +42,20 @@ body{
 	text-align: center;
 }
 
+// style for grid&bubble view mode
 #trend {
 	margin: auto auto auto auto;
 	text-align: left;
 	img {
-		width: 200px;
-		height: 200px;
-		border-radius: 200px;
-		-webkit-border-radius: 200px;
-		-moz-border-radius: 200px;
+		width: 150px;
+		height: 150px;
+		// border-radius: 200px;
+		// -webkit-border-radius: 200px;
+		// -moz-border-radius: 200px;
 	}
 }
 
+// style for table view mode
 #trend-table {
 	margin: auto auto auto auto;
 	text-align: left;

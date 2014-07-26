@@ -125,6 +125,7 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 			$('#trend-list').isotope
 				itemSelector: '.trend-grid'
 				layoutMode : "fitRows"
+				# layoutMode : "masonry"
 				# masonry:
 				# 	columnWidth: 200
 
