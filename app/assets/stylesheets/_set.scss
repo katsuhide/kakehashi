@@ -9,7 +9,7 @@ $_dark-color: #7f8c8d;
 // page color setting
 $_pattern: 0;
 
-// default pattern (1)
+// default pattern
 $_base-bg-color: #1F1F1F;
 $_base-text-color: #FFFFFF;
 $_top-bg-color: #DA6272;
@@ -37,6 +37,18 @@ $_card-bg-color: #E3E3E3;
 	$_top-text-color: #FFFFFF;
 	$_side-bg-color: #FFFFFF;
 	$_side-text-color: #000000;
+
+} @else if $_pattern == 3 {
+	// pattern 3 : blue base like pinterest
+	$_base-bg-color: #E3E3E3;
+	$_base-text-color: #000000;
+	$_top-bg-color: #284D89;
+	$_top-text-color: #FFFFFF;
+	$_side-bg-color: #FFFFFF;
+	$_side-text-color: #000000;
+	$_btn-hover-color: #C2D4DB;
+	$_btn-list-bg-color: #cccccc;
+	$_card-bg-color: #FFFFFF;
 
 }
 
