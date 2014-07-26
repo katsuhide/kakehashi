@@ -126,7 +126,8 @@ App.module 'KAKEHASHI.Views', (Views, App, Backbone, Marionette, $) ->
 				itemSelector: '.trend-grid'
 				# layoutMode : "fitRows"
 				masonry:
-					columnWidth: 150
+					columnWidth: 5
+					gutter: 5
 
 		templateHelpers:
 			getCategory: ->
