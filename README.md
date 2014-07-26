@@ -3,9 +3,13 @@
 ## セットアップ
 ### はじめに
 * kakehashiをforkしてclone
+* bundle install
 * install postgres
+* postgresを起動
 * rake db:migrate
 * rake db:seed
+* spring rails server
+* これで起動
 * twitter.rakeを使う場合はtwitter api keyの登録をする
 
 ### Twitter API Keyの登録
