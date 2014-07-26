@@ -4,7 +4,7 @@ $_tabbar-width: 15rem;
 $_datasource-area-height: 54px;
 $_width_pixel: 2880;
 $_black-color: #000000;
-$_dark-color: #333333;
+$_dark-color: #474747;
 $_light-dark-color: #D4D8D9;
 $_white-color: #FFFFFF;
 
@@ -13,18 +13,20 @@ $_pattern: 0;
 
 // default pattern is brue base like
 $_base-bg-color: #E3E3E3;
-$_base-text-color: $_black-color;
+$_base-text-color: $_dark-color;
 $_logo-color: $_white-color;
 $_top-bg-color: #134A63;
 $_top-text-color: $_light-dark-color;
 $_side-bg-color: $_white-color;
 $_side-bg-color-hover: #134A63;
-$_side-text-color: $_black-color;
+$_side-text-color: $_dark-color;
 $_side-text-color-hover: $_light-dark-color;
 $_btn-text-color: $_dark-color;
 $_btn-hover-color: #C2D4DB;
 $_btn-list-bg-color: #bbcad2;
-$_card-bg-color: $_white-color;
+$_card-bg-color: #FFFFFF;
+$_card-text-color: $_dark-color;
+$_card-border-color: $_light-dark-color;
 
 @if $_pattern==1 {
 	// pattern 1 : light blue
