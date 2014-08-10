@@ -7,7 +7,7 @@ App.module 'KAKEHASHI', (KAKEHASHI, App, Backbone, Marionette, $, _) ->
 
 	# Controller
 	KAKEHASHI.Controller = ->
-		@period = 'week'
+		@period = 'day'
 		@view_mode = 'grid'
 		@tag_type = null
 		@trendList = new App.Trends.TrendList()
