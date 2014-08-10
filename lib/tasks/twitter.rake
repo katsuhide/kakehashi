@@ -220,7 +220,7 @@ def update_trendlist
 		elsif @today != day_trend['base_date']  then
 			# 当日以外のデータがある場合(日付が変わった場合)、足し上げた上で新規レコード作成
 			prev_day_count = 0
-			prev_week_count = @today.strftime('%w') == 0 ? 0 : day_trend['week_count']
+			prev_week_count = @today.strftime('%w') == "0" ? 0 : day_trend['week_count']
 			prev_month_count = @today.strftime('%m') == day_trend['base_date'].strftime('%m') ? day_trend['month_count'] : 0
 			prev_total_count = day_trend['total_count']
 			day_trend = DayTrend.new()
